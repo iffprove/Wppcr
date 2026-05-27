@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Stencil Maker | Perth Chip Repairs Tools</title>
+<meta name="description" content="Free online stencil maker — upload an image, adjust threshold and contrast, download as PNG or SVG for precision chip repair pattern work.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap">
+<style>
+:root{--neon:#e8c84a;--dark:#0d0d0b;--mid:#131310;--card:#1a1a16;--border:#2a2a24;--text:#f0ede8;--muted:#706d64}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
+
+/* NAV */
+.tool-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(13,13,11,0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
+.nav-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--neon);text-decoration:none}
+.nav-logo small{display:block;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:500}
+.nav-back{color:rgba(240,237,232,.5);text-decoration:none;font-size:12px;letter-spacing:2px;text-transform:uppercase;transition:color .2s;display:flex;align-items:center;gap:8px}
+.nav-back:hover{color:var(--neon)}
+.nav-back::before{content:'←';font-size:14px}
+.nav-actions{display:flex;align-items:center;gap:20px}
+.nav-tool-link{color:rgba(240,237,232,.5);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
+.nav-tool-link:hover{color:var(--neon)}
+
+/* TOOL HERO */
+.tool-hero{padding:60px 48px 40px;border-bottom:1px solid var(--border);background:var(--mid)}
+.tool-hero-inner{max-width:1080px;margin:0 auto}
+.tool-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(232,200,74,.1);border:1px solid rgba(232,200,74,.25);padding:6px 14px;margin-bottom:20px;border-radius:980px}
+.tool-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--neon)}
+.tool-badge-text{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--neon);font-weight:600}
+.tool-hero h1{font-family:'Bebas Neue',sans-serif;font-size:clamp(56px,8vw,96px);line-height:.95;letter-spacing:-1px;margin-bottom:16px}
+.tool-hero h1 span{color:var(--neon)}
+.tool-hero p{font-size:15px;line-height:1.7;color:rgba(240,237,232,.5);max-width:540px}
+
+/* MAIN LAYOUT */
+.tool-body{max-width:1080px;margin:0 auto;padding:48px 48px 80px;display:grid;grid-template-columns:320px 1fr;gap:32px;align-items:start}
+
+/* CONTROLS */
+.controls{position:sticky;top:80px}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:16px}
+.panel-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin-bottom:20px;color:var(--text)}
+.panel-title span{color:var(--neon)}
+
+.upload-zone{border:2px dashed var(--border);border-radius:12px;padding:32px 20px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;position:relative}
+.upload-zone:hover,.upload-zone.drag-over{border-color:var(--neon);background:rgba(232,200,74,.04)}
+.upload-zone input[type=file]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
+.upload-icon{font-size:32px;margin-bottom:12px;opacity:.6}
+.upload-text{font-size:13px;font-weight:600;color:rgba(240,237,232,.7);margin-bottom:4px}
+.upload-hint{font-size:11px;color:var(--muted);letter-spacing:.5px}
+
+.ctrl-group{margin-bottom:20px}
+.ctrl-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.ctrl-value{color:var(--neon);font-family:'Inter',monospace}
+.ctrl-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer}
+.ctrl-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--neon);cursor:pointer;border:2px solid var(--dark);box-shadow:0 0 8px rgba(232,200,74,.4)}
+.ctrl-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--neon);cursor:pointer;border:2px solid var(--dark)}
+
+.ctrl-toggle{display:flex;align-items:center;gap:12px;cursor:pointer}
+.toggle-switch{position:relative;width:44px;height:24px;flex-shrink:0}
+.toggle-switch input{opacity:0;width:0;height:0}
+.toggle-track{position:absolute;inset:0;background:var(--border);border-radius:12px;transition:background .2s}
+.toggle-switch input:checked + .toggle-track{background:var(--neon)}
+.toggle-knob{position:absolute;left:3px;top:3px;width:18px;height:18px;background:var(--dark);border-radius:50%;transition:transform .2s}
+.toggle-switch input:checked ~ .toggle-knob{transform:translateX(20px)}
+.toggle-label{font-size:13px;color:rgba(240,237,232,.7)}
+
+.btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.98)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.btn-ghost{display:block;width:100%;background:transparent;color:var(--text);padding:12px 24px;font-size:12px;font-weight:600;letter-spacing:2px;text-transform:uppercase;border:1px solid rgba(240,237,232,.2);cursor:pointer;border-radius:980px;transition:all .2s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none;margin-top:10px}
+.btn-ghost:hover{border-color:var(--neon);color:var(--neon)}
+.btn-ghost:disabled{opacity:.4;cursor:not-allowed}
+
+.dl-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:16px}
+
+.link-mixer{display:flex;align-items:center;gap:10px;padding:14px 18px;background:rgba(232,200,74,.06);border:1px solid rgba(232,200,74,.2);border-radius:12px;text-decoration:none;color:var(--text);transition:background .2s,border-color .2s;margin-top:16px}
+.link-mixer:hover{background:rgba(232,200,74,.1);border-color:rgba(232,200,74,.4)}
+.link-mixer-icon{font-size:20px;flex-shrink:0}
+.link-mixer-text strong{display:block;font-size:13px;font-weight:700;color:var(--neon)}
+.link-mixer-text span{font-size:11px;color:var(--muted)}
+
+/* PREVIEW */
+.preview-area{}
+.preview-empty{background:var(--card);border:2px dashed var(--border);border-radius:18px;aspect-ratio:4/3;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center;padding:40px}
+.preview-empty-icon{font-size:48px;opacity:.3}
+.preview-empty-text{font-size:15px;color:var(--muted)}
+.preview-empty-hint{font-size:12px;color:rgba(112,109,100,.6)}
+
+.preview-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.preview-card{background:var(--card);border:1px solid var(--border);border-radius:14px;overflow:hidden}
+.preview-card-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;padding:12px 16px 8px;color:var(--muted)}
+.preview-card canvas{width:100%;display:block;max-height:300px;object-fit:contain}
+
+.stats-bar{display:flex;gap:24px;margin-top:16px;padding:16px 20px;background:var(--card);border:1px solid var(--border);border-radius:12px;flex-wrap:wrap}
+.stat-item{text-align:center}
+.stat-val{font-family:'Bebas Neue',sans-serif;font-size:28px;color:var(--neon);line-height:1}
+.stat-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px}
+
+/* HOW-TO */
+.how-to{margin-top:24px;background:var(--mid);border:1px solid var(--border);border-radius:14px;padding:20px}
+.how-to-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
+.how-step{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(42,42,36,.5)}
+.how-step:last-child{border-bottom:none;padding-bottom:0}
+.how-num{font-family:'Bebas Neue',sans-serif;font-size:18px;color:var(--neon);min-width:24px;line-height:1;padding-top:2px}
+.how-text h4{font-size:13px;font-weight:600;margin-bottom:2px}
+.how-text p{font-size:12px;line-height:1.6;color:rgba(240,237,232,.45)}
+
+/* FOOTER */
+.tool-footer{border-top:1px solid var(--border);padding:32px 48px;text-align:center}
+.tool-footer p{font-size:11px;color:var(--muted);letter-spacing:1px}
+.tool-footer a{color:var(--neon);text-decoration:none}
+
+@media(max-width:900px){
+  .tool-nav{padding:14px 24px}
+  .tool-hero{padding:40px 24px 28px}
+  .tool-body{padding:32px 24px 60px;grid-template-columns:1fr}
+  .controls{position:static}
+  .preview-grid{grid-template-columns:1fr}
+  .dl-grid{grid-template-columns:1fr}
+  .tool-footer{padding:24px}
+}
+</style>
+</head>
+<body>
+
+<nav class="tool-nav">
+  <a href="../index.html" class="nav-logo">Perth Chip Repairs<small>Surface Repair Specialists</small></a>
+  <div class="nav-actions">
+    <a href="color-mixer.html" class="nav-tool-link">Colour Mixer</a>
+    <a href="../index.html" class="nav-back">Main Site</a>
+  </div>
+</nav>
+
+<div class="tool-hero">
+  <div class="tool-hero-inner">
+    <div class="tool-badge"><div class="tool-badge-dot"></div><span class="tool-badge-text">Free Tool &middot; No Sign-In Required</span></div>
+    <h1>Stencil<br><span>Maker</span></h1>
+    <p>Upload any image and convert it to a precision black-and-white stencil. Adjust threshold and contrast, then download as PNG or SVG for printing, laser cutting or repair pattern work.</p>
+  </div>
+</div>
+
+<div class="tool-body">
+
+  <!-- CONTROLS -->
+  <div class="controls">
+    <div class="panel">
+      <div class="panel-title">1. <span>Upload Image</span></div>
+      <div class="upload-zone" id="uploadZone">
+        <div class="upload-icon">&#128247;</div>
+        <div class="upload-text">Click or drag &amp; drop</div>
+        <div class="upload-hint">PNG &middot; JPG &middot; WEBP &middot; Up to 10MB</div>
+        <input type="file" id="fileInput" accept="image/*">
+      </div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">2. <span>Adjust Settings</span></div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Threshold <span class="ctrl-value" id="thresholdVal">128</span></div>
+        <input type="range" class="ctrl-slider" id="threshold" min="0" max="255" value="128">
+        <p style="font-size:11px;color:var(--muted);margin-top:6px">Lower = more detail kept &middot; Higher = cleaner cutout</p>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Contrast <span class="ctrl-value" id="contrastVal">0</span></div>
+        <input type="range" class="ctrl-slider" id="contrast" min="-100" max="100" value="0">
+        <p style="font-size:11px;color:var(--muted);margin-top:6px">Increase contrast to sharpen edges before thresholding</p>
+      </div>
+
+      <div class="ctrl-group">
+        <div class="ctrl-label">Blur (edge soften) <span class="ctrl-value" id="blurVal">0</span></div>
+        <input type="range" class="ctrl-slider" id="blur" min="0" max="5" value="0" step="0.5">
+      </div>
+
+      <label class="ctrl-toggle" style="margin-bottom:8px">
+        <div class="toggle-switch">
+          <input type="checkbox" id="invertToggle">
+          <div class="toggle-track"></div>
+          <div class="toggle-knob"></div>
+        </div>
+        <span class="toggle-label">Invert (white on black)</span>
+      </label>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">3. <span>Export</span></div>
+      <button class="btn-primary" id="processBtn" disabled>Generate Stencil</button>
+      <div class="dl-grid" id="dlGrid" style="display:none">
+        <button class="btn-ghost" id="dlPng">&#8595; PNG</button>
+        <button class="btn-ghost" id="dlSvg">&#8595; SVG</button>
+      </div>
+
+      <a href="color-mixer.html" class="link-mixer">
+        <div class="link-mixer-icon">&#127912;</div>
+        <div class="link-mixer-text">
+          <strong>Colour Mixer &rarr;</strong>
+          <span>Match repair compound to surface colour</span>
+        </div>
+      </a>
+    </div>
+
+    <div class="how-to">
+      <div class="how-to-title">How it works</div>
+      <div class="how-step">
+        <div class="how-num">01</div>
+        <div class="how-text"><h4>Upload a pattern image</h4><p>Photo of a surface texture, tile pattern or shape you want to replicate.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">02</div>
+        <div class="how-text"><h4>Tune the threshold</h4><p>Drag the threshold slider until the preview shows a clean black-and-white cutout.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">03</div>
+        <div class="how-text"><h4>Download and print</h4><p>Export as PNG for printing or SVG for laser cutting. Use for pattern stencils over repair areas.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- PREVIEW -->
+  <div class="preview-area">
+    <div class="preview-empty" id="emptyState">
+      <div class="preview-empty-icon">&#9999;&#65039;</div>
+      <div class="preview-empty-text">Upload an image to get started</div>
+      <div class="preview-empty-hint">PNG, JPG or WEBP &middot; max 10MB</div>
+    </div>
+
+    <div id="previewState" style="display:none">
+      <div class="preview-grid">
+        <div class="preview-card">
+          <div class="preview-card-label">Original</div>
+          <canvas id="originalCanvas"></canvas>
+        </div>
+        <div class="preview-card">
+          <div class="preview-card-label">Stencil Preview</div>
+          <canvas id="stencilCanvas"></canvas>
+        </div>
+      </div>
+      <div class="stats-bar" id="statsBar">
+        <div class="stat-item"><div class="stat-val" id="statW">&mdash;</div><div class="stat-lbl">Width px</div></div>
+        <div class="stat-item"><div class="stat-val" id="statH">&mdash;</div><div class="stat-lbl">Height px</div></div>
+        <div class="stat-item"><div class="stat-val" id="statBlack">&mdash;</div><div class="stat-lbl">Black %</div></div>
+        <div class="stat-item"><div class="stat-val" id="statWhite">&mdash;</div><div class="stat-lbl">White %</div></div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<footer class="tool-footer">
+  <p>Part of the <a href="../index.html">Perth Chip Repairs</a> free tool suite &middot; No account required &middot; Processing happens in your browser</p>
+</footer>
+
+<!-- Hidden canvas for full-res processing -->
+<canvas id="workCanvas" style="display:none"></canvas>
+
+<script>
+(function(){
+  const fileInput = document.getElementById('fileInput');
+  const uploadZone = document.getElementById('uploadZone');
+  const thresholdSlider = document.getElementById('threshold');
+  const contrastSlider = document.getElementById('contrast');
+  const blurSlider = document.getElementById('blur');
+  const invertToggle = document.getElementById('invertToggle');
+  const processBtn = document.getElementById('processBtn');
+  const dlPng = document.getElementById('dlPng');
+  const dlSvg = document.getElementById('dlSvg');
+  const dlGrid = document.getElementById('dlGrid');
+  const emptyState = document.getElementById('emptyState');
+  const previewState = document.getElementById('previewState');
+  const originalCanvas = document.getElementById('originalCanvas');
+  const stencilCanvas = document.getElementById('stencilCanvas');
+  const workCanvas = document.getElementById('workCanvas');
+
+  let loadedImage = null;
+  let autoProcess = false;
+
+  uploadZone.addEventListener('dragover', e => { e.preventDefault(); uploadZone.classList.add('drag-over'); });
+  uploadZone.addEventListener('dragleave', () => uploadZone.classList.remove('drag-over'));
+  uploadZone.addEventListener('drop', e => {
+    e.preventDefault();
+    uploadZone.classList.remove('drag-over');
+    const file = e.dataTransfer.files[0];
+    if (file) loadFile(file);
+  });
+  fileInput.addEventListener('change', () => {
+    if (fileInput.files[0]) loadFile(fileInput.files[0]);
+  });
+
+  function loadFile(file) {
+    if (!file.type.startsWith('image/')) return;
+    if (file.size > 10 * 1024 * 1024) { alert('Image must be under 10MB'); return; }
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = new Image();
+      img.onload = () => {
+        loadedImage = img;
+        drawOriginal(img);
+        processBtn.disabled = false;
+        emptyState.style.display = 'none';
+        previewState.style.display = '';
+        autoProcess = true;
+        generateStencil();
+      };
+      img.src = e.target.result;
+    };
+    reader.readAsDataURL(file);
+  }
+
+  function drawOriginal(img) {
+    const maxW = 600, maxH = 500;
+    let w = img.width, h = img.height;
+    if (w > maxW) { h = h * maxW / w; w = maxW; }
+    if (h > maxH) { w = w * maxH / h; h = maxH; }
+    originalCanvas.width = Math.round(w);
+    originalCanvas.height = Math.round(h);
+    const ctx = originalCanvas.getContext('2d');
+    ctx.drawImage(img, 0, 0, Math.round(w), Math.round(h));
+    document.getElementById('statW').textContent = img.width;
+    document.getElementById('statH').textContent = img.height;
+  }
+
+  function generateStencil() {
+    if (!loadedImage) return;
+    const threshold = parseInt(thresholdSlider.value);
+    const contrast = parseInt(contrastSlider.value);
+    const blurAmt = parseFloat(blurSlider.value);
+    const invert = invertToggle.checked;
+
+    const maxDim = 1200;
+    let w = loadedImage.width, h = loadedImage.height;
+    if (w > maxDim) { h = Math.round(h * maxDim / w); w = maxDim; }
+    if (h > maxDim) { w = Math.round(w * maxDim / h); h = maxDim; }
+
+    workCanvas.width = w;
+    workCanvas.height = h;
+    const wCtx = workCanvas.getContext('2d');
+
+    if (blurAmt > 0) {
+      wCtx.filter = `blur(${blurAmt}px)`;
+    }
+    wCtx.drawImage(loadedImage, 0, 0, w, h);
+    wCtx.filter = 'none';
+
+    const imgData = wCtx.getImageData(0, 0, w, h);
+    const d = imgData.data;
+
+    let blackCount = 0;
+    for (let i = 0; i < d.length; i += 4) {
+      let r = d[i], g = d[i+1], b = d[i+2];
+
+      if (contrast !== 0) {
+        const f = (259 * (contrast + 255)) / (255 * (259 - contrast));
+        r = Math.min(255, Math.max(0, Math.round(f * (r - 128) + 128)));
+        g = Math.min(255, Math.max(0, Math.round(f * (g - 128) + 128)));
+        b = Math.min(255, Math.max(0, Math.round(f * (b - 128) + 128)));
+      }
+
+      const grey = Math.round(0.299 * r + 0.587 * g + 0.114 * b);
+      let bw = grey > threshold ? 255 : 0;
+      if (invert) bw = 255 - bw;
+
+      d[i] = d[i+1] = d[i+2] = bw;
+      d[i+3] = 255;
+      if (bw === 0) blackCount++;
+    }
+
+    wCtx.putImageData(imgData, 0, 0);
+
+    const maxPW = 600, maxPH = 500;
+    let pw = w, ph = h;
+    if (pw > maxPW) { ph = ph * maxPW / pw; pw = maxPW; }
+    if (ph > maxPH) { pw = pw * maxPH / ph; ph = maxPH; }
+    stencilCanvas.width = Math.round(pw);
+    stencilCanvas.height = Math.round(ph);
+    const sCtx = stencilCanvas.getContext('2d');
+    sCtx.drawImage(workCanvas, 0, 0, Math.round(pw), Math.round(ph));
+
+    const totalPx = (d.length / 4);
+    const blackPct = Math.round(blackCount / totalPx * 100);
+    document.getElementById('statBlack').textContent = blackPct + '%';
+    document.getElementById('statWhite').textContent = (100 - blackPct) + '%';
+
+    dlGrid.style.display = '';
+  }
+
+  thresholdSlider.addEventListener('input', function() {
+    document.getElementById('thresholdVal').textContent = this.value;
+    if (autoProcess) generateStencil();
+  });
+  contrastSlider.addEventListener('input', function() {
+    document.getElementById('contrastVal').textContent = this.value > 0 ? '+' + this.value : this.value;
+    if (autoProcess) generateStencil();
+  });
+  blurSlider.addEventListener('input', function() {
+    document.getElementById('blurVal').textContent = this.value;
+    if (autoProcess) generateStencil();
+  });
+  invertToggle.addEventListener('change', () => { if (autoProcess) generateStencil(); });
+  processBtn.addEventListener('click', generateStencil);
+
+  dlPng.addEventListener('click', () => {
+    if (!loadedImage) return;
+    generateStencil();
+    const link = document.createElement('a');
+    link.download = 'stencil.png';
+    link.href = workCanvas.toDataURL('image/png');
+    link.click();
+  });
+
+  dlSvg.addEventListener('click', () => {
+    if (!loadedImage) return;
+    generateStencil();
+    const dataUrl = workCanvas.toDataURL('image/png');
+    const w = workCanvas.width, h = workCanvas.height;
+    const svg = `<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+     width="${w}" height="${h}" viewBox="0 0 ${w} ${h}">
+  <title>Stencil</title>
+  <image width="${w}" height="${h}" xlink:href="${dataUrl}"/>
+</svg>`;
+    const blob = new Blob([svg], { type: 'image/svg+xml' });
+    const link = document.createElement('a');
+    link.download = 'stencil.svg';
+    link.href = URL.createObjectURL(blob);
+    link.click();
+    setTimeout(() => URL.revokeObjectURL(link.href), 5000);
+  });
+})();
+</script>
+</body>
+</html>
