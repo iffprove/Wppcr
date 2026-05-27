@@ -4,19 +4,17 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Colour Mixer | Perth Chip Repairs Tools</title>
-<meta name="description" content="Free airbrush paint colour mixer — match any surface colour to professional Createx Wicked paint formulas with ΔE-ranked results and ml/drop measurements.">
+<meta name="description" content="Professional airbrush paint colour mixer — find the best single, 2-paint or 3-paint blend from 400+ paints across 9 brands to match any target colour.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap">
 <style>
 :root{--neon:#e8c84a;--dark:#0d0d0b;--mid:#131310;--card:#1a1a16;--border:#2a2a24;--text:#f0ede8;--muted:#706d64;--dark-rgb:13,13,11;--text-rgb:240,237,232;--neon-rgb:232,200,74;--card-hover:#1e1e1a}
 [data-theme=light]{--neon:#b8960a;--neon-rgb:184,150,10;--dark:#f5f2ed;--dark-rgb:245,242,237;--mid:#eae7e1;--card:#ffffff;--border:#d8d4cc;--text:#1a1a16;--text-rgb:26,26,22;--muted:#7a7770;--card-hover:#ede9e1}
-[data-theme=light] .stats-section,[data-theme=light] .ticker-wrap,[data-theme=light] .cta-section{--dark:#0d0d0b;--dark-rgb:13,13,11;--text:#f0ede8;--text-rgb:240,237,232}
 [data-theme=light] body{background:var(--dark)}
 *{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
 body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;overflow-x:hidden;min-height:100vh}
 
-/* NAV */
 .tool-nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:16px 48px;background:rgba(var(--dark-rgb),0.97);backdrop-filter:blur(12px);border-bottom:1px solid var(--border)}
 .nav-logo{font-family:'Bebas Neue',sans-serif;font-size:18px;letter-spacing:3px;color:var(--neon);text-decoration:none;display:flex;align-items:center;gap:10px}
 .nav-logo small{display:block;font-family:'Inter',sans-serif;font-size:9px;letter-spacing:3px;text-transform:uppercase;color:var(--muted);font-weight:500}
@@ -30,10 +28,11 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .nav-actions{display:flex;align-items:center;gap:20px}
 .nav-tool-link{color:rgba(var(--text-rgb),.5);text-decoration:none;font-size:11px;letter-spacing:2px;text-transform:uppercase;transition:color .2s}
 .nav-tool-link:hover{color:var(--neon)}
+.theme-toggle{background:none;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:border-color .2s,background .2s;flex-shrink:0;padding:0}
+.theme-toggle:hover{border-color:var(--neon);background:rgba(var(--neon-rgb),.08)}
 
-/* HERO */
 .tool-hero{padding:60px 48px 40px;border-bottom:1px solid var(--border);background:var(--mid)}
-.tool-hero-inner{max-width:1080px;margin:0 auto}
+.tool-hero-inner{max-width:1160px;margin:0 auto}
 .tool-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(var(--neon-rgb),.1);border:1px solid rgba(var(--neon-rgb),.25);padding:6px 14px;margin-bottom:20px;border-radius:980px}
 .tool-badge-dot{width:6px;height:6px;border-radius:50%;background:var(--neon)}
 .tool-badge-text{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--neon);font-weight:600}
@@ -41,116 +40,69 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .tool-hero h1 span{color:var(--neon)}
 .tool-hero p{font-size:15px;line-height:1.7;color:rgba(var(--text-rgb),.5);max-width:560px}
 
-/* BODY */
-.tool-body{max-width:1080px;margin:0 auto;padding:48px 48px 80px;display:grid;grid-template-columns:340px 1fr;gap:32px;align-items:start}
+.tool-body{max-width:1160px;margin:0 auto;padding:48px 48px 80px;display:grid;grid-template-columns:340px 1fr;gap:32px;align-items:start}
+
 .controls{position:sticky;top:80px}
-.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:28px;margin-bottom:16px}
-.panel-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin-bottom:20px;color:var(--text)}
+.panel{background:var(--card);border:1px solid var(--border);border-radius:18px;padding:24px;margin-bottom:14px}
+.panel-title{font-family:'Bebas Neue',sans-serif;font-size:22px;letter-spacing:1px;margin-bottom:18px;color:var(--text)}
 .panel-title span{color:var(--neon)}
 
-/* COLOR INPUT */
-.color-swatch-row{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.color-swatch{width:72px;height:72px;border-radius:14px;border:2px solid var(--border);flex-shrink:0;cursor:pointer;position:relative;overflow:hidden;transition:border-color .2s}
-.color-swatch:hover{border-color:var(--neon)}
-.color-swatch input[type=color]{position:absolute;inset:0;opacity:0;cursor:pointer;width:100%;height:100%}
-.color-swatch-info{flex:1}
-.color-swatch-hex{font-family:'Inter',monospace;font-size:22px;font-weight:700;color:var(--text);letter-spacing:2px}
-.color-swatch-rgb{font-size:11px;color:var(--muted);margin-top:4px;font-family:'Inter',monospace;letter-spacing:.5px}
+/* Color picker */
+.color-preview-row{display:flex;align-items:center;gap:12px;margin-bottom:16px}
+.color-swatch-large{width:64px;height:64px;border-radius:12px;border:2px solid var(--border);flex-shrink:0;cursor:pointer;position:relative;overflow:hidden}
+.color-swatch-large input[type=color]{position:absolute;inset:0;width:100%;height:100%;opacity:0;cursor:pointer;border:none;padding:0}
+.color-hex-display{flex:1}
+.color-hex-val{font-family:'Bebas Neue',sans-serif;font-size:28px;letter-spacing:2px;color:var(--neon);line-height:1}
+.color-hex-lbl{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-top:2px}
 
-.hex-input-row{display:flex;gap:10px;align-items:center;margin-bottom:20px}
-.hex-prefix{font-size:18px;font-weight:700;color:var(--neon);font-family:monospace}
-.hex-input{flex:1;background:var(--mid);border:1.5px solid var(--border);color:var(--text);padding:12px 14px;font-size:15px;font-family:monospace;font-weight:700;letter-spacing:3px;border-radius:10px;outline:none;text-transform:uppercase;transition:border-color .2s}
-.hex-input:focus{border-color:var(--neon)}
+.hex-input-row{display:flex;align-items:center;gap:8px;margin-bottom:14px}
+.hex-input-row label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);flex-shrink:0}
+.hex-input{background:var(--mid);border:1px solid var(--border);color:var(--text);padding:8px 12px;font-size:14px;font-family:'Inter',monospace;border-radius:8px;width:110px;letter-spacing:1px}
+.hex-input:focus{outline:none;border-color:var(--neon)}
 
-.ctrl-group{margin-bottom:16px}
+.ctrl-group{margin-bottom:14px}
 .ctrl-label{display:flex;justify-content:space-between;align-items:center;font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:8px}
 .ctrl-value{color:var(--neon);font-family:'Inter',monospace}
-.ctrl-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;outline:none;cursor:pointer}
+.ctrl-slider{-webkit-appearance:none;appearance:none;width:100%;height:4px;border-radius:2px;background:var(--border);outline:none;cursor:pointer}
 .ctrl-slider::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:18px;height:18px;border-radius:50%;background:var(--neon);cursor:pointer;border:2px solid var(--dark);box-shadow:0 0 8px rgba(var(--neon-rgb),.4)}
 .ctrl-slider::-moz-range-thumb{width:18px;height:18px;border-radius:50%;background:var(--neon);cursor:pointer;border:2px solid var(--dark)}
-#sliderR{background:linear-gradient(to right,#000,#ff0000)}
-#sliderG{background:linear-gradient(to right,#000,#00ff00)}
-#sliderB{background:linear-gradient(to right,#000,#0000ff)}
+.rgb-sliders{display:flex;flex-direction:column;gap:8px}
+.rgb-row{display:grid;grid-template-columns:12px 1fr 36px;align-items:center;gap:8px}
+.rgb-dot{width:10px;height:10px;border-radius:50%}
+.rgb-num{font-size:12px;font-family:'Inter',monospace;color:var(--text);text-align:right}
 
-.btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center}
-.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
-
-/* Volume calc */
-.vol-row{display:flex;gap:10px;align-items:center;margin-top:16px}
-.vol-input{flex:1;background:var(--mid);border:1.5px solid var(--border);color:var(--text);padding:10px 14px;font-size:14px;font-family:monospace;border-radius:10px;outline:none;transition:border-color .2s}
-.vol-input:focus{border-color:var(--neon)}
-.vol-unit{font-size:12px;color:var(--muted);letter-spacing:1px;white-space:nowrap}
+/* Brand checkboxes */
+.brand-grid{display:flex;flex-direction:column;gap:6px}
+.brand-item{display:flex;align-items:center;gap:10px;padding:7px 10px;background:rgba(var(--neon-rgb),.03);border:1px solid var(--border);border-radius:8px;cursor:pointer;transition:border-color .15s}
+.brand-item:hover{border-color:rgba(var(--neon-rgb),.3)}
+.brand-item input[type=checkbox]{width:14px;height:14px;accent-color:var(--neon);cursor:pointer;flex-shrink:0}
+.brand-name{font-size:12px;font-weight:600;color:var(--text);flex:1}
+.brand-count{font-size:10px;color:var(--muted)}
 
 /* Category filter */
-.cat-filter{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:16px}
-.cat-btn{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--border);padding:5px 12px;color:var(--muted);background:transparent;cursor:pointer;border-radius:980px;transition:all .2s;font-family:'Inter',sans-serif}
-.cat-btn.active{background:rgba(var(--neon-rgb),.15);border-color:rgba(var(--neon-rgb),.5);color:var(--neon)}
+.cat-pills{display:flex;flex-wrap:wrap;gap:6px}
+.cat-pill{padding:5px 11px;font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;border-radius:980px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.cat-pill.active{border-color:var(--neon);color:var(--neon);background:rgba(var(--neon-rgb),.08)}
+.cat-pill:hover:not(.active){border-color:rgba(var(--text-rgb),.3);color:rgba(var(--text-rgb),.7)}
 
-/* RESULTS */
-.results-area{}
-.results-empty{background:var(--card);border:2px dashed var(--border);border-radius:18px;padding:60px 40px;text-align:center}
-.results-empty-icon{font-size:48px;opacity:.3;margin-bottom:16px}
-.results-empty-text{font-size:15px;color:var(--muted);margin-bottom:8px}
-.results-empty-hint{font-size:12px;color:rgba(112,109,100,.6)}
+/* Volume input */
+.vol-row{display:flex;align-items:center;gap:10px}
+.vol-input{background:var(--mid);border:1px solid var(--border);color:var(--text);padding:9px 12px;font-size:15px;font-family:'Inter',monospace;border-radius:8px;width:90px;text-align:right}
+.vol-input:focus{outline:none;border-color:var(--neon)}
+.vol-unit{font-size:13px;color:var(--muted);font-weight:500}
 
-.section-head{display:flex;align-items:center;gap:10px;margin-bottom:16px}
-.section-head-dot{width:8px;height:8px;border-radius:50%;background:var(--neon)}
-.section-head-label{font-size:11px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted)}
+.btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none}
+.btn-primary:hover{opacity:.9;transform:translateY(-1px)}
+.btn-primary:active{transform:scale(.98)}
+.btn-primary:disabled{opacity:.4;cursor:not-allowed;transform:none}
 
-/* Match card */
-.match-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:20px 22px;display:flex;align-items:center;gap:18px;margin-bottom:10px;transition:border-color .2s,background .2s;cursor:default}
-.match-card:hover{border-color:rgba(var(--neon-rgb),.3);background:var(--card-hover)}
-.match-card.best{border-color:rgba(var(--neon-rgb),.4);background:rgba(var(--neon-rgb),.04)}
-.match-swatch{width:52px;height:52px;border-radius:10px;flex-shrink:0;border:1.5px solid rgba(255,255,255,.1)}
-.match-info{flex:1;min-width:0}
-.match-name{font-size:15px;font-weight:700;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.match-code{font-family:monospace;font-size:11px;color:var(--neon);letter-spacing:1px;margin-bottom:4px}
-.match-cat{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;color:var(--muted)}
-.match-score{text-align:right;flex-shrink:0}
-.match-pct{font-family:'Bebas Neue',sans-serif;font-size:32px;line-height:1;color:var(--neon)}
-.match-de{font-size:10px;color:var(--muted);letter-spacing:1px;margin-top:2px}
-.match-de-label{font-size:9px;text-transform:uppercase;letter-spacing:1px}
-.best-badge{display:inline-flex;align-items:center;gap:4px;background:var(--neon);color:var(--dark);padding:3px 10px;border-radius:980px;font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:6px}
-
-/* 2-paint formula */
-.formula-card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px;margin-top:24px}
-.formula-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;margin-bottom:16px}
-.formula-title span{color:var(--neon)}
-.formula-paints{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
-.formula-paint{background:var(--mid);border:1px solid var(--border);border-radius:10px;padding:12px 16px;flex:1;min-width:140px}
-.formula-paint-bar{height:8px;border-radius:4px;margin-bottom:8px}
-.formula-paint-ratio{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:var(--neon)}
-.formula-paint-parts{font-size:11px;color:var(--muted);margin-bottom:6px}
-.formula-paint-name{font-size:13px;font-weight:600;margin-bottom:2px}
-.formula-paint-code{font-family:monospace;font-size:10px;color:var(--neon);letter-spacing:1px}
-.formula-result{display:flex;align-items:center;gap:14px;padding:14px;background:var(--mid);border:1px solid var(--border);border-radius:10px;margin-bottom:14px}
-.formula-result-swatch{width:44px;height:44px;border-radius:8px;flex-shrink:0;border:1.5px solid rgba(255,255,255,.1)}
-.formula-result-info{flex:1}
-.formula-result-label{font-size:10px;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
-.formula-result-hex{font-family:monospace;font-size:13px;font-weight:700;letter-spacing:2px}
-.formula-result-de{font-size:11px;color:var(--muted)}
-
-/* Volume breakdown */
-.vol-breakdown{background:var(--mid);border:1px solid var(--border);border-radius:10px;padding:14px 16px;margin-top:12px}
-.vol-breakdown-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
-.vol-row-item{display:flex;justify-content:space-between;align-items:center;padding:6px 0;border-bottom:1px solid rgba(42,42,36,.5)}
-.vol-row-item:last-child{border-bottom:none}
-.vol-paint-label{font-size:12px;font-weight:600}
-.vol-amounts{font-family:monospace;font-size:12px;color:var(--neon)}
-
-.de-bar{display:flex;gap:4px;align-items:center;margin-top:8px}
-.de-label{font-size:10px;text-transform:uppercase;letter-spacing:2px;color:var(--muted)}
-.de-track{flex:1;height:4px;background:var(--border);border-radius:2px;overflow:hidden}
-.de-fill{height:100%;border-radius:2px;transition:width .4s}
-
-/* Stencil link */
-.link-stencil{display:flex;align-items:center;gap:10px;padding:14px 18px;background:rgba(var(--neon-rgb),.06);border:1px solid rgba(var(--neon-rgb),.2);border-radius:12px;text-decoration:none;color:var(--text);transition:background .2s,border-color .2s;margin-top:16px}
+.link-stencil{display:flex;align-items:center;gap:10px;padding:14px 18px;background:rgba(var(--neon-rgb),.06);border:1px solid rgba(var(--neon-rgb),.2);border-radius:12px;text-decoration:none;color:var(--text);transition:background .2s,border-color .2s;margin-top:12px}
 .link-stencil:hover{background:rgba(var(--neon-rgb),.1);border-color:rgba(var(--neon-rgb),.4)}
 .link-stencil-icon{font-size:20px;flex-shrink:0}
 .link-stencil-text strong{display:block;font-size:13px;font-weight:700;color:var(--neon)}
 .link-stencil-text span{font-size:11px;color:var(--muted)}
 
-.how-to{background:var(--mid);border:1px solid var(--border);border-radius:14px;padding:20px}
+.how-to{margin-top:0;background:var(--mid);border:1px solid var(--border);border-radius:14px;padding:20px}
 .how-to-title{font-size:10px;font-weight:700;letter-spacing:3px;text-transform:uppercase;color:var(--muted);margin-bottom:16px}
 .how-step{display:flex;gap:14px;padding:10px 0;border-bottom:1px solid rgba(42,42,36,.5)}
 .how-step:last-child{border-bottom:none;padding-bottom:0}
@@ -158,21 +110,92 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .how-text h4{font-size:13px;font-weight:600;margin-bottom:2px}
 .how-text p{font-size:12px;line-height:1.6;color:rgba(var(--text-rgb),.45)}
 
-.brand-tag{font-size:10px;font-weight:700;letter-spacing:1.5px;background:rgba(var(--neon-rgb),.1);border:1px solid rgba(var(--neon-rgb),.2);color:var(--neon);padding:3px 9px;border-radius:980px;display:inline-block;margin:2px}
+/* Results area */
+.results-area{}
+.results-empty{background:var(--card);border:2px dashed var(--border);border-radius:18px;padding:64px 40px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:16px;text-align:center}
+.results-empty-icon{font-size:48px;opacity:.3}
+.results-empty-text{font-size:15px;color:var(--muted)}
+.results-empty-hint{font-size:12px;color:rgba(112,109,100,.6)}
+
+.spinner-wrap{display:flex;flex-direction:column;align-items:center;justify-content:center;padding:48px;gap:16px}
+.spinner{width:36px;height:36px;border:3px solid var(--border);border-top-color:var(--neon);border-radius:50%;animation:spin .7s linear infinite}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+
+.result-cards{display:flex;flex-direction:column;gap:20px}
+
+/* Target color display */
+.target-row{display:flex;align-items:center;gap:16px;background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px 20px;margin-bottom:20px}
+.target-swatch{width:48px;height:48px;border-radius:10px;border:2px solid var(--border);flex-shrink:0}
+.target-info{flex:1}
+.target-label{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.target-hex{font-family:'Bebas Neue',sans-serif;font-size:24px;letter-spacing:2px;color:var(--text)}
+
+/* Result card */
+.result-card{background:var(--card);border:1px solid var(--border);border-radius:18px;overflow:hidden}
+.result-card-header{padding:18px 22px 14px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:12px}
+.result-card-num{font-family:'Bebas Neue',sans-serif;font-size:36px;color:var(--neon);line-height:1;min-width:36px}
+.result-card-title{font-family:'Bebas Neue',sans-serif;font-size:20px;letter-spacing:1px;color:var(--text)}
+.result-card-subtitle{font-size:11px;color:var(--muted);margin-top:1px}
+.result-badge{margin-left:auto;display:flex;flex-direction:column;align-items:flex-end;gap:4px}
+.badge-score{font-family:'Bebas Neue',sans-serif;font-size:28px;line-height:1;color:var(--neon)}
+.badge-score-lbl{font-size:9px;letter-spacing:2px;text-transform:uppercase;color:var(--muted)}
+.badge-de{font-size:11px;color:rgba(var(--text-rgb),.5)}
+.badge-label{font-size:10px;font-weight:700;letter-spacing:1px;padding:3px 8px;border-radius:980px;background:rgba(var(--neon-rgb),.12);color:var(--neon)}
+
+.result-card-body{padding:20px 22px}
+
+.swatches-row{display:flex;align-items:center;gap:10px;margin-bottom:20px;flex-wrap:wrap}
+.swatch-item{display:flex;flex-direction:column;align-items:center;gap:6px}
+.swatch-box{width:52px;height:52px;border-radius:10px;border:2px solid var(--border);flex-shrink:0}
+.swatch-plus{font-size:18px;color:var(--muted);padding:0 4px;margin-bottom:18px}
+.swatch-arrow{font-size:16px;color:var(--neon);padding:0 4px;margin-bottom:18px}
+.swatch-lbl{font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--muted);text-align:center}
+.swatch-ratio{font-family:'Bebas Neue',sans-serif;font-size:16px;color:var(--neon)}
+
+.paints-list{display:flex;flex-direction:column;gap:10px}
+.paint-row{display:grid;grid-template-columns:auto 1fr auto;align-items:center;gap:12px;padding:12px 14px;background:rgba(var(--neon-rgb),.03);border:1px solid var(--border);border-radius:10px}
+.paint-swatch-sm{width:36px;height:36px;border-radius:7px;border:1.5px solid var(--border);flex-shrink:0}
+.paint-info{}
+.paint-code{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--neon);margin-bottom:2px}
+.paint-name{font-size:13px;font-weight:600;color:var(--text);margin-bottom:2px}
+.paint-meta{font-size:11px;color:var(--muted)}
+.cat-tag{display:inline-block;padding:2px 7px;border-radius:980px;font-size:9px;font-weight:700;letter-spacing:1px;text-transform:uppercase;border:1px solid;margin-left:5px}
+.cat-tag-opaque{color:#6ec6ff;border-color:rgba(110,198,255,.3)}
+.cat-tag-transparent{color:#aef0b0;border-color:rgba(174,240,176,.3)}
+.cat-tag-standard{color:#d0bfff;border-color:rgba(208,191,255,.3)}
+.cat-tag-metallic{color:#ffd180;border-color:rgba(255,209,128,.3)}
+.cat-tag-pearl{color:#f9a8d4;border-color:rgba(249,168,212,.3)}
+.cat-tag-fluorescent{color:#f9f871;border-color:rgba(249,248,113,.3)}
+.cat-tag-detail{color:#86efac;border-color:rgba(134,239,172,.3)}
+.cat-tag-primer{color:#94a3b8;border-color:rgba(148,163,184,.3)}
+.paint-ratio-col{text-align:right}
+.paint-ratio-big{font-family:'Bebas Neue',sans-serif;font-size:22px;color:var(--neon);line-height:1}
+.paint-ratio-pct{font-size:11px;color:var(--muted)}
+
+.vol-breakdown{margin-top:16px;padding:14px 16px;background:var(--mid);border:1px solid var(--border);border-radius:10px}
+.vol-breakdown-title{font-size:10px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--muted);margin-bottom:10px}
+.vol-breakdown-rows{display:flex;flex-direction:column;gap:6px}
+.vol-row-item{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.vol-row-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
+.vol-row-name{font-size:12px;color:rgba(var(--text-rgb),.7);flex:1}
+.vol-row-vals{font-size:12px;font-family:'Inter',monospace;color:var(--text);text-align:right;white-space:nowrap}
 
 .tool-footer{border-top:1px solid var(--border);padding:32px 48px;text-align:center}
 .tool-footer p{font-size:11px;color:var(--muted);letter-spacing:1px}
 .tool-footer a{color:var(--neon);text-decoration:none}
 
-@media(max-width:900px){
+.select-all-row{display:flex;gap:8px;margin-bottom:10px}
+.select-btn{font-size:10px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;padding:4px 10px;border-radius:980px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s}
+.select-btn:hover{border-color:var(--neon);color:var(--neon)}
+
+@media(max-width:960px){
   .tool-nav{padding:14px 24px}
   .tool-hero{padding:40px 24px 28px}
   .tool-body{padding:32px 24px 60px;grid-template-columns:1fr}
   .controls{position:static}
   .tool-footer{padding:24px}
 }
-.theme-toggle{background:none;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:border-color .2s,background .2s;flex-shrink:0;padding:0}
-.theme-toggle:hover{border-color:var(--neon);background:rgba(var(--neon-rgb),.08)}
 </style>
 </head>
 <body>
@@ -180,7 +203,7 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 <nav class="tool-nav">
   <a href="../index.html" class="nav-logo"><img src="data:image/png;base64,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" class="nav-logo-img nav-logo-img--dark" alt="Perth Chip Repairs"><img src="data:image/png;base64,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" class="nav-logo-img nav-logo-img--light" alt="Perth Chip Repairs"><span>Perth Chip Repairs<small>Surface Repair Specialists</small></span></a>
   <div class="nav-actions">
-    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" onclick="toggleTheme()"><span id="themeIcon">☀️</span></button>
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" onclick="toggleTheme()"><span id="themeIcon">&#9728;&#65039;</span></button>
     <a href="stencil-maker.html" class="nav-tool-link">Stencil Maker</a>
     <a href="../index.html" class="nav-back">Main Site</a>
   </div>
@@ -188,320 +211,772 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 
 <div class="tool-hero">
   <div class="tool-hero-inner">
-    <div class="tool-badge"><div class="tool-badge-dot"></div><span class="tool-badge-text">103 Paints &middot; Createx Wicked Colors &middot; Free</span></div>
+    <div class="tool-badge"><div class="tool-badge-dot"></div><span class="tool-badge-text">Free Tool &middot; 400+ Paints &middot; 9 Brands</span></div>
     <h1>Colour<br><span>Mixer</span></h1>
-    <p>Enter any target colour and find the closest Createx Wicked airbrush paint formula &mdash; single paint match or best 2-paint blend with ΔE accuracy scores and ml / drop measurements.</p>
+    <p>Enter a target colour and find the best single paint or multi-paint blend from 400+ airbrush paints across 9 professional brands. Calculates exact ratios and volume breakdowns.</p>
   </div>
 </div>
 
 <div class="tool-body">
 
-  <!-- CONTROLS -->
+  <!-- LEFT PANEL -->
   <div class="controls">
-    <div class="panel">
-      <div class="panel-title">1. <span>Pick a Colour</span></div>
 
-      <div class="color-swatch-row">
-        <div class="color-swatch" id="swatchWrap">
-          <input type="color" id="colorPicker" value="#c8bfb0">
+    <div class="panel">
+      <div class="panel-title">1. <span>Target Colour</span></div>
+      <div class="color-preview-row">
+        <div class="color-swatch-large" id="swatchLarge" style="background:#e83a2e">
+          <input type="color" id="colorPicker" value="#e83a2e">
         </div>
-        <div class="color-swatch-info">
-          <div class="color-swatch-hex" id="swatchHex">#C8BFB0</div>
-          <div class="color-swatch-rgb" id="swatchRgb">R 200 · G 191 · B 176</div>
+        <div class="color-hex-display">
+          <div class="color-hex-val" id="hexDisplay">#E83A2E</div>
+          <div class="color-hex-lbl">Target Hex</div>
         </div>
       </div>
-
       <div class="hex-input-row">
-        <div class="hex-prefix">#</div>
-        <input type="text" class="hex-input" id="hexInput" value="C8BFB0" maxlength="6" placeholder="RRGGBB">
+        <label>HEX</label>
+        <input type="text" class="hex-input" id="hexInput" value="#e83a2e" maxlength="7" spellcheck="false">
       </div>
-
-      <div class="ctrl-group">
-        <div class="ctrl-label">Red <span class="ctrl-value" id="rVal">200</span></div>
-        <input type="range" class="ctrl-slider" id="sliderR" min="0" max="255" value="200">
-      </div>
-      <div class="ctrl-group">
-        <div class="ctrl-label">Green <span class="ctrl-value" id="gVal">191</span></div>
-        <input type="range" class="ctrl-slider" id="sliderG" min="0" max="255" value="191">
-      </div>
-      <div class="ctrl-group">
-        <div class="ctrl-label">Blue <span class="ctrl-value" id="bVal">176</span></div>
-        <input type="range" class="ctrl-slider" id="sliderB" min="0" max="255" value="176">
-      </div>
-
-      <button class="btn-primary" id="findBtn">Find Best Match &#8594;</button>
-    </div>
-
-    <div class="panel">
-      <div class="panel-title">2. <span>Filter Paints</span></div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:14px">Include only these paint types in the search:</p>
-      <div class="cat-filter" id="catFilter">
-        <button class="cat-btn active" data-cat="transparent">Transparent</button>
-        <button class="cat-btn active" data-cat="opaque">Opaque</button>
-        <button class="cat-btn active" data-cat="detail">Detail</button>
-        <button class="cat-btn active" data-cat="pearl">Pearl</button>
-        <button class="cat-btn active" data-cat="metallic">Metallic</button>
-        <button class="cat-btn active" data-cat="fluorescent">Fluorescent</button>
+      <div class="rgb-sliders">
+        <div class="ctrl-group" style="margin-bottom:8px">
+          <div class="ctrl-label">R <span class="ctrl-value" id="rVal">232</span></div>
+          <input type="range" class="ctrl-slider" id="rSlider" min="0" max="255" value="232" style="--thumb-color:#ff5555">
+        </div>
+        <div class="ctrl-group" style="margin-bottom:8px">
+          <div class="ctrl-label">G <span class="ctrl-value" id="gVal">58</span></div>
+          <input type="range" class="ctrl-slider" id="gSlider" min="0" max="255" value="58">
+        </div>
+        <div class="ctrl-group" style="margin-bottom:0">
+          <div class="ctrl-label">B <span class="ctrl-value" id="bVal">46</span></div>
+          <input type="range" class="ctrl-slider" id="bSlider" min="0" max="255" value="46">
+        </div>
       </div>
     </div>
 
     <div class="panel">
-      <div class="panel-title">3. <span>Volume Calc</span></div>
-      <p style="font-size:12px;color:var(--muted);margin-bottom:12px">Enter total mix volume to get ml and drop amounts:</p>
-      <div style="display:flex;gap:10px;align-items:center">
-        <input type="number" class="vol-input" id="volInput" value="5" min="0.1" max="100" step="0.5">
+      <div class="panel-title">2. <span>Brands</span></div>
+      <div class="select-all-row">
+        <button class="select-btn" onclick="selectAllBrands()">All</button>
+        <button class="select-btn" onclick="selectNoBrands()">None</button>
+      </div>
+      <div class="brand-grid" id="brandGrid"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">3. <span>Categories</span></div>
+      <div class="cat-pills" id="catPills"></div>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">4. <span>Volume</span></div>
+      <div class="vol-row" style="gap:10px;align-items:center">
+        <input type="number" class="vol-input" id="volInput" value="10" min="0.5" max="500" step="0.5">
         <span class="vol-unit">ml total</span>
       </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:8px">Volume breakdown shown per paint in ml and drops (1 drop = 0.05 ml)</p>
     </div>
 
-    <a href="stencil-maker.html" class="link-stencil">
-      <div class="link-stencil-icon">✂️</div>
+    <button class="btn-primary" id="findBtn" onclick="runSearch()">&#128269; Find Best Match</button>
+
+    <a href="stencil-maker.html" class="link-stencil" style="margin-top:12px">
+      <div class="link-stencil-icon">&#9999;&#65039;</div>
       <div class="link-stencil-text">
-        <strong>Stencil Maker →</strong>
-        <span>Convert a pattern image to a cutting stencil</span>
+        <strong>Stencil Maker &#8594;</strong>
+        <span>Create precision stencils for repair work</span>
       </div>
     </a>
 
-    <div class="how-to" style="margin-top:16px">
+    <div class="how-to" style="margin-top:14px">
       <div class="how-to-title">How it works</div>
       <div class="how-step">
         <div class="how-num">01</div>
-        <div class="how-text"><h4>Pick target colour</h4><p>Use the colour picker, hex input or RGB sliders to set your target surface colour.</p></div>
+        <div class="how-text"><h4>Pick a target colour</h4><p>Use the colour picker, RGB sliders or type a hex code directly.</p></div>
       </div>
       <div class="how-step">
         <div class="how-num">02</div>
-        <div class="how-text"><h4>Search all paints</h4><p>We convert to CIE LAB and compute ΔE distance against all 103 Createx Wicked paints.</p></div>
+        <div class="how-text"><h4>Select brands &amp; categories</h4><p>Filter to the paints you have on hand or want to order.</p></div>
       </div>
       <div class="how-step">
         <div class="how-num">03</div>
-        <div class="how-text"><h4>Get your formula</h4><p>Top 5 single-paint matches plus the best 2-paint blend, with ml and drop counts.</p></div>
+        <div class="how-text"><h4>Run the search</h4><p>Algorithm calculates &#916;E (perceptual colour difference) across all combinations.</p></div>
+      </div>
+      <div class="how-step">
+        <div class="how-num">04</div>
+        <div class="how-text"><h4>Mix by the ratios</h4><p>Use the part ratios and ml/drops breakdown to mix your batch precisely.</p></div>
       </div>
     </div>
+
   </div>
 
-  <!-- RESULTS -->
-  <div class="results-area">
-    <div class="results-empty" id="emptyResults">
+  <!-- RIGHT: RESULTS -->
+  <div class="results-area" id="resultsArea">
+    <div class="results-empty" id="emptyState">
       <div class="results-empty-icon">&#127912;</div>
-      <div class="results-empty-text">Pick a colour to find the best match</div>
-      <div class="results-empty-hint">Searches 103 Createx Wicked paints in CIE LAB colour space</div>
-      <div style="margin-top:20px">
-        <span class="brand-tag">Transparent</span>
-        <span class="brand-tag">Opaque</span>
-        <span class="brand-tag">Detail</span>
-        <span class="brand-tag">Pearl</span>
-        <span class="brand-tag">Metallic</span>
-        <span class="brand-tag">Fluorescent</span>
+      <div class="results-empty-text">Select a colour and click Find Best Match</div>
+      <div class="results-empty-hint">Searches 400+ paints across 9 brands using perceptual &#916;E colour matching</div>
+    </div>
+    <div id="spinnerState" style="display:none">
+      <div class="spinner-wrap">
+        <div class="spinner"></div>
+        <div class="spinner-label">Searching&hellip;</div>
       </div>
     </div>
-
-    <div id="resultsContent" style="display:none">
-      <!-- Single paint matches -->
-      <div class="section-head">
-        <div class="section-head-dot"></div>
-        <div class="section-head-label">Top Single Paint Matches</div>
+    <div id="resultsState" style="display:none">
+      <div class="target-row">
+        <div class="target-swatch" id="targetSwatch"></div>
+        <div class="target-info">
+          <div class="target-label">Target Colour</div>
+          <div class="target-hex" id="targetHexLabel"></div>
+        </div>
       </div>
-      <div id="singleMatches"></div>
-
-      <!-- 2-paint formula -->
-      <div id="formulaSection"></div>
+      <div class="result-cards" id="resultCards"></div>
     </div>
   </div>
 
 </div>
 
 <footer class="tool-footer">
-  <p>Createx Wicked Colors · 103 paints · CIE76 ΔE colour matching · <a href="../index.html">Perth Chip Repairs</a></p>
-  <p style="margin-top:6px;opacity:.6">Colour values are approximations from official colour charts. Always spray a test card before committing to a job.</p>
+  <p>Part of the <a href="../index.html">Perth Chip Repairs</a> free tool suite &middot; No account required &middot; All processing in your browser</p>
 </footer>
-
 <script>
+// ─── THEME ───────────────────────────────────────────────────────────────────
 (function(){
+  const t = localStorage.getItem('pcr-theme');
+  if(t) { document.documentElement.setAttribute('data-theme', t); }
+  document.addEventListener('DOMContentLoaded', function(){
+    updateThemeIcon();
+  });
+})();
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur === 'light' ? 'dark' : 'light';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('pcr-theme', next);
+  updateThemeIcon();
+}
+function updateThemeIcon(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const el = document.getElementById('themeIcon');
+  if(el) el.textContent = cur === 'light' ? '🌙' : '☀️';
+}
 
-// ============================
-// PAINT DATABASE — Createx Wicked (103 paints)
-// ============================
+// ─── PAINT DATABASE ───────────────────────────────────────────────────────────
 const PAINTS = [
-  // Transparent
-  {code:'W001',name:'White',cat:'transparent',rgb:[255,255,255],op:0.3},
-  {code:'W002',name:'Black',cat:'transparent',rgb:[20,20,20],op:0.7},
-  {code:'W003',name:'Yellow',cat:'transparent',rgb:[242,214,0],op:0.4},
-  {code:'W004',name:'Orange',cat:'transparent',rgb:[255,102,0],op:0.5},
-  {code:'W005',name:'Red',cat:'transparent',rgb:[204,0,33],op:0.5},
-  {code:'W006',name:'Violet',cat:'transparent',rgb:[77,38,115],op:0.5},
-  {code:'W007',name:'Blue',cat:'transparent',rgb:[0,51,153],op:0.5},
-  {code:'W008',name:'Deep Blue',cat:'transparent',rgb:[0,26,77],op:0.6},
-  {code:'W009',name:'Phthalo Green',cat:'transparent',rgb:[0,77,64],op:0.5},
-  {code:'W010',name:'Brown',cat:'transparent',rgb:[102,51,0],op:0.5},
-  {code:'W011',name:'Golden Yellow',cat:'transparent',rgb:[255,170,0],op:0.4},
-  {code:'W012',name:'Red Oxide',cat:'transparent',rgb:[153,51,0],op:0.6},
-  {code:'W013',name:'Laguna Blue',cat:'transparent',rgb:[0,128,204],op:0.4},
-  {code:'W014',name:'Grey',cat:'transparent',rgb:[128,128,128],op:0.4},
-  {code:'W015',name:'Crimson',cat:'transparent',rgb:[179,0,45],op:0.5},
-  {code:'W016',name:'Apple Green',cat:'transparent',rgb:[51,179,51],op:0.4},
-  // Opaque
-  {code:'W030',name:'Opaque White',cat:'opaque',rgb:[255,255,255],op:0.95},
-  {code:'W031',name:'Opaque Jet Black',cat:'opaque',rgb:[5,5,5],op:0.95},
-  {code:'W032',name:'Opaque Flat White',cat:'opaque',rgb:[250,250,245],op:0.95},
-  {code:'W033',name:'Opaque Yellow',cat:'opaque',rgb:[255,220,0],op:0.85},
-  {code:'W034',name:'Opaque Orange',cat:'opaque',rgb:[255,120,0],op:0.85},
-  {code:'W035',name:'Opaque Red',cat:'opaque',rgb:[210,0,30],op:0.85},
-  {code:'W036',name:'Opaque Blue',cat:'opaque',rgb:[0,60,160],op:0.85},
-  {code:'W037',name:'Opaque Green',cat:'opaque',rgb:[0,128,64],op:0.85},
-  {code:'W038',name:'Opaque Violet',cat:'opaque',rgb:[90,30,130],op:0.85},
-  {code:'W080',name:'Opaque Hansa Yellow',cat:'opaque',rgb:[255,230,0],op:0.9},
-  {code:'W081',name:'Opaque Dioxazine Purple',cat:'opaque',rgb:[60,0,100],op:0.9},
-  {code:'W082',name:'Opaque Phthalo Blue',cat:'opaque',rgb:[0,40,130],op:0.9},
-  {code:'W083',name:'Opaque Pyrrole Red',cat:'opaque',rgb:[220,20,20],op:0.9},
-  {code:'W084',name:'Opaque Naphthol Red Light',cat:'opaque',rgb:[230,50,30],op:0.9},
-  {code:'W085',name:'Opaque Phthalo Green',cat:'opaque',rgb:[0,100,70],op:0.9},
-  {code:'W086',name:'Opaque Burnt Sienna',cat:'opaque',rgb:[150,60,20],op:0.9},
-  {code:'W087',name:'Opaque Raw Umber',cat:'opaque',rgb:[100,70,40],op:0.9},
-  {code:'W088',name:'Opaque Burnt Umber',cat:'opaque',rgb:[70,35,15],op:0.9},
-  {code:'W090',name:'Opaque Warm Grey',cat:'opaque',rgb:[140,130,120],op:0.9},
-  {code:'W091',name:'Opaque Cool Grey',cat:'opaque',rgb:[120,125,135],op:0.9},
-  {code:'W098',name:'Opaque Flat Black',cat:'opaque',rgb:[15,15,15],op:0.95},
-  // Detail
-  {code:'W050',name:'Detail White',cat:'detail',rgb:[255,255,255],op:0.8},
-  {code:'W051',name:'Detail Black',cat:'detail',rgb:[15,15,15],op:0.8},
-  {code:'W052',name:'Detail Yellow',cat:'detail',rgb:[245,215,0],op:0.7},
-  {code:'W053',name:'Detail Scarlet',cat:'detail',rgb:[210,25,25],op:0.7},
-  {code:'W054',name:'Detail Orange',cat:'detail',rgb:[245,110,0],op:0.7},
-  {code:'W055',name:'Detail Violet',cat:'detail',rgb:[75,30,110],op:0.7},
-  {code:'W056',name:'Detail Red Violet',cat:'detail',rgb:[140,20,80],op:0.7},
-  {code:'W057',name:'Detail Blue Violet',cat:'detail',rgb:[50,30,120],op:0.7},
-  {code:'W058',name:'Detail Blue Green',cat:'detail',rgb:[0,90,90],op:0.7},
-  {code:'W059',name:'Detail Moss Green',cat:'detail',rgb:[40,70,30],op:0.7},
-  {code:'W060',name:'Detail Viridian',cat:'detail',rgb:[0,100,60],op:0.7},
-  {code:'W061',name:'Detail Cobalt Blue',cat:'detail',rgb:[0,60,150],op:0.7},
-  {code:'W062',name:'Detail Cerulean Blue',cat:'detail',rgb:[0,120,190],op:0.7},
-  {code:'W063',name:'Detail Carmine',cat:'detail',rgb:[180,0,50],op:0.7},
-  {code:'W064',name:'Detail Magenta',cat:'detail',rgb:[200,0,100],op:0.7},
-  {code:'W065',name:'Detail Yellow Ochre',cat:'detail',rgb:[180,130,40],op:0.7},
-  {code:'W066',name:'Detail Burnt Orange',cat:'detail',rgb:[180,60,0],op:0.7},
-  {code:'W067',name:'Detail Raw Sienna',cat:'detail',rgb:[160,100,40],op:0.7},
-  {code:'W068',name:'Detail Raw Umber',cat:'detail',rgb:[90,70,40],op:0.7},
-  {code:'W069',name:'Detail Burnt Umber',cat:'detail',rgb:[65,35,20],op:0.7},
-  {code:'W070',name:'Detail Sepia',cat:'detail',rgb:[50,25,5],op:0.7},
-  {code:'W071',name:'Detail Paynes Grey',cat:'detail',rgb:[50,55,65],op:0.7},
-  {code:'W072',name:'Detail Smoke Black',cat:'detail',rgb:[30,30,30],op:0.6},
-  {code:'W073',name:'Detail Flesh Tone',cat:'detail',rgb:[235,170,120],op:0.7},
-  {code:'W074',name:'Detail Burnt Sienna',cat:'detail',rgb:[155,55,25],op:0.7},
-  {code:'W075',name:'Detail Black Magenta',cat:'detail',rgb:[50,5,30],op:0.7},
-  {code:'W076',name:'Detail Universal Fleshtone',cat:'detail',rgb:[220,175,130],op:0.7},
-  // Pearl
-  {code:'W300',name:'Pearl Black',cat:'pearl',rgb:[25,25,30],op:0.6},
-  {code:'W301',name:'Pearl White',cat:'pearl',rgb:[240,240,235],op:0.6},
-  {code:'W302',name:'Pearl Yellow',cat:'pearl',rgb:[255,230,50],op:0.5},
-  {code:'W303',name:'Pearl Red',cat:'pearl',rgb:[200,30,40],op:0.5},
-  {code:'W304',name:'Pearl Blue',cat:'pearl',rgb:[30,80,180],op:0.5},
-  {code:'W305',name:'Pearl Lime Green',cat:'pearl',rgb:[100,200,50],op:0.5},
-  {code:'W306',name:'Pearl Orange',cat:'pearl',rgb:[240,120,20],op:0.5},
-  {code:'W307',name:'Pearl Plum',cat:'pearl',rgb:[100,20,80],op:0.5},
-  {code:'W308',name:'Pearl Green',cat:'pearl',rgb:[0,130,80],op:0.5},
-  {code:'W309',name:'Pearl Teal',cat:'pearl',rgb:[0,120,130],op:0.5},
-  {code:'W310',name:'Pearl Magenta',cat:'pearl',rgb:[180,20,90],op:0.5},
-  {code:'W311',name:'Pearl Purple',cat:'pearl',rgb:[80,20,140],op:0.5},
-  {code:'W350',name:'Pearl Gold',cat:'pearl',rgb:[200,170,50],op:0.5},
-  {code:'W351',name:'Pearl Silver',cat:'pearl',rgb:[180,185,190],op:0.5},
-  {code:'W352',name:'Pearl Platinum',cat:'pearl',rgb:[200,200,205],op:0.5},
-  {code:'W353',name:'Pearl Fastback Green',cat:'pearl',rgb:[0,80,50],op:0.5},
-  {code:'W354',name:'Pearl Aluminium',cat:'pearl',rgb:[160,165,170],op:0.5},
-  // Metallic
-  {code:'W355',name:'Metallic Gold',cat:'metallic',rgb:[200,160,40],op:0.6},
-  {code:'W358',name:'Gold Chrome',cat:'metallic',rgb:[210,180,50],op:0.7},
-  {code:'W359',name:'Metallic Charcoal',cat:'metallic',rgb:[60,60,65],op:0.7},
-  {code:'W360',name:'Metallic Copper',cat:'metallic',rgb:[180,100,50],op:0.6},
-  {code:'W361',name:'Metallic Red',cat:'metallic',rgb:[180,30,30],op:0.6},
-  {code:'W362',name:'Metallic Violet',cat:'metallic',rgb:[90,30,120],op:0.6},
-  {code:'W363',name:'Metallic Blue',cat:'metallic',rgb:[30,60,150],op:0.6},
-  {code:'W364',name:'Metallic Blue Silver',cat:'metallic',rgb:[120,140,170],op:0.6},
-  {code:'W365',name:'Metallic Burnt Orange',cat:'metallic',rgb:[180,80,20],op:0.6},
-  {code:'W370',name:'Metallic Light Brown',cat:'metallic',rgb:[150,110,60],op:0.6},
-  {code:'W371',name:'Metallic Dark Brown',cat:'metallic',rgb:[80,50,25],op:0.6},
-  // Fluorescent
-  {code:'W019',name:'Fluorescent Aqua',cat:'fluorescent',rgb:[0,230,200],op:0.4},
-  {code:'W020',name:'Fluorescent Purple',cat:'fluorescent',rgb:[160,0,200],op:0.4},
-  {code:'W021',name:'Fluorescent Raspberry',cat:'fluorescent',rgb:[230,0,100],op:0.4},
-  {code:'W022',name:'Fluorescent Red',cat:'fluorescent',rgb:[255,30,30],op:0.4},
-  {code:'W023',name:'Fluorescent Green',cat:'fluorescent',rgb:[0,230,50],op:0.4},
-  {code:'W024',name:'Fluorescent Yellow',cat:'fluorescent',rgb:[255,255,0],op:0.3},
-  {code:'W025',name:'Fluorescent Sunburst',cat:'fluorescent',rgb:[255,200,0],op:0.4},
-  {code:'W026',name:'Fluorescent Pink',cat:'fluorescent',rgb:[255,50,150],op:0.4},
-  {code:'W027',name:'Fluorescent Orange',cat:'fluorescent',rgb:[255,130,0],op:0.4},
-  {code:'W028',name:'Fluorescent Blue',cat:'fluorescent',rgb:[0,100,255],op:0.4},
-  {code:'W029',name:'Fluorescent Magenta',cat:'fluorescent',rgb:[255,0,150],op:0.4},
+// Createx Wicked
+{code:'W001',name:'White',brand:'createx-wicked',category:'transparent',rgb:[255,255,255],opacity:0.3,tintingStrength:1.5},
+{code:'W002',name:'Black',brand:'createx-wicked',category:'transparent',rgb:[20,20,20],opacity:0.7,tintingStrength:3},
+{code:'W003',name:'Yellow',brand:'createx-wicked',category:'transparent',rgb:[242,214,0],opacity:0.4,tintingStrength:1.5},
+{code:'W004',name:'Orange',brand:'createx-wicked',category:'transparent',rgb:[255,102,0],opacity:0.5,tintingStrength:1.5},
+{code:'W005',name:'Red',brand:'createx-wicked',category:'transparent',rgb:[204,0,33],opacity:0.5,tintingStrength:1.5},
+{code:'W006',name:'Violet',brand:'createx-wicked',category:'transparent',rgb:[77,38,115],opacity:0.5,tintingStrength:1.5},
+{code:'W007',name:'Blue',brand:'createx-wicked',category:'transparent',rgb:[0,51,153],opacity:0.5,tintingStrength:1.5},
+{code:'W008',name:'Deep Blue',brand:'createx-wicked',category:'transparent',rgb:[0,26,77],opacity:0.6,tintingStrength:1.5},
+{code:'W009',name:'Phthalo Green',brand:'createx-wicked',category:'transparent',rgb:[0,77,64],opacity:0.5,tintingStrength:3.5},
+{code:'W010',name:'Brown',brand:'createx-wicked',category:'transparent',rgb:[102,51,0],opacity:0.5,tintingStrength:1.5},
+{code:'W011',name:'Golden Yellow',brand:'createx-wicked',category:'transparent',rgb:[255,170,0],opacity:0.4,tintingStrength:1.5},
+{code:'W012',name:'Red Oxide',brand:'createx-wicked',category:'transparent',rgb:[153,51,0],opacity:0.6,tintingStrength:1.5},
+{code:'W013',name:'Laguna Blue',brand:'createx-wicked',category:'transparent',rgb:[0,128,204],opacity:0.4,tintingStrength:1.5},
+{code:'W014',name:'Grey',brand:'createx-wicked',category:'transparent',rgb:[128,128,128],opacity:0.4,tintingStrength:1.5},
+{code:'W015',name:'Crimson',brand:'createx-wicked',category:'transparent',rgb:[179,0,45],opacity:0.5,tintingStrength:2},
+{code:'W016',name:'Apple Green',brand:'createx-wicked',category:'transparent',rgb:[51,179,51],opacity:0.4,tintingStrength:1.5},
+{code:'W030',name:'Opaque White',brand:'createx-wicked',category:'opaque',rgb:[255,255,255],opacity:0.95,tintingStrength:0.4},
+{code:'W031',name:'Opaque Jet Black',brand:'createx-wicked',category:'opaque',rgb:[5,5,5],opacity:0.95,tintingStrength:3},
+{code:'W032',name:'Opaque Flat White',brand:'createx-wicked',category:'opaque',rgb:[250,250,245],opacity:0.95,tintingStrength:0.4},
+{code:'W033',name:'Opaque Yellow',brand:'createx-wicked',category:'opaque',rgb:[255,220,0],opacity:0.85,tintingStrength:1},
+{code:'W034',name:'Opaque Orange',brand:'createx-wicked',category:'opaque',rgb:[255,120,0],opacity:0.85,tintingStrength:1},
+{code:'W035',name:'Opaque Red',brand:'createx-wicked',category:'opaque',rgb:[210,0,30],opacity:0.85,tintingStrength:1},
+{code:'W036',name:'Opaque Blue',brand:'createx-wicked',category:'opaque',rgb:[0,60,160],opacity:0.85,tintingStrength:1},
+{code:'W037',name:'Opaque Green',brand:'createx-wicked',category:'opaque',rgb:[0,128,64],opacity:0.85,tintingStrength:1},
+{code:'W038',name:'Opaque Violet',brand:'createx-wicked',category:'opaque',rgb:[90,30,130],opacity:0.85,tintingStrength:1},
+{code:'W080',name:'Opaque Hansa Yellow',brand:'createx-wicked',category:'opaque',rgb:[255,230,0],opacity:0.9,tintingStrength:3.5},
+{code:'W081',name:'Opaque Dioxazine Purple',brand:'createx-wicked',category:'opaque',rgb:[60,0,100],opacity:0.9,tintingStrength:3.5},
+{code:'W082',name:'Opaque Phthalo Blue',brand:'createx-wicked',category:'opaque',rgb:[0,40,130],opacity:0.9,tintingStrength:3.5},
+{code:'W083',name:'Opaque Pyrrole Red',brand:'createx-wicked',category:'opaque',rgb:[220,20,20],opacity:0.9,tintingStrength:1},
+{code:'W084',name:'Opaque Naphthol Red Light',brand:'createx-wicked',category:'opaque',rgb:[230,50,30],opacity:0.9,tintingStrength:3.5},
+{code:'W085',name:'Opaque Phthalo Green',brand:'createx-wicked',category:'opaque',rgb:[0,100,70],opacity:0.9,tintingStrength:3.5},
+{code:'W086',name:'Opaque Burnt Sienna',brand:'createx-wicked',category:'opaque',rgb:[150,60,20],opacity:0.9,tintingStrength:0.7},
+{code:'W087',name:'Opaque Raw Umber',brand:'createx-wicked',category:'opaque',rgb:[100,70,40],opacity:0.9,tintingStrength:0.7},
+{code:'W088',name:'Opaque Burnt Umber',brand:'createx-wicked',category:'opaque',rgb:[70,35,15],opacity:0.9,tintingStrength:0.7},
+{code:'W090',name:'Opaque Warm Grey',brand:'createx-wicked',category:'opaque',rgb:[140,130,120],opacity:0.9,tintingStrength:1},
+{code:'W091',name:'Opaque Cool Grey',brand:'createx-wicked',category:'opaque',rgb:[120,125,135],opacity:0.9,tintingStrength:1},
+{code:'W098',name:'Opaque Flat Black',brand:'createx-wicked',category:'opaque',rgb:[15,15,15],opacity:0.95,tintingStrength:1},
+{code:'W050',name:'Detail White',brand:'createx-wicked',category:'detail',rgb:[255,255,255],opacity:0.8,tintingStrength:0.4},
+{code:'W051',name:'Detail Black',brand:'createx-wicked',category:'detail',rgb:[15,15,15],opacity:0.8,tintingStrength:1},
+{code:'W052',name:'Detail Yellow',brand:'createx-wicked',category:'detail',rgb:[245,215,0],opacity:0.7,tintingStrength:1},
+{code:'W053',name:'Detail Scarlet',brand:'createx-wicked',category:'detail',rgb:[210,25,25],opacity:0.7,tintingStrength:1},
+{code:'W054',name:'Detail Orange',brand:'createx-wicked',category:'detail',rgb:[245,110,0],opacity:0.7,tintingStrength:1},
+{code:'W055',name:'Detail Violet',brand:'createx-wicked',category:'detail',rgb:[75,30,110],opacity:0.7,tintingStrength:1},
+{code:'W056',name:'Detail Red Violet',brand:'createx-wicked',category:'detail',rgb:[140,20,80],opacity:0.7,tintingStrength:1},
+{code:'W057',name:'Detail Blue Violet',brand:'createx-wicked',category:'detail',rgb:[50,30,120],opacity:0.7,tintingStrength:1},
+{code:'W058',name:'Detail Blue Green',brand:'createx-wicked',category:'detail',rgb:[0,90,90],opacity:0.7,tintingStrength:1},
+{code:'W059',name:'Detail Moss Green',brand:'createx-wicked',category:'detail',rgb:[40,70,30],opacity:0.7,tintingStrength:1},
+{code:'W060',name:'Detail Viridian',brand:'createx-wicked',category:'detail',rgb:[0,100,60],opacity:0.7,tintingStrength:1},
+{code:'W061',name:'Detail Cobalt Blue',brand:'createx-wicked',category:'detail',rgb:[0,60,150],opacity:0.7,tintingStrength:1.8},
+{code:'W062',name:'Detail Cerulean Blue',brand:'createx-wicked',category:'detail',rgb:[0,120,190],opacity:0.7,tintingStrength:1.8},
+{code:'W063',name:'Detail Carmine',brand:'createx-wicked',category:'detail',rgb:[180,0,50],opacity:0.7,tintingStrength:1},
+{code:'W064',name:'Detail Magenta',brand:'createx-wicked',category:'detail',rgb:[200,0,100],opacity:0.7,tintingStrength:2},
+{code:'W065',name:'Detail Yellow Ochre',brand:'createx-wicked',category:'detail',rgb:[180,130,40],opacity:0.7,tintingStrength:0.7},
+{code:'W066',name:'Detail Burnt Orange',brand:'createx-wicked',category:'detail',rgb:[180,60,0],opacity:0.7,tintingStrength:0.7},
+{code:'W067',name:'Detail Raw Sienna',brand:'createx-wicked',category:'detail',rgb:[160,100,40],opacity:0.7,tintingStrength:0.7},
+{code:'W068',name:'Detail Raw Umber',brand:'createx-wicked',category:'detail',rgb:[90,70,40],opacity:0.7,tintingStrength:0.7},
+{code:'W069',name:'Detail Burnt Umber',brand:'createx-wicked',category:'detail',rgb:[65,35,20],opacity:0.7,tintingStrength:0.7},
+{code:'W070',name:'Detail Sepia',brand:'createx-wicked',category:'detail',rgb:[50,25,5],opacity:0.7,tintingStrength:1},
+{code:'W071',name:'Detail Paynes Grey',brand:'createx-wicked',category:'detail',rgb:[50,55,65],opacity:0.7,tintingStrength:1},
+{code:'W072',name:'Detail Smoke Black',brand:'createx-wicked',category:'detail',rgb:[30,30,30],opacity:0.6,tintingStrength:1},
+{code:'W073',name:'Detail Flesh Tone',brand:'createx-wicked',category:'detail',rgb:[235,170,120],opacity:0.7,tintingStrength:1},
+{code:'W074',name:'Detail Burnt Sienna',brand:'createx-wicked',category:'detail',rgb:[155,55,25],opacity:0.7,tintingStrength:0.7},
+{code:'W075',name:'Detail Black Magenta',brand:'createx-wicked',category:'detail',rgb:[50,5,30],opacity:0.7,tintingStrength:2},
+{code:'W076',name:'Detail Universal Fleshtone',brand:'createx-wicked',category:'detail',rgb:[220,175,130],opacity:0.7,tintingStrength:1},
+{code:'W300',name:'Pearl Black',brand:'createx-wicked',category:'pearl',rgb:[25,25,30],opacity:0.6,tintingStrength:0.6},
+{code:'W301',name:'Pearl White',brand:'createx-wicked',category:'pearl',rgb:[240,240,235],opacity:0.6,tintingStrength:0.4},
+{code:'W302',name:'Pearl Yellow',brand:'createx-wicked',category:'pearl',rgb:[255,230,50],opacity:0.5,tintingStrength:0.6},
+{code:'W303',name:'Pearl Red',brand:'createx-wicked',category:'pearl',rgb:[200,30,40],opacity:0.5,tintingStrength:0.6},
+{code:'W304',name:'Pearl Blue',brand:'createx-wicked',category:'pearl',rgb:[30,80,180],opacity:0.5,tintingStrength:0.6},
+{code:'W305',name:'Pearl Lime Green',brand:'createx-wicked',category:'pearl',rgb:[100,200,50],opacity:0.5,tintingStrength:0.6},
+{code:'W306',name:'Pearl Orange',brand:'createx-wicked',category:'pearl',rgb:[240,120,20],opacity:0.5,tintingStrength:0.6},
+{code:'W307',name:'Pearl Plum',brand:'createx-wicked',category:'pearl',rgb:[100,20,80],opacity:0.5,tintingStrength:0.6},
+{code:'W308',name:'Pearl Green',brand:'createx-wicked',category:'pearl',rgb:[0,130,80],opacity:0.5,tintingStrength:0.6},
+{code:'W309',name:'Pearl Teal',brand:'createx-wicked',category:'pearl',rgb:[0,120,130],opacity:0.5,tintingStrength:0.6},
+{code:'W310',name:'Pearl Magenta',brand:'createx-wicked',category:'pearl',rgb:[180,20,90],opacity:0.5,tintingStrength:2},
+{code:'W311',name:'Pearl Purple',brand:'createx-wicked',category:'pearl',rgb:[80,20,140],opacity:0.5,tintingStrength:0.6},
+{code:'W350',name:'Pearl Gold',brand:'createx-wicked',category:'pearl',rgb:[200,170,50],opacity:0.5,tintingStrength:0.6},
+{code:'W351',name:'Pearl Silver',brand:'createx-wicked',category:'pearl',rgb:[180,185,190],opacity:0.5,tintingStrength:0.6},
+{code:'W352',name:'Pearl Platinum',brand:'createx-wicked',category:'pearl',rgb:[200,200,205],opacity:0.5,tintingStrength:0.6},
+{code:'W353',name:'Pearl Fastback Green',brand:'createx-wicked',category:'pearl',rgb:[0,80,50],opacity:0.5,tintingStrength:0.6},
+{code:'W354',name:'Pearl Aluminum',brand:'createx-wicked',category:'pearl',rgb:[160,165,170],opacity:0.5,tintingStrength:0.6},
+{code:'W355',name:'Metallic Gold',brand:'createx-wicked',category:'metallic',rgb:[200,160,40],opacity:0.6,tintingStrength:0.6},
+{code:'W358',name:'Gold Chrome',brand:'createx-wicked',category:'metallic',rgb:[210,180,50],opacity:0.7,tintingStrength:0.6},
+{code:'W359',name:'Metallic Charcoal',brand:'createx-wicked',category:'metallic',rgb:[60,60,65],opacity:0.7,tintingStrength:0.6},
+{code:'W360',name:'Metallic Copper',brand:'createx-wicked',category:'metallic',rgb:[180,100,50],opacity:0.6,tintingStrength:0.6},
+{code:'W361',name:'Metallic Red',brand:'createx-wicked',category:'metallic',rgb:[180,30,30],opacity:0.6,tintingStrength:0.6},
+{code:'W362',name:'Metallic Violet',brand:'createx-wicked',category:'metallic',rgb:[90,30,120],opacity:0.6,tintingStrength:0.6},
+{code:'W363',name:'Metallic Blue',brand:'createx-wicked',category:'metallic',rgb:[30,60,150],opacity:0.6,tintingStrength:0.6},
+{code:'W364',name:'Metallic Blue Silver',brand:'createx-wicked',category:'metallic',rgb:[120,140,170],opacity:0.6,tintingStrength:0.6},
+{code:'W365',name:'Metallic Burnt Orange',brand:'createx-wicked',category:'metallic',rgb:[180,80,20],opacity:0.6,tintingStrength:0.7},
+{code:'W370',name:'Metallic Light Brown',brand:'createx-wicked',category:'metallic',rgb:[150,110,60],opacity:0.6,tintingStrength:0.6},
+{code:'W371',name:'Metallic Dark Brown',brand:'createx-wicked',category:'metallic',rgb:[80,50,25],opacity:0.6,tintingStrength:0.6},
+{code:'W019',name:'Fluorescent Aqua',brand:'createx-wicked',category:'fluorescent',rgb:[0,230,200],opacity:0.4,tintingStrength:0.8},
+{code:'W020',name:'Fluorescent Purple',brand:'createx-wicked',category:'fluorescent',rgb:[160,0,200],opacity:0.4,tintingStrength:0.8},
+{code:'W021',name:'Fluorescent Raspberry',brand:'createx-wicked',category:'fluorescent',rgb:[230,0,100],opacity:0.4,tintingStrength:0.8},
+{code:'W022',name:'Fluorescent Red',brand:'createx-wicked',category:'fluorescent',rgb:[255,30,30],opacity:0.4,tintingStrength:0.8},
+{code:'W023',name:'Fluorescent Green',brand:'createx-wicked',category:'fluorescent',rgb:[0,230,50],opacity:0.4,tintingStrength:0.8},
+{code:'W024',name:'Fluorescent Yellow',brand:'createx-wicked',category:'fluorescent',rgb:[255,255,0],opacity:0.3,tintingStrength:0.8},
+{code:'W025',name:'Fluorescent Sunburst',brand:'createx-wicked',category:'fluorescent',rgb:[255,200,0],opacity:0.4,tintingStrength:0.8},
+{code:'W026',name:'Fluorescent Pink',brand:'createx-wicked',category:'fluorescent',rgb:[255,50,150],opacity:0.4,tintingStrength:0.8},
+{code:'W027',name:'Fluorescent Orange',brand:'createx-wicked',category:'fluorescent',rgb:[255,130,0],opacity:0.4,tintingStrength:0.8},
+{code:'W028',name:'Fluorescent Blue',brand:'createx-wicked',category:'fluorescent',rgb:[0,100,255],opacity:0.4,tintingStrength:0.8},
+{code:'W029',name:'Fluorescent Magenta',brand:'createx-wicked',category:'fluorescent',rgb:[255,0,150],opacity:0.4,tintingStrength:2},
+// Createx Illustration
+{code:'5050',name:'White',brand:'createx-illustration',category:'opaque',rgb:[255,255,255],opacity:0.9,tintingStrength:0.4},
+{code:'5051',name:'Black',brand:'createx-illustration',category:'opaque',rgb:[10,10,10],opacity:0.9,tintingStrength:3},
+{code:'5052',name:'Yellow',brand:'createx-illustration',category:'transparent',rgb:[250,210,0],opacity:0.5,tintingStrength:1.5},
+{code:'5053',name:'Scarlet',brand:'createx-illustration',category:'transparent',rgb:[215,25,30],opacity:0.5,tintingStrength:1.5},
+{code:'5054',name:'Orange',brand:'createx-illustration',category:'transparent',rgb:[245,120,0],opacity:0.5,tintingStrength:1.5},
+{code:'5055',name:'Violet',brand:'createx-illustration',category:'transparent',rgb:[80,30,120],opacity:0.5,tintingStrength:1.5},
+{code:'5056',name:'Red Violet',brand:'createx-illustration',category:'transparent',rgb:[150,20,80],opacity:0.5,tintingStrength:1.5},
+{code:'5057',name:'Blue Violet',brand:'createx-illustration',category:'transparent',rgb:[45,30,130],opacity:0.5,tintingStrength:1.5},
+{code:'5058',name:'Blue Green',brand:'createx-illustration',category:'transparent',rgb:[0,100,100],opacity:0.5,tintingStrength:1.5},
+{code:'5059',name:'Moss Green',brand:'createx-illustration',category:'transparent',rgb:[45,75,35],opacity:0.5,tintingStrength:1.5},
+{code:'5060',name:'Viridian',brand:'createx-illustration',category:'transparent',rgb:[0,110,65],opacity:0.5,tintingStrength:1.5},
+{code:'5061',name:'Cobalt Blue',brand:'createx-illustration',category:'transparent',rgb:[0,65,160],opacity:0.5,tintingStrength:1.8},
+{code:'5062',name:'Burnt Umber',brand:'createx-illustration',category:'transparent',rgb:[70,40,20],opacity:0.5,tintingStrength:1.5},
+{code:'5063',name:'Carmine',brand:'createx-illustration',category:'transparent',rgb:[185,0,55],opacity:0.5,tintingStrength:1.5},
+{code:'5064',name:'Magenta',brand:'createx-illustration',category:'transparent',rgb:[210,0,110],opacity:0.5,tintingStrength:2},
+{code:'5065',name:'Yellow Ochre',brand:'createx-illustration',category:'transparent',rgb:[185,135,45],opacity:0.5,tintingStrength:1.5},
+{code:'5066',name:'Burnt Orange',brand:'createx-illustration',category:'transparent',rgb:[185,65,0],opacity:0.5,tintingStrength:1.5},
+{code:'5067',name:'Raw Sienna',brand:'createx-illustration',category:'transparent',rgb:[165,105,45],opacity:0.5,tintingStrength:1.5},
+{code:'5068',name:'Raw Umber',brand:'createx-illustration',category:'transparent',rgb:[95,75,45],opacity:0.5,tintingStrength:1.5},
+{code:'5069',name:'Cerulean Blue',brand:'createx-illustration',category:'transparent',rgb:[0,125,195],opacity:0.5,tintingStrength:1.8},
+{code:'5070',name:'Sepia',brand:'createx-illustration',category:'transparent',rgb:[55,30,10],opacity:0.5,tintingStrength:1.5},
+{code:'5071',name:'Paynes Grey',brand:'createx-illustration',category:'transparent',rgb:[55,60,70],opacity:0.5,tintingStrength:1.5},
+{code:'5072',name:'Smoke Black',brand:'createx-illustration',category:'transparent',rgb:[35,35,35],opacity:0.4,tintingStrength:1.5},
+{code:'5073',name:'Flesh Tone',brand:'createx-illustration',category:'transparent',rgb:[240,175,125],opacity:0.5,tintingStrength:1.5},
+{code:'5074',name:'Burnt Sienna',brand:'createx-illustration',category:'transparent',rgb:[160,60,25],opacity:0.5,tintingStrength:1.5},
+// Vallejo Model Air
+{code:'71.001',name:'White',brand:'vallejo-model-air',category:'standard',rgb:[255,255,255],opacity:0.85,tintingStrength:0.4},
+{code:'71.002',name:'Medium Yellow',brand:'vallejo-model-air',category:'standard',rgb:[240,200,30],opacity:0.7,tintingStrength:1},
+{code:'71.003',name:'Red RLM23',brand:'vallejo-model-air',category:'standard',rgb:[190,30,30],opacity:0.75,tintingStrength:1},
+{code:'71.004',name:'Blue',brand:'vallejo-model-air',category:'standard',rgb:[30,60,150],opacity:0.75,tintingStrength:1},
+{code:'71.005',name:'Intermediate Blue',brand:'vallejo-model-air',category:'standard',rgb:[80,120,170],opacity:0.7,tintingStrength:1},
+{code:'71.006',name:'Light Grey',brand:'vallejo-model-air',category:'standard',rgb:[180,180,180],opacity:0.8,tintingStrength:1},
+{code:'71.007',name:'Olive Green',brand:'vallejo-model-air',category:'standard',rgb:[70,80,40],opacity:0.75,tintingStrength:1},
+{code:'71.008',name:'Pale Blue',brand:'vallejo-model-air',category:'standard',rgb:[140,170,200],opacity:0.7,tintingStrength:1},
+{code:'71.009',name:'Gold Yellow',brand:'vallejo-model-air',category:'standard',rgb:[230,180,20],opacity:0.7,tintingStrength:1},
+{code:'71.010',name:'Interior Green',brand:'vallejo-model-air',category:'standard',rgb:[100,130,80],opacity:0.75,tintingStrength:1},
+{code:'71.012',name:'Tan',brand:'vallejo-model-air',category:'standard',rgb:[180,150,100],opacity:0.75,tintingStrength:1},
+{code:'71.013',name:'Yellow Olive',brand:'vallejo-model-air',category:'standard',rgb:[130,120,50],opacity:0.75,tintingStrength:1},
+{code:'71.014',name:'Gunmetal',brand:'vallejo-model-air',category:'metallic',rgb:[70,70,80],opacity:0.8,tintingStrength:0.6},
+{code:'71.015',name:'Burnt Sienna',brand:'vallejo-model-air',category:'standard',rgb:[140,60,25],opacity:0.75,tintingStrength:0.7},
+{code:'71.016',name:'Burnt Umber',brand:'vallejo-model-air',category:'standard',rgb:[75,40,20],opacity:0.75,tintingStrength:0.7},
+{code:'71.017',name:'Russian Green',brand:'vallejo-model-air',category:'standard',rgb:[60,75,45],opacity:0.75,tintingStrength:1},
+{code:'71.021',name:'Metallic Black',brand:'vallejo-model-air',category:'metallic',rgb:[25,25,30],opacity:0.8,tintingStrength:0.6},
+{code:'71.022',name:'Camouflage Green',brand:'vallejo-model-air',category:'standard',rgb:[55,70,40],opacity:0.75,tintingStrength:1},
+{code:'71.023',name:'Hemp',brand:'vallejo-model-air',category:'standard',rgb:[170,155,120],opacity:0.75,tintingStrength:1},
+{code:'71.024',name:'Yellow Ochre',brand:'vallejo-model-air',category:'standard',rgb:[180,140,50],opacity:0.75,tintingStrength:0.7},
+{code:'71.025',name:'FS36622 Grey',brand:'vallejo-model-air',category:'standard',rgb:[130,135,130],opacity:0.8,tintingStrength:1},
+{code:'71.027',name:'Light Brown',brand:'vallejo-model-air',category:'standard',rgb:[150,110,60],opacity:0.75,tintingStrength:1},
+{code:'71.028',name:'Desert Sand',brand:'vallejo-model-air',category:'standard',rgb:[200,180,140],opacity:0.75,tintingStrength:1},
+{code:'71.029',name:'Dark Earth',brand:'vallejo-model-air',category:'standard',rgb:[100,80,50],opacity:0.75,tintingStrength:0.7},
+{code:'71.030',name:'Dark Green',brand:'vallejo-model-air',category:'standard',rgb:[40,60,30],opacity:0.75,tintingStrength:1},
+{code:'71.031',name:'Middlestone',brand:'vallejo-model-air',category:'standard',rgb:[170,150,90],opacity:0.75,tintingStrength:1},
+{code:'71.032',name:'Golden Brown',brand:'vallejo-model-air',category:'standard',rgb:[160,120,40],opacity:0.75,tintingStrength:1},
+{code:'71.033',name:'Yellow Green',brand:'vallejo-model-air',category:'standard',rgb:[110,140,50],opacity:0.75,tintingStrength:1},
+{code:'71.034',name:'Sandy Brown',brand:'vallejo-model-air',category:'standard',rgb:[180,145,85],opacity:0.75,tintingStrength:1},
+{code:'71.035',name:'Camouflage Pale Brown',brand:'vallejo-model-air',category:'standard',rgb:[150,130,90],opacity:0.75,tintingStrength:1},
+{code:'71.036',name:'Burnt Iron',brand:'vallejo-model-air',category:'metallic',rgb:[50,45,45],opacity:0.8,tintingStrength:0.7},
+{code:'71.037',name:'Sand Yellow',brand:'vallejo-model-air',category:'standard',rgb:[190,170,110],opacity:0.75,tintingStrength:1},
+{code:'71.039',name:'Smoke',brand:'vallejo-model-air',category:'transparent',rgb:[40,35,30],opacity:0.3,tintingStrength:1.5},
+{code:'71.041',name:'Dark Olive Green',brand:'vallejo-model-air',category:'standard',rgb:[50,55,30],opacity:0.75,tintingStrength:1},
+{code:'71.043',name:'US Olive Drab',brand:'vallejo-model-air',category:'standard',rgb:[80,75,45],opacity:0.75,tintingStrength:1},
+{code:'71.044',name:'Grey',brand:'vallejo-model-air',category:'standard',rgb:[120,120,120],opacity:0.8,tintingStrength:1},
+{code:'71.047',name:'Grey Violet',brand:'vallejo-model-air',category:'standard',rgb:[100,90,110],opacity:0.75,tintingStrength:1},
+{code:'71.050',name:'Light Grey',brand:'vallejo-model-air',category:'standard',rgb:[195,195,195],opacity:0.8,tintingStrength:1},
+{code:'71.052',name:'German Grey',brand:'vallejo-model-air',category:'standard',rgb:[55,55,55],opacity:0.8,tintingStrength:1},
+{code:'71.055',name:'Grey Green',brand:'vallejo-model-air',category:'standard',rgb:[100,110,90],opacity:0.75,tintingStrength:1},
+{code:'71.057',name:'Black',brand:'vallejo-model-air',category:'standard',rgb:[15,15,15],opacity:0.9,tintingStrength:3},
+{code:'71.062',name:'Aluminum',brand:'vallejo-model-air',category:'metallic',rgb:[175,180,185],opacity:0.8,tintingStrength:0.6},
+{code:'71.063',name:'Silver RLM01',brand:'vallejo-model-air',category:'metallic',rgb:[190,195,200],opacity:0.8,tintingStrength:0.6},
+{code:'71.065',name:'Steel',brand:'vallejo-model-air',category:'metallic',rgb:[140,145,150],opacity:0.8,tintingStrength:0.6},
+{code:'71.066',name:'Gold',brand:'vallejo-model-air',category:'metallic',rgb:[200,170,50],opacity:0.8,tintingStrength:0.6},
+{code:'71.068',name:'Sun Yellow',brand:'vallejo-model-air',category:'standard',rgb:[250,220,30],opacity:0.7,tintingStrength:1},
+{code:'71.069',name:'Purple',brand:'vallejo-model-air',category:'standard',rgb:[90,30,110],opacity:0.75,tintingStrength:1},
+{code:'71.070',name:'Medium Green',brand:'vallejo-model-air',category:'standard',rgb:[60,120,50],opacity:0.75,tintingStrength:1},
+{code:'71.075',name:'Sand (Ivory)',brand:'vallejo-model-air',category:'standard',rgb:[220,210,170],opacity:0.75,tintingStrength:1},
+{code:'71.076',name:'Insignia Red',brand:'vallejo-model-air',category:'standard',rgb:[175,25,25],opacity:0.8,tintingStrength:1},
+{code:'71.078',name:'Gold Brown',brand:'vallejo-model-air',category:'standard',rgb:[145,110,40],opacity:0.75,tintingStrength:1},
+{code:'71.080',name:'Khaki Brown',brand:'vallejo-model-air',category:'standard',rgb:[115,95,55],opacity:0.75,tintingStrength:1},
+{code:'71.085',name:'Ferrari Red',brand:'vallejo-model-air',category:'standard',rgb:[200,20,20],opacity:0.8,tintingStrength:1},
+{code:'71.102',name:'Steel Blue',brand:'vallejo-model-air',category:'standard',rgb:[70,100,140],opacity:0.75,tintingStrength:1},
+{code:'71.104',name:'Fluorescent Green',brand:'vallejo-model-air',category:'fluorescent',rgb:[0,220,60],opacity:0.4,tintingStrength:0.8},
+{code:'71.105',name:'Luminous Orange',brand:'vallejo-model-air',category:'fluorescent',rgb:[255,140,0],opacity:0.4,tintingStrength:0.8},
+// Vallejo Game Air
+{code:'72.701',name:'Dead White',brand:'vallejo-game-air',category:'standard',rgb:[255,255,255],opacity:0.85,tintingStrength:0.4},
+{code:'72.702',name:'White Primer',brand:'vallejo-game-air',category:'primer',rgb:[245,245,240],opacity:0.9,tintingStrength:0.4},
+{code:'72.703',name:'Pale Flesh',brand:'vallejo-game-air',category:'standard',rgb:[240,200,170],opacity:0.75,tintingStrength:1},
+{code:'72.704',name:'Elf Skin Tone',brand:'vallejo-game-air',category:'standard',rgb:[225,180,140],opacity:0.75,tintingStrength:1},
+{code:'72.706',name:'Sun Yellow',brand:'vallejo-game-air',category:'standard',rgb:[250,220,30],opacity:0.7,tintingStrength:1},
+{code:'72.707',name:'Gold Yellow',brand:'vallejo-game-air',category:'standard',rgb:[235,185,20],opacity:0.7,tintingStrength:1},
+{code:'72.708',name:'Orange Fire',brand:'vallejo-game-air',category:'standard',rgb:[240,100,0],opacity:0.75,tintingStrength:1},
+{code:'72.709',name:'Hot Orange',brand:'vallejo-game-air',category:'standard',rgb:[250,130,20],opacity:0.75,tintingStrength:1},
+{code:'72.710',name:'Bloody Red',brand:'vallejo-game-air',category:'standard',rgb:[200,20,20],opacity:0.8,tintingStrength:1},
+{code:'72.711',name:'Gory Red',brand:'vallejo-game-air',category:'standard',rgb:[160,15,15],opacity:0.8,tintingStrength:1},
+{code:'72.712',name:'Scarlet Red',brand:'vallejo-game-air',category:'standard',rgb:[220,30,30],opacity:0.8,tintingStrength:1},
+{code:'72.714',name:'Warlord Purple',brand:'vallejo-game-air',category:'standard',rgb:[100,20,80],opacity:0.75,tintingStrength:1},
+{code:'72.716',name:'Royal Purple',brand:'vallejo-game-air',category:'standard',rgb:[75,25,120],opacity:0.75,tintingStrength:1},
+{code:'72.718',name:'Magic Blue',brand:'vallejo-game-air',category:'standard',rgb:[30,80,170],opacity:0.75,tintingStrength:1},
+{code:'72.720',name:'Imperial Blue',brand:'vallejo-game-air',category:'standard',rgb:[20,50,130],opacity:0.8,tintingStrength:1},
+{code:'72.721',name:'Ghost Grey',brand:'vallejo-game-air',category:'standard',rgb:[200,210,215],opacity:0.8,tintingStrength:1},
+{code:'72.722',name:'Ultramarine Blue',brand:'vallejo-game-air',category:'standard',rgb:[30,40,140],opacity:0.8,tintingStrength:1.8},
+{code:'72.723',name:'Electric Blue',brand:'vallejo-game-air',category:'standard',rgb:[0,100,200],opacity:0.75,tintingStrength:1},
+{code:'72.724',name:'Turquoise',brand:'vallejo-game-air',category:'standard',rgb:[0,150,160],opacity:0.75,tintingStrength:1},
+{code:'72.726',name:'Jade Green',brand:'vallejo-game-air',category:'standard',rgb:[0,130,80],opacity:0.75,tintingStrength:1},
+{code:'72.728',name:'Dark Green',brand:'vallejo-game-air',category:'standard',rgb:[30,70,30],opacity:0.8,tintingStrength:1},
+{code:'72.729',name:'Sick Green',brand:'vallejo-game-air',category:'standard',rgb:[130,160,50],opacity:0.7,tintingStrength:1},
+{code:'72.730',name:'Goblin Green',brand:'vallejo-game-air',category:'standard',rgb:[50,130,40],opacity:0.75,tintingStrength:1},
+{code:'72.731',name:'Scorpy Green',brand:'vallejo-game-air',category:'standard',rgb:[100,200,50],opacity:0.7,tintingStrength:1},
+{code:'72.732',name:'Escorpena Green',brand:'vallejo-game-air',category:'standard',rgb:[80,170,40],opacity:0.7,tintingStrength:1},
+{code:'72.735',name:'Dead Flesh',brand:'vallejo-game-air',category:'standard',rgb:[200,190,150],opacity:0.75,tintingStrength:1},
+{code:'72.736',name:'Bronze Flesh',brand:'vallejo-game-air',category:'standard',rgb:[180,130,90],opacity:0.75,tintingStrength:1},
+{code:'72.737',name:'Filthy Brown',brand:'vallejo-game-air',category:'standard',rgb:[150,120,50],opacity:0.75,tintingStrength:1},
+{code:'72.738',name:'Plague Brown',brand:'vallejo-game-air',category:'standard',rgb:[180,160,60],opacity:0.7,tintingStrength:1},
+{code:'72.740',name:'Leather Brown',brand:'vallejo-game-air',category:'standard',rgb:[120,70,30],opacity:0.75,tintingStrength:1},
+{code:'72.741',name:'Charred Brown',brand:'vallejo-game-air',category:'standard',rgb:[60,30,15],opacity:0.8,tintingStrength:1},
+{code:'72.743',name:'Beasty Brown',brand:'vallejo-game-air',category:'standard',rgb:[100,60,25],opacity:0.75,tintingStrength:1},
+{code:'72.745',name:'Charcoal',brand:'vallejo-game-air',category:'standard',rgb:[45,45,45],opacity:0.85,tintingStrength:1},
+{code:'72.747',name:'Wolf Grey',brand:'vallejo-game-air',category:'standard',rgb:[150,160,170],opacity:0.8,tintingStrength:1},
+{code:'72.748',name:'Sombre Grey',brand:'vallejo-game-air',category:'standard',rgb:[80,85,90],opacity:0.8,tintingStrength:1},
+{code:'72.750',name:'Cold Grey',brand:'vallejo-game-air',category:'standard',rgb:[100,105,115],opacity:0.8,tintingStrength:1},
+{code:'72.751',name:'Black',brand:'vallejo-game-air',category:'standard',rgb:[10,10,10],opacity:0.9,tintingStrength:3},
+{code:'72.753',name:'Chainmail Silver',brand:'vallejo-game-air',category:'metallic',rgb:[180,185,190],opacity:0.8,tintingStrength:0.6},
+{code:'72.755',name:'Polished Gold',brand:'vallejo-game-air',category:'metallic',rgb:[200,165,40],opacity:0.8,tintingStrength:0.6},
+{code:'72.756',name:'Glorious Gold',brand:'vallejo-game-air',category:'metallic',rgb:[185,150,30],opacity:0.8,tintingStrength:0.6},
+{code:'72.757',name:'Bright Bronze',brand:'vallejo-game-air',category:'metallic',rgb:[170,120,50],opacity:0.8,tintingStrength:0.6},
+// E'TAC
+{code:'EFX-100',name:'White',brand:'etac',category:'opaque',rgb:[255,255,255],opacity:0.9,tintingStrength:0.4},
+{code:'EFX-101',name:'Black',brand:'etac',category:'opaque',rgb:[10,10,10],opacity:0.9,tintingStrength:3},
+{code:'EFX-102',name:'Yellow',brand:'etac',category:'standard',rgb:[250,215,0],opacity:0.7,tintingStrength:1},
+{code:'EFX-103',name:'Orange',brand:'etac',category:'standard',rgb:[250,110,0],opacity:0.7,tintingStrength:1},
+{code:'EFX-104',name:'Red',brand:'etac',category:'standard',rgb:[210,25,25],opacity:0.7,tintingStrength:1},
+{code:'EFX-105',name:'Crimson',brand:'etac',category:'standard',rgb:[180,0,40],opacity:0.7,tintingStrength:2},
+{code:'EFX-106',name:'Violet',brand:'etac',category:'standard',rgb:[85,30,120],opacity:0.7,tintingStrength:1},
+{code:'EFX-107',name:'Blue',brand:'etac',category:'standard',rgb:[0,60,160],opacity:0.7,tintingStrength:1},
+{code:'EFX-108',name:'Cerulean Blue',brand:'etac',category:'standard',rgb:[0,120,190],opacity:0.7,tintingStrength:1.8},
+{code:'EFX-109',name:'Phthalo Green',brand:'etac',category:'standard',rgb:[0,90,70],opacity:0.7,tintingStrength:3.5},
+{code:'EFX-110',name:'Green',brand:'etac',category:'standard',rgb:[0,130,60],opacity:0.7,tintingStrength:1},
+{code:'EFX-111',name:'Burnt Sienna',brand:'etac',category:'standard',rgb:[150,60,20],opacity:0.7,tintingStrength:0.7},
+{code:'EFX-112',name:'Burnt Umber',brand:'etac',category:'standard',rgb:[70,40,15],opacity:0.7,tintingStrength:0.7},
+{code:'EFX-113',name:'Raw Umber',brand:'etac',category:'standard',rgb:[95,75,40],opacity:0.7,tintingStrength:0.7},
+{code:'EFX-114',name:'Raw Sienna',brand:'etac',category:'standard',rgb:[160,105,40],opacity:0.7,tintingStrength:0.7},
+{code:'EFX-115',name:'Yellow Ochre',brand:'etac',category:'standard',rgb:[180,135,40],opacity:0.7,tintingStrength:0.7},
+{code:'EFX-116',name:'Flesh',brand:'etac',category:'standard',rgb:[235,175,125],opacity:0.7,tintingStrength:1},
+{code:'EFX-117',name:'Magenta',brand:'etac',category:'standard',rgb:[200,0,100],opacity:0.7,tintingStrength:2},
+{code:'EFX-118',name:'Paynes Grey',brand:'etac',category:'standard',rgb:[50,55,65],opacity:0.7,tintingStrength:1},
+{code:'PS-100',name:'White',brand:'etac',category:'opaque',rgb:[255,255,255],opacity:0.9,tintingStrength:0.4},
+{code:'PS-101',name:'Black',brand:'etac',category:'opaque',rgb:[10,10,10],opacity:0.9,tintingStrength:3},
+{code:'PS-102',name:'Yellow',brand:'etac',category:'standard',rgb:[255,220,0],opacity:0.8,tintingStrength:1},
+{code:'PS-103',name:'Orange',brand:'etac',category:'standard',rgb:[255,120,0],opacity:0.8,tintingStrength:1},
+{code:'PS-104',name:'Red',brand:'etac',category:'standard',rgb:[220,20,20],opacity:0.8,tintingStrength:1},
+{code:'PS-105',name:'Magenta',brand:'etac',category:'standard',rgb:[210,0,100],opacity:0.8,tintingStrength:2},
+{code:'PS-106',name:'Violet',brand:'etac',category:'standard',rgb:[90,30,130],opacity:0.8,tintingStrength:1},
+{code:'PS-107',name:'Blue',brand:'etac',category:'standard',rgb:[0,50,160],opacity:0.8,tintingStrength:1},
+{code:'PS-108',name:'Turquoise',brand:'etac',category:'standard',rgb:[0,150,160],opacity:0.8,tintingStrength:1},
+{code:'PS-109',name:'Green',brand:'etac',category:'standard',rgb:[0,140,60],opacity:0.8,tintingStrength:1},
+{code:'PS-110',name:'Brown',brand:'etac',category:'standard',rgb:[100,55,20],opacity:0.8,tintingStrength:1},
+{code:'PS-111',name:'Maroon',brand:'etac',category:'standard',rgb:[120,20,30],opacity:0.8,tintingStrength:1},
+{code:'PS-112',name:'Navy',brand:'etac',category:'standard',rgb:[20,30,80],opacity:0.8,tintingStrength:1},
+{code:'PS-113',name:'Kelly Green',brand:'etac',category:'standard',rgb:[0,120,50],opacity:0.8,tintingStrength:1},
+{code:'PS-114',name:'Pink',brand:'etac',category:'standard',rgb:[255,100,150],opacity:0.7,tintingStrength:1},
+{code:'PS-115',name:'Light Blue',brand:'etac',category:'standard',rgb:[100,160,220],opacity:0.7,tintingStrength:1},
+{code:'PS-F01',name:'Fluorescent Yellow',brand:'etac',category:'fluorescent',rgb:[255,255,0],opacity:0.4,tintingStrength:0.8},
+{code:'PS-F02',name:'Fluorescent Orange',brand:'etac',category:'fluorescent',rgb:[255,130,0],opacity:0.4,tintingStrength:0.8},
+{code:'PS-F03',name:'Fluorescent Red',brand:'etac',category:'fluorescent',rgb:[255,30,30],opacity:0.4,tintingStrength:0.8},
+{code:'PS-F04',name:'Fluorescent Pink',brand:'etac',category:'fluorescent',rgb:[255,50,150],opacity:0.4,tintingStrength:0.8},
+{code:'PS-F05',name:'Fluorescent Green',brand:'etac',category:'fluorescent',rgb:[0,230,50],opacity:0.4,tintingStrength:0.8},
+{code:'PS-F06',name:'Fluorescent Blue',brand:'etac',category:'fluorescent',rgb:[0,100,255],opacity:0.4,tintingStrength:0.8},
+// Badger Minitaire
+{code:'D6-101',name:'Skull White',brand:'badger-minitaire',category:'standard',rgb:[255,255,255],opacity:0.85,tintingStrength:0.4},
+{code:'D6-102',name:'Angelic Yellow',brand:'badger-minitaire',category:'standard',rgb:[250,225,50],opacity:0.7,tintingStrength:1},
+{code:'D6-103',name:'Harvest Gold',brand:'badger-minitaire',category:'standard',rgb:[220,180,40],opacity:0.7,tintingStrength:1},
+{code:'D6-104',name:'Razorback Ridge',brand:'badger-minitaire',category:'standard',rgb:[200,150,50],opacity:0.7,tintingStrength:1},
+{code:'D6-105',name:'Troll Flesh',brand:'badger-minitaire',category:'standard',rgb:[180,200,80],opacity:0.7,tintingStrength:1},
+{code:'D6-106',name:'Zombie Flesh',brand:'badger-minitaire',category:'standard',rgb:[200,200,120],opacity:0.7,tintingStrength:1},
+{code:'D6-107',name:'Bark',brand:'badger-minitaire',category:'standard',rgb:[80,50,25],opacity:0.8,tintingStrength:1},
+{code:'D6-108',name:'Russ Grey',brand:'badger-minitaire',category:'standard',rgb:[100,110,130],opacity:0.8,tintingStrength:1},
+{code:'D6-109',name:'Concrete Slab',brand:'badger-minitaire',category:'standard',rgb:[140,140,140],opacity:0.8,tintingStrength:1},
+{code:'D6-110',name:'Obsidian Black',brand:'badger-minitaire',category:'standard',rgb:[10,10,10],opacity:0.9,tintingStrength:1},
+{code:'D6-111',name:'Regal Blue',brand:'badger-minitaire',category:'standard',rgb:[20,50,120],opacity:0.8,tintingStrength:1},
+{code:'D6-112',name:'Nautilus Blue',brand:'badger-minitaire',category:'standard',rgb:[30,80,160],opacity:0.75,tintingStrength:1},
+{code:'D6-113',name:'Plasma Blue',brand:'badger-minitaire',category:'standard',rgb:[50,130,200],opacity:0.7,tintingStrength:1},
+{code:'D6-114',name:'Lagoon Blue',brand:'badger-minitaire',category:'standard',rgb:[0,150,170],opacity:0.7,tintingStrength:1},
+{code:'D6-115',name:'Ghost Tint Fresh Blood',brand:'badger-minitaire',category:'transparent',rgb:[180,0,0],opacity:0.3,tintingStrength:1.5},
+{code:'D6-116',name:'Ghost Tint Plasma Fluid',brand:'badger-minitaire',category:'transparent',rgb:[0,200,100],opacity:0.3,tintingStrength:1.5},
+{code:'D6-117',name:'Ghost Tint Oil Discharge',brand:'badger-minitaire',category:'transparent',rgb:[80,60,20],opacity:0.3,tintingStrength:1.5},
+{code:'D6-118',name:'Werewolf Brown',brand:'badger-minitaire',category:'standard',rgb:[110,70,30],opacity:0.75,tintingStrength:1},
+{code:'D6-119',name:'Sandstorm',brand:'badger-minitaire',category:'standard',rgb:[190,170,120],opacity:0.75,tintingStrength:1},
+{code:'D6-120',name:'Crimson',brand:'badger-minitaire',category:'standard',rgb:[170,10,20],opacity:0.8,tintingStrength:2},
+{code:'D6-121',name:'Blood Red',brand:'badger-minitaire',category:'standard',rgb:[200,20,20],opacity:0.8,tintingStrength:1},
+{code:'D6-122',name:'Angron Red',brand:'badger-minitaire',category:'standard',rgb:[160,25,25],opacity:0.8,tintingStrength:1},
+{code:'D6-123',name:'Autumn',brand:'badger-minitaire',category:'standard',rgb:[180,80,20],opacity:0.75,tintingStrength:1},
+{code:'D6-124',name:'Brass Monkey',brand:'badger-minitaire',category:'metallic',rgb:[170,120,40],opacity:0.8,tintingStrength:0.6},
+{code:'D6-125',name:'Steel',brand:'badger-minitaire',category:'metallic',rgb:[150,155,160],opacity:0.8,tintingStrength:0.6},
+{code:'D6-126',name:'Silver',brand:'badger-minitaire',category:'metallic',rgb:[185,190,195],opacity:0.8,tintingStrength:0.6},
+{code:'D6-127',name:'Gold',brand:'badger-minitaire',category:'metallic',rgb:[200,165,40],opacity:0.8,tintingStrength:0.6},
+{code:'D6-128',name:'Copper',brand:'badger-minitaire',category:'metallic',rgb:[180,100,50],opacity:0.8,tintingStrength:0.6},
+{code:'D6-130',name:'Warpstone Green',brand:'badger-minitaire',category:'standard',rgb:[0,120,50],opacity:0.75,tintingStrength:1},
+{code:'D6-131',name:'Caliban Green',brand:'badger-minitaire',category:'standard',rgb:[20,60,30],opacity:0.8,tintingStrength:1},
+{code:'D6-132',name:'Mace Purple',brand:'badger-minitaire',category:'standard',rgb:[90,30,100],opacity:0.75,tintingStrength:1},
+{code:'D6-133',name:'Liche Purple',brand:'badger-minitaire',category:'standard',rgb:[60,20,80],opacity:0.8,tintingStrength:1},
+{code:'D6-134',name:'Warlock Purple',brand:'badger-minitaire',category:'standard',rgb:[130,30,100],opacity:0.75,tintingStrength:1},
+{code:'D6-135',name:'Flesh',brand:'badger-minitaire',category:'standard',rgb:[220,170,130],opacity:0.75,tintingStrength:1},
+{code:'D6-136',name:'Dark Flesh',brand:'badger-minitaire',category:'standard',rgb:[160,100,60],opacity:0.75,tintingStrength:1},
+// Com-Art
+{code:'10001',name:'Opaque White',brand:'com-art',category:'opaque',rgb:[255,255,255],opacity:0.9,tintingStrength:0.4},
+{code:'10002',name:'Opaque Black',brand:'com-art',category:'opaque',rgb:[10,10,10],opacity:0.9,tintingStrength:1},
+{code:'10011',name:'Opaque Yellow',brand:'com-art',category:'opaque',rgb:[250,215,0],opacity:0.85,tintingStrength:1},
+{code:'10021',name:'Opaque Orange',brand:'com-art',category:'opaque',rgb:[245,110,0],opacity:0.85,tintingStrength:1},
+{code:'10031',name:'Opaque Red',brand:'com-art',category:'opaque',rgb:[210,20,20],opacity:0.85,tintingStrength:1},
+{code:'10041',name:'Opaque Violet',brand:'com-art',category:'opaque',rgb:[85,25,110],opacity:0.85,tintingStrength:1},
+{code:'10051',name:'Opaque Blue',brand:'com-art',category:'opaque',rgb:[0,55,155],opacity:0.85,tintingStrength:1},
+{code:'10061',name:'Opaque Green',brand:'com-art',category:'opaque',rgb:[0,120,55],opacity:0.85,tintingStrength:1},
+{code:'10071',name:'Opaque Burnt Sienna',brand:'com-art',category:'opaque',rgb:[145,60,20],opacity:0.85,tintingStrength:0.7},
+{code:'10081',name:'Opaque Burnt Umber',brand:'com-art',category:'opaque',rgb:[65,35,15],opacity:0.85,tintingStrength:0.7},
+{code:'20001',name:'Transparent White',brand:'com-art',category:'transparent',rgb:[255,255,255],opacity:0.3,tintingStrength:1.5},
+{code:'20002',name:'Transparent Black',brand:'com-art',category:'transparent',rgb:[20,20,20],opacity:0.5,tintingStrength:1.5},
+{code:'20011',name:'Transparent Yellow',brand:'com-art',category:'transparent',rgb:[250,215,0],opacity:0.4,tintingStrength:1.5},
+{code:'20021',name:'Transparent Orange',brand:'com-art',category:'transparent',rgb:[250,110,0],opacity:0.4,tintingStrength:1.5},
+{code:'20031',name:'Transparent Red',brand:'com-art',category:'transparent',rgb:[200,20,20],opacity:0.4,tintingStrength:1.5},
+{code:'20041',name:'Transparent Violet',brand:'com-art',category:'transparent',rgb:[80,25,110],opacity:0.4,tintingStrength:1.5},
+{code:'20051',name:'Transparent Blue',brand:'com-art',category:'transparent',rgb:[0,50,150],opacity:0.4,tintingStrength:1.5},
+{code:'20061',name:'Transparent Green',brand:'com-art',category:'transparent',rgb:[0,110,50],opacity:0.4,tintingStrength:1.5},
+{code:'20071',name:'Transparent Burnt Sienna',brand:'com-art',category:'transparent',rgb:[140,55,15],opacity:0.4,tintingStrength:1.5},
+{code:'20081',name:'Transparent Burnt Umber',brand:'com-art',category:'transparent',rgb:[60,30,10],opacity:0.4,tintingStrength:1.5},
+{code:'20091',name:'Transparent Raw Sienna',brand:'com-art',category:'transparent',rgb:[155,100,35],opacity:0.4,tintingStrength:1.5},
+{code:'20101',name:'Transparent Raw Umber',brand:'com-art',category:'transparent',rgb:[85,65,35],opacity:0.4,tintingStrength:1.5},
+{code:'20111',name:'Transparent Magenta',brand:'com-art',category:'transparent',rgb:[200,0,90],opacity:0.4,tintingStrength:2},
+{code:'20121',name:'Transparent Cerulean Blue',brand:'com-art',category:'transparent',rgb:[0,120,185],opacity:0.4,tintingStrength:1.8},
+{code:'20131',name:'Transparent Phthalo Green',brand:'com-art',category:'transparent',rgb:[0,85,65],opacity:0.4,tintingStrength:3.5},
+{code:'20141',name:'Transparent Yellow Ochre',brand:'com-art',category:'transparent',rgb:[175,130,35],opacity:0.4,tintingStrength:1.5},
+// Createx Candy2o
+{code:'4651',name:'Lemon Yellow',brand:'createx-candy2o',category:'transparent',rgb:[255,230,0],opacity:0.3,tintingStrength:4},
+{code:'4652',name:'Yellow',brand:'createx-candy2o',category:'transparent',rgb:[255,200,0],opacity:0.3,tintingStrength:4},
+{code:'4653',name:'Gold',brand:'createx-candy2o',category:'transparent',rgb:[220,170,20],opacity:0.3,tintingStrength:4},
+{code:'4654',name:'Light Orange',brand:'createx-candy2o',category:'transparent',rgb:[255,150,0],opacity:0.3,tintingStrength:4},
+{code:'4655',name:'Orange',brand:'createx-candy2o',category:'transparent',rgb:[255,100,0],opacity:0.3,tintingStrength:4},
+{code:'4656',name:'Sunset Orange',brand:'createx-candy2o',category:'transparent',rgb:[240,70,0],opacity:0.3,tintingStrength:4},
+{code:'4657',name:'Light Red',brand:'createx-candy2o',category:'transparent',rgb:[230,30,20],opacity:0.3,tintingStrength:4},
+{code:'4658',name:'Red',brand:'createx-candy2o',category:'transparent',rgb:[200,10,20],opacity:0.3,tintingStrength:4},
+{code:'4659',name:'Blood Red',brand:'createx-candy2o',category:'transparent',rgb:[160,0,15],opacity:0.3,tintingStrength:4},
+{code:'4660',name:'Magenta',brand:'createx-candy2o',category:'transparent',rgb:[190,0,80],opacity:0.3,tintingStrength:4},
+{code:'4661',name:'Red Violet',brand:'createx-candy2o',category:'transparent',rgb:[140,0,80],opacity:0.3,tintingStrength:4},
+{code:'4662',name:'Violet',brand:'createx-candy2o',category:'transparent',rgb:[80,20,120],opacity:0.3,tintingStrength:4},
+{code:'4663',name:'Blue Violet',brand:'createx-candy2o',category:'transparent',rgb:[50,20,130],opacity:0.3,tintingStrength:4},
+{code:'4664',name:'Deep Blue',brand:'createx-candy2o',category:'transparent',rgb:[0,30,120],opacity:0.3,tintingStrength:4},
+{code:'4665',name:'Blue',brand:'createx-candy2o',category:'transparent',rgb:[0,60,160],opacity:0.3,tintingStrength:4},
+{code:'4666',name:'Teal',brand:'createx-candy2o',category:'transparent',rgb:[0,100,120],opacity:0.3,tintingStrength:4},
+{code:'4667',name:'Blue Green',brand:'createx-candy2o',category:'transparent',rgb:[0,120,100],opacity:0.3,tintingStrength:4},
+{code:'4668',name:'Green',brand:'createx-candy2o',category:'transparent',rgb:[0,130,50],opacity:0.3,tintingStrength:4},
+{code:'4669',name:'Light Green',brand:'createx-candy2o',category:'transparent',rgb:[50,170,50],opacity:0.3,tintingStrength:4},
+{code:'4670',name:'Root Beer',brand:'createx-candy2o',category:'transparent',rgb:[100,50,10],opacity:0.3,tintingStrength:4},
+{code:'4671',name:'Cola',brand:'createx-candy2o',category:'transparent',rgb:[60,25,5],opacity:0.3,tintingStrength:4},
+{code:'4672',name:'Black',brand:'createx-candy2o',category:'transparent',rgb:[15,15,15],opacity:0.3,tintingStrength:4},
+// Createx Auto-Air
+{code:'4201',name:'White',brand:'createx-autoair',category:'opaque',rgb:[255,255,255],opacity:0.85,tintingStrength:0.4},
+{code:'4202',name:'Jet Black',brand:'createx-autoair',category:'opaque',rgb:[10,10,10],opacity:0.85,tintingStrength:3},
+{code:'4203',name:'Flame Yellow',brand:'createx-autoair',category:'opaque',rgb:[255,210,0],opacity:0.8,tintingStrength:1},
+{code:'4204',name:'Canary Yellow',brand:'createx-autoair',category:'opaque',rgb:[255,230,30],opacity:0.8,tintingStrength:1},
+{code:'4205',name:'Orange',brand:'createx-autoair',category:'opaque',rgb:[250,110,0],opacity:0.8,tintingStrength:1},
+{code:'4206',name:'Red',brand:'createx-autoair',category:'opaque',rgb:[210,20,20],opacity:0.8,tintingStrength:1},
+{code:'4207',name:'Crimson',brand:'createx-autoair',category:'opaque',rgb:[170,0,40],opacity:0.8,tintingStrength:2},
+{code:'4208',name:'Magenta',brand:'createx-autoair',category:'opaque',rgb:[190,0,90],opacity:0.8,tintingStrength:2},
+{code:'4209',name:'Violet',brand:'createx-autoair',category:'opaque',rgb:[80,25,120],opacity:0.8,tintingStrength:1},
+{code:'4210',name:'Blue',brand:'createx-autoair',category:'opaque',rgb:[0,50,150],opacity:0.8,tintingStrength:1},
+{code:'4211',name:'Deep Blue',brand:'createx-autoair',category:'opaque',rgb:[0,30,100],opacity:0.8,tintingStrength:1},
+{code:'4212',name:'Teal',brand:'createx-autoair',category:'opaque',rgb:[0,110,120],opacity:0.8,tintingStrength:1},
+{code:'4213',name:'Green',brand:'createx-autoair',category:'opaque',rgb:[0,120,50],opacity:0.8,tintingStrength:1},
+{code:'4214',name:'Leaf Green',brand:'createx-autoair',category:'opaque',rgb:[50,150,40],opacity:0.8,tintingStrength:1},
+{code:'4215',name:'Brown',brand:'createx-autoair',category:'opaque',rgb:[100,55,20],opacity:0.8,tintingStrength:1},
+{code:'4216',name:'Tan',brand:'createx-autoair',category:'opaque',rgb:[180,150,100],opacity:0.8,tintingStrength:1},
+{code:'4217',name:'Medium Grey',brand:'createx-autoair',category:'opaque',rgb:[130,130,130],opacity:0.8,tintingStrength:1},
+{code:'4218',name:'Dark Grey',brand:'createx-autoair',category:'opaque',rgb:[70,70,70],opacity:0.85,tintingStrength:1},
+{code:'4230',name:'Transparent Yellow',brand:'createx-autoair',category:'transparent',rgb:[250,215,0],opacity:0.4,tintingStrength:1.5},
+{code:'4231',name:'Transparent Orange',brand:'createx-autoair',category:'transparent',rgb:[250,110,0],opacity:0.4,tintingStrength:1.5},
+{code:'4232',name:'Transparent Red',brand:'createx-autoair',category:'transparent',rgb:[200,15,20],opacity:0.4,tintingStrength:1.5},
+{code:'4233',name:'Transparent Violet',brand:'createx-autoair',category:'transparent',rgb:[75,20,110],opacity:0.4,tintingStrength:1.5},
+{code:'4234',name:'Transparent Blue',brand:'createx-autoair',category:'transparent',rgb:[0,50,150],opacity:0.4,tintingStrength:1.5},
+{code:'4235',name:'Transparent Green',brand:'createx-autoair',category:'transparent',rgb:[0,110,50],opacity:0.4,tintingStrength:1.5},
+{code:'4236',name:'Transparent Brown',brand:'createx-autoair',category:'transparent',rgb:[100,50,10],opacity:0.4,tintingStrength:1.5},
+{code:'4301',name:'Metallic Silver',brand:'createx-autoair',category:'metallic',rgb:[185,190,195],opacity:0.7,tintingStrength:0.6},
+{code:'4302',name:'Metallic Gold',brand:'createx-autoair',category:'metallic',rgb:[200,165,40],opacity:0.7,tintingStrength:0.6},
+{code:'4303',name:'Metallic Copper',brand:'createx-autoair',category:'metallic',rgb:[180,100,50],opacity:0.7,tintingStrength:0.6},
+{code:'4304',name:'Metallic Bronze',brand:'createx-autoair',category:'metallic',rgb:[160,120,50],opacity:0.7,tintingStrength:0.6},
+{code:'4305',name:'Metallic Red',brand:'createx-autoair',category:'metallic',rgb:[170,30,30],opacity:0.7,tintingStrength:0.6},
+{code:'4306',name:'Metallic Blue',brand:'createx-autoair',category:'metallic',rgb:[30,60,150],opacity:0.7,tintingStrength:0.6},
+{code:'4307',name:'Metallic Green',brand:'createx-autoair',category:'metallic',rgb:[0,100,60],opacity:0.7,tintingStrength:0.6},
+{code:'4308',name:'Metallic Purple',brand:'createx-autoair',category:'metallic',rgb:[80,20,120],opacity:0.7,tintingStrength:0.6},
+{code:'4309',name:'Metallic Charcoal',brand:'createx-autoair',category:'metallic',rgb:[55,55,60],opacity:0.7,tintingStrength:0.6},
+{code:'4310',name:'Metallic Pewter',brand:'createx-autoair',category:'metallic',rgb:[120,125,130],opacity:0.7,tintingStrength:0.6},
+{code:'4401',name:'Pearl White',brand:'createx-autoair',category:'pearl',rgb:[240,240,235],opacity:0.5,tintingStrength:0.4},
+{code:'4402',name:'Pearl Yellow',brand:'createx-autoair',category:'pearl',rgb:[255,230,50],opacity:0.5,tintingStrength:0.6},
+{code:'4403',name:'Pearl Orange',brand:'createx-autoair',category:'pearl',rgb:[240,120,20],opacity:0.5,tintingStrength:0.6},
+{code:'4404',name:'Pearl Red',brand:'createx-autoair',category:'pearl',rgb:[200,30,40],opacity:0.5,tintingStrength:0.6},
+{code:'4405',name:'Pearl Magenta',brand:'createx-autoair',category:'pearl',rgb:[180,20,90],opacity:0.5,tintingStrength:2},
+{code:'4406',name:'Pearl Purple',brand:'createx-autoair',category:'pearl',rgb:[80,20,140],opacity:0.5,tintingStrength:0.6},
+{code:'4407',name:'Pearl Blue',brand:'createx-autoair',category:'pearl',rgb:[30,80,180],opacity:0.5,tintingStrength:0.6},
+{code:'4408',name:'Pearl Teal',brand:'createx-autoair',category:'pearl',rgb:[0,120,130],opacity:0.5,tintingStrength:0.6},
+{code:'4409',name:'Pearl Green',brand:'createx-autoair',category:'pearl',rgb:[0,130,80],opacity:0.5,tintingStrength:0.6},
+{code:'4410',name:'Pearl Lime Green',brand:'createx-autoair',category:'pearl',rgb:[100,200,50],opacity:0.5,tintingStrength:0.6},
+{code:'4411',name:'Pearl Black',brand:'createx-autoair',category:'pearl',rgb:[25,25,30],opacity:0.5,tintingStrength:0.6},
+{code:'4250',name:'Fluorescent Yellow',brand:'createx-autoair',category:'fluorescent',rgb:[255,255,0],opacity:0.4,tintingStrength:0.8},
+{code:'4251',name:'Fluorescent Orange',brand:'createx-autoair',category:'fluorescent',rgb:[255,130,0],opacity:0.4,tintingStrength:0.8},
+{code:'4252',name:'Fluorescent Red',brand:'createx-autoair',category:'fluorescent',rgb:[255,30,30],opacity:0.4,tintingStrength:0.8},
+{code:'4253',name:'Fluorescent Pink',brand:'createx-autoair',category:'fluorescent',rgb:[255,50,150],opacity:0.4,tintingStrength:0.8},
+{code:'4254',name:'Fluorescent Blue',brand:'createx-autoair',category:'fluorescent',rgb:[0,100,255],opacity:0.4,tintingStrength:0.8},
+{code:'4255',name:'Fluorescent Green',brand:'createx-autoair',category:'fluorescent',rgb:[0,230,50],opacity:0.4,tintingStrength:0.8},
 ];
 
-// ============================
-// COLOUR SCIENCE
-// ============================
-function srgbToLinear(c){ const v=c/255; return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4); }
-function linearToSrgb(c){ const v=Math.max(0,Math.min(1,c)); return v<=0.0031308?Math.round(v*12.92*255):Math.round((1.055*Math.pow(v,1/2.4)-0.055)*255); }
+// ─── BRAND METADATA ──────────────────────────────────────────────────────────
+const BRAND_NAMES = {
+  'createx-wicked':'Createx Wicked',
+  'createx-illustration':'Createx Illustration',
+  'createx-candy2o':'Createx Candy2o',
+  'createx-autoair':'Createx Auto-Air',
+  'vallejo-model-air':'Vallejo Model Air',
+  'vallejo-game-air':'Vallejo Game Air',
+  'etac':"E'TAC",
+  'badger-minitaire':'Badger Minitaire',
+  'com-art':'Com-Art'
+};
 
+const ALL_CATS = ['opaque','transparent','standard','metallic','pearl','fluorescent','detail','primer'];
+const CAT_LABELS = {opaque:'Opaque',transparent:'Transparent',standard:'Standard',metallic:'Metallic',pearl:'Pearl',fluorescent:'Fluoro',detail:'Detail',primer:'Primer'};
+
+// ─── STATE ────────────────────────────────────────────────────────────────────
+let currentRGB = [232,58,46];
+let activeBrands = new Set(['createx-wicked']);
+let activeCats = new Set(['opaque','transparent','standard','metallic','pearl','fluorescent','detail']);
+
+// ─── INIT UI ──────────────────────────────────────────────────────────────────
+function initUI() {
+  // Brand grid
+  const allBrands = Object.keys(BRAND_NAMES);
+  const brandGrid = document.getElementById('brandGrid');
+  allBrands.forEach(b => {
+    const count = PAINTS.filter(p => p.brand === b).length;
+    const item = document.createElement('label');
+    item.className = 'brand-item';
+    const chk = document.createElement('input');
+    chk.type = 'checkbox';
+    chk.value = b;
+    chk.checked = activeBrands.has(b);
+    chk.addEventListener('change', () => {
+      if(chk.checked) activeBrands.add(b); else activeBrands.delete(b);
+    });
+    const nm = document.createElement('span');
+    nm.className = 'brand-name';
+    nm.textContent = BRAND_NAMES[b];
+    const cnt = document.createElement('span');
+    cnt.className = 'brand-count';
+    cnt.textContent = count + ' paints';
+    item.appendChild(chk); item.appendChild(nm); item.appendChild(cnt);
+    brandGrid.appendChild(item);
+  });
+
+  // Cat pills
+  const catPills = document.getElementById('catPills');
+  ALL_CATS.forEach(c => {
+    const btn = document.createElement('button');
+    btn.className = 'cat-pill' + (activeCats.has(c) ? ' active' : '');
+    btn.textContent = CAT_LABELS[c];
+    btn.dataset.cat = c;
+    btn.addEventListener('click', () => {
+      if(activeCats.has(c)) activeCats.delete(c); else activeCats.add(c);
+      btn.classList.toggle('active', activeCats.has(c));
+    });
+    catPills.appendChild(btn);
+  });
+
+  // Sync color picker init
+  syncRGBfromArray(currentRGB);
+}
+
+function selectAllBrands() {
+  activeBrands = new Set(Object.keys(BRAND_NAMES));
+  document.querySelectorAll('#brandGrid input[type=checkbox]').forEach(c => c.checked = true);
+}
+function selectNoBrands() {
+  activeBrands = new Set();
+  document.querySelectorAll('#brandGrid input[type=checkbox]').forEach(c => c.checked = false);
+}
+
+// ─── COLOR SYNC ───────────────────────────────────────────────────────────────
+function rgbToHex(r,g,b){return'#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
+function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return[(n>>16)&255,(n>>8)&255,n&255];}
+
+function syncRGBfromArray(rgb) {
+  const [r,g,b] = rgb;
+  document.getElementById('rSlider').value = r;
+  document.getElementById('gSlider').value = g;
+  document.getElementById('bSlider').value = b;
+  document.getElementById('rVal').textContent = r;
+  document.getElementById('gVal').textContent = g;
+  document.getElementById('bVal').textContent = b;
+  const hex = rgbToHex(r,g,b);
+  document.getElementById('hexInput').value = hex;
+  document.getElementById('hexDisplay').textContent = hex.toUpperCase();
+  document.getElementById('swatchLarge').style.background = hex;
+  document.getElementById('colorPicker').value = hex;
+  currentRGB = [r,g,b];
+}
+
+document.addEventListener('DOMContentLoaded', function(){
+  initUI();
+  document.getElementById('colorPicker').addEventListener('input', function(){
+    syncRGBfromArray(hexToRgb(this.value));
+  });
+  document.getElementById('hexInput').addEventListener('input', function(){
+    const v = this.value.trim();
+    if(/^#?[0-9a-fA-F]{6}$/.test(v)){
+      syncRGBfromArray(hexToRgb(v.startsWith('#')?v:'#'+v));
+    }
+  });
+  ['r','g','b'].forEach(ch => {
+    document.getElementById(ch+'Slider').addEventListener('input', function(){
+      const r=+document.getElementById('rSlider').value;
+      const g=+document.getElementById('gSlider').value;
+      const b=+document.getElementById('bSlider').value;
+      syncRGBfromArray([r,g,b]);
+    });
+  });
+});
+
+// ─── COLOR MATH ───────────────────────────────────────────────────────────────
+function srgbToLinear(c){const v=c/255;return v<=0.04045?v/12.92:Math.pow((v+0.055)/1.055,2.4);}
+function linearToSrgb(c){const v=Math.max(0,Math.min(1,c));return v<=0.0031308?Math.round(v*12.92*255):Math.round((1.055*Math.pow(v,1/2.4)-0.055)*255);}
 function rgbToLab(r,g,b){
   let rr=srgbToLinear(r),gg=srgbToLinear(g),bb=srgbToLinear(b);
   let x=(rr*0.4124564+gg*0.3575761+bb*0.1804375)/0.95047;
   let y=(rr*0.2126729+gg*0.7151522+bb*0.0721750)/1.00000;
   let z=(rr*0.0193339+gg*0.1191920+bb*0.9503041)/1.08883;
   const f=t=>t>0.008856?Math.pow(t,1/3):(7.787*t)+16/116;
-  return [(116*f(y))-16, 500*(f(x)-f(y)), 200*(f(y)-f(z))];
+  return[(116*f(y))-16,500*(f(x)-f(y)),200*(f(y)-f(z))];
 }
-
-function deltaE(lab1,lab2){
-  const d0=lab1[0]-lab2[0],d1=lab1[1]-lab2[1],d2=lab1[2]-lab2[2];
-  return Math.sqrt(d0*d0+d1*d1+d2*d2);
-}
-
-function matchScore(dE){ return Math.round(100*Math.exp(-dE/8)); }
-
-function deLabel(dE){
-  if(dE<=1)return'Imperceptible';
-  if(dE<=2)return'Very close';
-  if(dE<=3.5)return'Close match';
-  if(dE<=5)return'Noticeable';
-  if(dE<=10)return'Clearly different';
-  return'Poor match';
-}
-
-// CMY-style subtractive mix (same model as original)
+function deltaE(lab1,lab2){const d0=lab1[0]-lab2[0],d1=lab1[1]-lab2[1],d2=lab1[2]-lab2[2];return Math.sqrt(d0*d0+d1*d1+d2*d2);}
 function mixCMY(paints,ratios){
-  const total=ratios.reduce((s,r)=>s+r,0);
-  if(!total)return[128,128,128];
+  const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
   let absR=0,absG=0,absB=0,tw=0;
   for(let i=0;i<paints.length;i++){
     const lr=srgbToLinear(paints[i].rgb[0]),lg=srgbToLinear(paints[i].rgb[1]),lb=srgbToLinear(paints[i].rgb[2]);
-    const ratio=ratios[i]/total, power=ratio*(0.3+paints[i].op*0.7);
-    absR+=(1-lr)*power; absG+=(1-lg)*power; absB+=(1-lb)*power; tw+=power;
+    const ratio=ratios[i]/total;
+    const power=ratio*paints[i].tintingStrength*(0.3+paints[i].opacity*0.7);
+    absR+=(1-lr)*power;absG+=(1-lg)*power;absB+=(1-lb)*power;tw+=power;
   }
   if(!tw)return[128,128,128];
   return[linearToSrgb(1-absR/tw),linearToSrgb(1-absG/tw),linearToSrgb(1-absB/tw)];
 }
-
-function findBestSingle(targetLab, paints){
-  let best=null, bestDE=Infinity;
-  for(const p of paints){
-    const pLab=rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]);
-    const d=deltaE(targetLab,pLab);
-    if(d<bestDE){bestDE=d;best=p;}
+function mixLAB(paints,ratios){
+  const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
+  const labs=paints.map(p=>rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]));
+  let L=0,a=0,b=0,lw=0,cw=0;
+  for(let i=0;i<paints.length;i++){
+    const ratio=ratios[i]/total,op=paints[i].opacity,ts=paints[i].tintingStrength;
+    const w1=ratio*ts*(0.2+op*0.8);L+=labs[i][0]*w1;lw+=w1;
+    const boost=1+(1-labs[i][0]/100)*0.5;
+    const w2=ratio*ts*boost*(0.4+op*0.6);a+=labs[i][1]*w2;b+=labs[i][2]*w2;cw+=w2;
   }
-  return best ? {paints:[best],ratios:[1],pcts:[100],de:bestDE,rgb:best.rgb} : null;
+  if(lw>0){L/=lw;}if(cw>0){a/=cw;b/=cw;}
+  let y=(L+16)/116,x=a/500+y,z=y-b/200;
+  const finv=t=>{const t3=t*t*t;return t3>0.008856?t3:(t-16/116)/7.787;};
+  x=finv(x)*0.95047;y=finv(y)*1.00000;z=finv(z)*1.08883;
+  let rr=x*3.2404542+y*-1.5371385+z*-0.4985314;
+  let gg=x*-0.9692660+y*1.8760108+z*0.0415560;
+  let bb=x*0.0556434+y*-0.2040259+z*1.0572252;
+  return[linearToSrgb(rr),linearToSrgb(gg),linearToSrgb(bb)];
+}
+function mixPaints(paints,ratios){
+  const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
+  let avgOp=0;
+  for(let i=0;i<paints.length;i++)avgOp+=paints[i].opacity*(ratios[i]/total);
+  const cmy=mixCMY(paints,ratios),lab=mixLAB(paints,ratios);
+  return[Math.round(cmy[0]*avgOp+lab[0]*(1-avgOp)),Math.round(cmy[1]*avgOp+lab[1]*(1-avgOp)),Math.round(cmy[2]*avgOp+lab[2]*(1-avgOp))];
+}
+function gcd2(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function gcd3(a,b,c){return gcd2(gcd2(a,b),c);}
+function matchScore(dE){return Math.round(100*Math.exp(-dE/8));}
+function deLabel(dE){if(dE<=1)return'Imperceptible';if(dE<=2)return'Very close';if(dE<=3.5)return'Close match';if(dE<=5)return'Noticeable';if(dE<=10)return'Clearly different';return'Poor match';}
+
+// ─── SEARCH ───────────────────────────────────────────────────────────────────
+function getAvailablePaints() {
+  return PAINTS.filter(p => activeBrands.has(p.brand) && activeCats.has(p.category));
 }
 
-function findBestPair(targetLab,paints){
-  const steps=[0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95];
-  let best=null,bestDE=Infinity;
-  for(let i=0;i<paints.length;i++){
-    for(let j=i+1;j<paints.length;j++){
-      for(const t of steps){
-        const rgb=mixCMY([paints[i],paints[j]],[t,1-t]);
-        const dE=deltaE(targetLab,rgbToLab(rgb[0],rgb[1],rgb[2]));
-        if(dE<bestDE){
-          bestDE=dE;
-          const r1=Math.round(t*20),r2=20-r1;
-          const g=gcd(r1,r2);
-          const s1=r1/g,s2=r2/g,tot=s1+s2;
-          best={paints:[paints[i],paints[j]],ratios:[s1,s2],pcts:[Math.round(s1/tot*100),Math.round(s2/tot*100)],de:bestDE,rgb};
+function findBestSingle(pool, targetLab) {
+  let best = null, bestDE = Infinity;
+  for(const p of pool) {
+    const lab = rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]);
+    const de = deltaE(targetLab, lab);
+    if(de < bestDE) { bestDE = de; best = p; }
+  }
+  if(!best) return null;
+  return { paints:[best], ratios:[1], mixedRGB:best.rgb, dE:bestDE };
+}
+
+function findBestPair(pool, targetLab) {
+  let best = null, bestDE = Infinity;
+  const steps = [0.05,0.10,0.15,0.20,0.25,0.30,0.35,0.40,0.45,0.50,0.55,0.60,0.65,0.70,0.75,0.80,0.85,0.90,0.95];
+  for(let i=0;i<pool.length;i++){
+    for(let j=i+1;j<pool.length;j++){
+      const pair=[pool[i],pool[j]];
+      for(const s of steps){
+        const ratios=[s,1-s];
+        const mixed=mixPaints(pair,ratios);
+        const lab=rgbToLab(mixed[0],mixed[1],mixed[2]);
+        const de=deltaE(targetLab,lab);
+        if(de<bestDE){
+          bestDE=de;
+          // simplify ratio
+          const r0=Math.round(s*20), r1=Math.round((1-s)*20);
+          const g=gcd2(r0,r1);
+          best={paints:pair,ratios:[r0/g,r1/g],mixedRGB:mixed,dE:de};
         }
       }
     }
@@ -509,230 +984,154 @@ function findBestPair(targetLab,paints){
   return best;
 }
 
-function gcd(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
+function findBestTriple(pool, targetLab) {
+  // Get top 15 candidates by single dE
+  const sorted = pool.map(p=>{
+    const lab=rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]);
+    return {p,de:deltaE(targetLab,lab)};
+  }).sort((a,b)=>a.de-b.de).slice(0,15).map(x=>x.p);
 
-function rgbToHex(r,g,b){'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');}
-function toHex(r,g,b){return'#'+[r,g,b].map(v=>Math.round(v).toString(16).padStart(2,'0')).join('');}
-
-// ============================
-// UI STATE
-// ============================
-let currentR=200,currentG=191,currentB=176;
-let activeCats=new Set(['transparent','opaque','detail','pearl','metallic','fluorescent']);
-
-function syncFromRgb(r,g,b){
-  currentR=r;currentG=g;currentB=b;
-  const hex=toHex(r,g,b).toUpperCase().slice(1);
-  document.getElementById('hexInput').value=hex;
-  document.getElementById('colorPicker').value='#'+hex.toLowerCase();
-  document.getElementById('swatchWrap').style.backgroundColor='#'+hex;
-  document.getElementById('swatchHex').textContent='#'+hex;
-  document.getElementById('swatchRgb').textContent='R '+r+' · G '+g+' · B '+b;
-  document.getElementById('sliderR').value=r;
-  document.getElementById('sliderG').value=g;
-  document.getElementById('sliderB').value=b;
-  document.getElementById('rVal').textContent=r;
-  document.getElementById('gVal').textContent=g;
-  document.getElementById('bVal').textContent=b;
-}
-
-// Slider gradient updates
-function updateSliderGradients(r,g,b){
-  document.getElementById('sliderR').style.background=`linear-gradient(to right, rgb(0,${g},${b}), rgb(255,${g},${b}))`;
-  document.getElementById('sliderG').style.background=`linear-gradient(to right, rgb(${r},0,${b}), rgb(${r},255,${b}))`;
-  document.getElementById('sliderB').style.background=`linear-gradient(to right, rgb(${r},${g},0), rgb(${r},${g},255))`;
-}
-
-document.getElementById('colorPicker').addEventListener('input',function(){
-  const h=this.value.slice(1);
-  const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
-  syncFromRgb(r,g,b);
-  updateSliderGradients(r,g,b);
-});
-
-document.getElementById('hexInput').addEventListener('input',function(){
-  const h=this.value.replace(/[^0-9a-fA-F]/g,'').slice(0,6);
-  this.value=h.toUpperCase();
-  if(h.length===6){
-    const r=parseInt(h.slice(0,2),16),g=parseInt(h.slice(2,4),16),b=parseInt(h.slice(4,6),16);
-    if(!isNaN(r+g+b)){syncFromRgb(r,g,b);updateSliderGradients(r,g,b);}
+  let best=null, bestDE=Infinity;
+  for(let i=0;i<sorted.length;i++){
+    for(let j=i+1;j<sorted.length;j++){
+      for(let k=j+1;k<sorted.length;k++){
+        const triple=[sorted[i],sorted[j],sorted[k]];
+        for(let r1s=1;r1s<=9;r1s++){
+          for(let r2s=1;r2s<=9-r1s;r2s++){
+            const r3s=10-r1s-r2s;
+            if(r3s<1) continue;
+            const ratios=[r1s,r2s,r3s];
+            const mixed=mixPaints(triple,ratios);
+            const lab=rgbToLab(mixed[0],mixed[1],mixed[2]);
+            const de=deltaE(targetLab,lab);
+            if(de<bestDE){
+              bestDE=de;
+              const g=gcd3(r1s,r2s,r3s);
+              best={paints:triple,ratios:[r1s/g,r2s/g,r3s/g],mixedRGB:mixed,dE:de};
+            }
+          }
+        }
+      }
+    }
   }
-});
-
-['R','G','B'].forEach(ch=>{
-  document.getElementById('slider'+ch).addEventListener('input',function(){
-    const r=parseInt(document.getElementById('sliderR').value);
-    const g=parseInt(document.getElementById('sliderG').value);
-    const b=parseInt(document.getElementById('sliderB').value);
-    syncFromRgb(r,g,b);
-    updateSliderGradients(r,g,b);
-  });
-});
-
-document.getElementById('volInput').addEventListener('input',renderResults);
-
-// Category filter
-document.querySelectorAll('.cat-btn').forEach(btn=>{
-  btn.addEventListener('click',function(){
-    const cat=this.dataset.cat;
-    if(activeCats.has(cat)){activeCats.delete(cat);this.classList.remove('active');}
-    else{activeCats.add(cat);this.classList.add('active');}
-    if(document.getElementById('resultsContent').style.display!=='none') findAndRender();
-  });
-});
-
-document.getElementById('findBtn').addEventListener('click',findAndRender);
-// Auto-search on color change
-let searchTimeout;
-function scheduleSearch(){clearTimeout(searchTimeout);searchTimeout=setTimeout(()=>{if(document.getElementById('resultsContent').style.display!=='none')findAndRender();},200);}
-['sliderR','sliderG','sliderB','colorPicker'].forEach(id=>document.getElementById(id).addEventListener('input',scheduleSearch));
-
-// ============================
-// SEARCH & RENDER
-// ============================
-let lastResults=null;
-
-function findAndRender(){
-  const available=PAINTS.filter(p=>activeCats.has(p.cat));
-  if(!available.length)return;
-
-  const targetLab=rgbToLab(currentR,currentG,currentB);
-
-  // Top 5 singles
-  const singles=available
-    .map(p=>({paint:p,de:deltaE(targetLab,rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]))}))
-    .sort((a,b)=>a.de-b.de)
-    .slice(0,5);
-
-  // Best pair (only from top-20 singles for speed)
-  const top20=singles.concat(available
-    .map(p=>({paint:p,de:deltaE(targetLab,rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]))}))
-    .sort((a,b)=>a.de-b.de)
-    .slice(0,20)
-  ).filter((v,i,a)=>a.findIndex(x=>x.paint.code===v.paint.code)===i).map(x=>x.paint);
-
-  const pair=available.length>=2 ? findBestPair(targetLab,top20) : null;
-
-  lastResults={singles,pair,targetLab};
-  document.getElementById('emptyResults').style.display='none';
-  document.getElementById('resultsContent').style.display='';
-  renderResults();
+  return best;
 }
 
-function renderResults(){
-  if(!lastResults)return;
-  const {singles,pair}=lastResults;
-  const volMl=parseFloat(document.getElementById('volInput').value)||5;
+// ─── RENDER RESULTS ───────────────────────────────────────────────────────────
+function rgbStr(rgb){return `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;}
 
-  // Single matches
-  const smEl=document.getElementById('singleMatches');
-  smEl.innerHTML='';
-  singles.forEach((m,i)=>{
-    const card=document.createElement('div');
-    card.className='match-card'+(i===0?' best':'');
-    const [r,g,b]=m.paint.rgb;
-    const score=matchScore(m.de);
-    const deColor=m.de<=2?'#4ade80':m.de<=5?'#facc15':m.de<=10?'#fb923c':'#f87171';
-    card.innerHTML=`
-      ${i===0?'<div style="width:100%;margin-bottom:8px"><span class="best-badge">★ Best Match</span></div>':''}
-      <div style="display:flex;align-items:center;gap:18px;width:100%">
-        <div class="match-swatch" style="background:rgb(${r},${g},${b})"></div>
-        <div class="match-info">
-          <div class="match-name">${m.paint.name}</div>
-          <div class="match-code">${m.paint.code}</div>
-          <div class="match-cat">${m.paint.cat}</div>
-          <div class="de-bar" style="margin-top:6px">
-            <div class="de-label">ΔE ${m.de.toFixed(1)}</div>
-            <div class="de-track"><div class="de-fill" style="width:${Math.max(2,100-m.de*4)}%;background:${deColor}"></div></div>
-          </div>
+function catTagClass(cat){
+  const map={opaque:'opaque',transparent:'transparent',standard:'standard',metallic:'metallic',pearl:'pearl',fluorescent:'fluorescent',detail:'detail',primer:'primer'};
+  return 'cat-tag cat-tag-'+(map[cat]||'standard');
+}
+
+function renderCard(result, cardNum, title, totalVol) {
+  if(!result) return '<div class="result-card" style="opacity:.4"><div class="result-card-header"><div class="result-card-num">'+cardNum+'</div><div><div class="result-card-title">'+title+'</div><div class="result-card-subtitle">No paints match current filters</div></div></div></div>';
+
+  const {paints,ratios,mixedRGB,dE} = result;
+  const score = matchScore(dE);
+  const label = deLabel(dE);
+  const totalRatio = ratios.reduce((s,r)=>s+r,0);
+
+  let swatchesHTML = '';
+  paints.forEach((p,i) => {
+    if(i>0) swatchesHTML += '<span class="swatch-plus">+</span>';
+    const pct = Math.round(ratios[i]/totalRatio*100);
+    swatchesHTML += `<div class="swatch-item"><div class="swatch-box" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div><div class="swatch-ratio">${ratios[i]}pt</div><div class="swatch-lbl">${pct}%</div></div>`;
+  });
+  swatchesHTML += `<span class="swatch-arrow">=</span><div class="swatch-item"><div class="swatch-box" style="background:rgb(${mixedRGB[0]},${mixedRGB[1]},${mixedRGB[2]})"></div><div class="swatch-lbl">Result</div></div>`;
+
+  let paintsHTML = '';
+  paints.forEach((p,i) => {
+    const pct = Math.round(ratios[i]/totalRatio*100);
+    paintsHTML += `
+      <div class="paint-row">
+        <div class="paint-swatch-sm" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
+        <div class="paint-info">
+          <div class="paint-code">${p.code}<span class="${catTagClass(p.category)}">${CAT_LABELS[p.category]}</span></div>
+          <div class="paint-name">${p.name}</div>
+          <div class="paint-meta">${BRAND_NAMES[p.brand]}</div>
         </div>
-        <div class="match-score">
-          <div class="match-pct">${score}%</div>
-          <div class="match-de">${deLabel(m.de)}</div>
+        <div class="paint-ratio-col">
+          <div class="paint-ratio-big">${ratios[i]}pt</div>
+          <div class="paint-ratio-pct">${pct}%</div>
         </div>
-      </div>
-    `;
-    if(i===0) card.style.flexWrap='wrap';
-    smEl.appendChild(card);
+      </div>`;
   });
 
-  // 2-paint formula
-  const fsEl=document.getElementById('formulaSection');
-  fsEl.innerHTML='';
-  if(pair && pair.de<(singles[0]?.de||999)){
-    const [r,g,b]=pair.rgb;
-    const score=matchScore(pair.de);
-    const totalMl=volMl;
-    const totalParts=pair.ratios.reduce((s,r)=>s+r,0);
-    const mls=pair.ratios.map(r=>(r/totalParts*totalMl).toFixed(2));
-    const drops=mls.map(m=>Math.round(parseFloat(m)/0.05));
-
-    fsEl.innerHTML=`
-      <div class="formula-card" style="margin-top:32px">
-        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px">
-          <div class="section-head-dot"></div>
-          <div class="section-head-label" style="margin:0">Best 2-Paint Blend</div>
-          ${pair.de<(singles[0]?.de||999)?'<span class="best-badge">Better than any single</span>':''}
-        </div>
-        <div class="formula-paints">
-          ${pair.paints.map((p,i)=>`
-            <div class="formula-paint">
-              <div class="formula-paint-bar" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
-              <div class="formula-paint-ratio">${pair.ratios[i]}</div>
-              <div class="formula-paint-parts">${pair.pcts[i]}% · ${pair.ratios[i]} part${pair.ratios[i]!==1?'s':''}</div>
-              <div class="formula-paint-name">${p.name}</div>
-              <div class="formula-paint-code">${p.code}</div>
-            </div>
-          `).join('')}
-        </div>
-        <div class="formula-result">
-          <div class="formula-result-swatch" style="background:rgb(${r},${g},${b})"></div>
-          <div class="formula-result-info">
-            <div class="formula-result-label">Mixed result</div>
-            <div class="formula-result-hex">${toHex(r,g,b).toUpperCase()}</div>
-            <div class="formula-result-de">ΔE ${pair.de.toFixed(1)} — ${deLabel(pair.de)} · Match score: ${score}%</div>
-          </div>
-        </div>
-        <div class="vol-breakdown">
-          <div class="vol-breakdown-title">Volume breakdown (${totalMl}ml total)</div>
-          ${pair.paints.map((p,i)=>`
-            <div class="vol-row-item">
-              <div class="vol-paint-label">${p.code} ${p.name}</div>
-              <div class="vol-amounts">${mls[i]}ml / ${drops[i]} drops</div>
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    `;
+  // Volume breakdown
+  let volHTML = '';
+  if(totalVol > 0) {
+    const volRows = paints.map((p,i) => {
+      const pct = ratios[i]/totalRatio;
+      const ml = +(totalVol * pct).toFixed(2);
+      const drops = Math.round(ml / 0.05);
+      return `<div class="vol-row-item">
+        <div class="vol-row-dot" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
+        <div class="vol-row-name">${p.code} ${p.name}</div>
+        <div class="vol-row-vals">${ml} ml &nbsp;/&nbsp; ${drops} drops</div>
+      </div>`;
+    }).join('');
+    volHTML = `<div class="vol-breakdown"><div class="vol-breakdown-title">Volume at ${totalVol} ml total</div><div class="vol-breakdown-rows">${volRows}</div></div>`;
   }
+
+  return `<div class="result-card">
+    <div class="result-card-header">
+      <div class="result-card-num">${cardNum}</div>
+      <div>
+        <div class="result-card-title">${title}</div>
+        <div class="result-card-subtitle">${paints.length === 1 ? 'Single paint match' : paints.length+'-paint blend &mdash; mix by parts ratio'}</div>
+      </div>
+      <div class="result-badge">
+        <div class="badge-score">${score}%</div>
+        <div class="badge-score-lbl">Match</div>
+        <div class="badge-de">&Delta;E ${dE.toFixed(2)}</div>
+        <div class="badge-label">${label}</div>
+      </div>
+    </div>
+    <div class="result-card-body">
+      <div class="swatches-row">${swatchesHTML}</div>
+      <div class="paints-list">${paintsHTML}</div>
+      ${volHTML}
+    </div>
+  </div>`;
 }
 
-// ============================
-// INIT
-// ============================
-syncFromRgb(200,191,176);
-updateSliderGradients(200,191,176);
+// ─── MAIN SEARCH ─────────────────────────────────────────────────────────────
+function runSearch() {
+  const pool = getAvailablePaints();
+  if(pool.length === 0) { alert('No paints match the current brand and category filters.'); return; }
 
-})();
-</script>
-<script>
-(function(){
-  var saved=localStorage.getItem('pcr-theme');
-  var prefersDark=window.matchMedia('(prefers-color-scheme:dark)').matches;
-  var theme=saved||(prefersDark?'dark':'light');
-  if(theme==='light')document.documentElement.setAttribute('data-theme','light');
-  document.addEventListener('DOMContentLoaded',function(){
-    var icon=document.getElementById('themeIcon');
-    if(icon)icon.textContent=document.documentElement.getAttribute('data-theme')==='light'?'🌙':'☀️';
-  });
-})();
-function toggleTheme(){
-  var html=document.documentElement;
-  var isLight=html.getAttribute('data-theme')==='light';
-  html.setAttribute('data-theme',isLight?'dark':'light');
-  localStorage.setItem('pcr-theme',isLight?'dark':'light');
-  var icon=document.getElementById('themeIcon');
-  if(icon)icon.textContent=isLight?'☀️':'🌙';
+  const [r,g,b] = currentRGB;
+  const targetLab = rgbToLab(r,g,b);
+  const totalVol = parseFloat(document.getElementById('volInput').value) || 10;
+  const hexStr = rgbToHex(r,g,b).toUpperCase();
+
+  document.getElementById('emptyState').style.display = 'none';
+  document.getElementById('resultsState').style.display = 'none';
+  document.getElementById('spinnerState').style.display = '';
+
+  // Single and pair are fast — run sync, triple is deferred
+  const single = findBestSingle(pool, targetLab);
+  const pair = findBestPair(pool, targetLab);
+
+  // Defer triple to avoid blocking UI
+  setTimeout(() => {
+    const triple = findBestTriple(pool, targetLab);
+
+    document.getElementById('spinnerState').style.display = 'none';
+
+    // Target display
+    document.getElementById('targetSwatch').style.background = rgbStr(currentRGB);
+    document.getElementById('targetHexLabel').textContent = hexStr + '  —  rgb('+r+', '+g+', '+b+')';
+
+    const cards = document.getElementById('resultCards');
+    cards.innerHTML = renderCard(single,1,'Best Single Paint',totalVol)
+      + renderCard(pair,2,'Best 2-Paint Blend',totalVol)
+      + renderCard(triple,3,'Best 3-Paint Blend',totalVol);
+
+    document.getElementById('resultsState').style.display = '';
+  }, 20);
 }
 </script>
 </body>
