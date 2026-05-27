@@ -116,7 +116,7 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&family=Bebas+Neue&display=swap">
 <style>
-  :root{--neon:#e8c84a;--dark:#0d0d0b;--mid:#131310;--card:#1a1a16;--border:#2a2a24;--text:#f0ede8;--muted:#706d64;--dark-rgb:13,13,11;--text-rgb:240,237,232;--neon-rgb:232,200,74;--card-hover:var(--card-hover)}
+  :root{--neon:#e8c84a;--dark:#0d0d0b;--mid:#131310;--card:#1a1a16;--border:#2a2a24;--text:#f0ede8;--muted:#706d64;--dark-rgb:13,13,11;--text-rgb:240,237,232;--neon-rgb:232,200,74;--card-hover:#2a2a24}
 [data-theme=light]{--neon:#b8960a;--neon-rgb:184,150,10;--dark:#f5f2ed;--dark-rgb:245,242,237;--mid:#eae7e1;--card:#ffffff;--border:#d8d4cc;--text:#1a1a16;--text-rgb:26,26,22;--muted:#7a7770;--card-hover:#ede9e1}
 [data-theme=light] .stats-section,[data-theme=light] .ticker-wrap,[data-theme=light] .cta-section{--dark:#0d0d0b;--dark-rgb:13,13,11;--text:#f0ede8;--text-rgb:240,237,232}
 [data-theme=light] body{background:var(--dark)}
@@ -450,7 +450,7 @@
     <div class="service-card">
       <div class="service-icon">🚿</div>
       <div class="service-name">Bathroom Surface Repair</div>
-      <p class="service-desc">Chips and cracks in bathroom vanities, shower recesses, bath surrounds and floor tiles. We match grout colour, surface texture and sheen level for a flawless invisible repair.</p>
+      <p class="service-desc">Chips and cracks in bathroom vanities, shower recesses, bath surrounds and floor tiles. We match grout colour, surface texture and sheen for a flawless invisible repair.</p>
       <div class="service-tag">
         <span class="tag">Vanity</span><span class="tag">Shower</span><span class="tag">Bath Surround</span><span class="tag">Grout</span>
       </div>
@@ -488,6 +488,7 @@
       <div class="ba-label-top">Kitchen Benchtop &mdash; Engineered Stone</div>
       <div class="ba-slider" id="slider1">
         <div class="ba-after">
+          <!-- AFTER: clean polished stone benchtop -->
           <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="stone1a" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -499,15 +500,18 @@
             </defs>
             <rect width="800" height="500" fill="url(#stone1a)"/>
             <rect width="800" height="500" fill="url(#stone1a)" filter="url(#noise1a)" opacity="0.3"/>
+            <!-- subtle veining -->
             <path d="M0 180 Q200 170 400 185 Q600 200 800 190" stroke="#a09080" stroke-width="1.5" fill="none" opacity="0.4"/>
             <path d="M0 320 Q150 310 350 325 Q550 340 800 315" stroke="#a09080" stroke-width="1" fill="none" opacity="0.3"/>
             <path d="M200 0 Q210 150 205 300 Q200 400 210 500" stroke="#a09080" stroke-width="0.8" fill="none" opacity="0.25"/>
+            <!-- sheen highlight -->
             <rect x="0" y="0" width="800" height="500" fill="url(#sheen1)" opacity="0.15"/>
             <defs><linearGradient id="sheen1" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fff;stop-opacity:0.3"/><stop offset="40%" style="stop-color:#fff;stop-opacity:0.05"/><stop offset="100%" style="stop-color:#000;stop-opacity:0.1"/></linearGradient></defs>
             <text x="400" y="460" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="18" fill="rgba(255,255,255,0.4)" letter-spacing="4">REPLACE WITH YOUR AFTER PHOTO</text>
           </svg>
         </div>
         <div class="ba-before">
+          <!-- BEFORE: damaged benchtop with chip -->
           <svg viewBox="0 0 800 500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
             <defs>
               <linearGradient id="stone1b" x1="0%" y1="0%" x2="100%" y2="100%">
@@ -518,6 +522,7 @@
             <rect width="800" height="500" fill="url(#stone1b)"/>
             <path d="M0 180 Q200 170 400 185 Q600 200 800 190" stroke="#908070" stroke-width="1.5" fill="none" opacity="0.4"/>
             <path d="M0 320 Q150 310 350 325 Q550 340 800 315" stroke="#908070" stroke-width="1" fill="none" opacity="0.3"/>
+            <!-- chip damage -->
             <polygon points="340,220 360,205 385,215 375,240 355,248 338,238" fill="#7a6e63" opacity="0.85"/>
             <polygon points="355,222 372,210 382,218 374,235 358,242 352,230" fill="#5a4e44" opacity="0.9"/>
             <line x1="385" y1="215" x2="410" y2="208" stroke="#6a5e54" stroke-width="1.5" opacity="0.6"/>
@@ -551,6 +556,7 @@
               </linearGradient>
             </defs>
             <rect width="800" height="500" fill="url(#tile2a)"/>
+            <!-- tile grid lines -->
             <line x1="0" y1="125" x2="800" y2="125" stroke="#c0bbb5" stroke-width="3"/>
             <line x1="0" y1="250" x2="800" y2="250" stroke="#c0bbb5" stroke-width="3"/>
             <line x1="0" y1="375" x2="800" y2="375" stroke="#c0bbb5" stroke-width="3"/>
@@ -558,6 +564,7 @@
             <line x1="320" y1="0" x2="320" y2="500" stroke="#c0bbb5" stroke-width="3"/>
             <line x1="480" y1="0" x2="480" y2="500" stroke="#c0bbb5" stroke-width="3"/>
             <line x1="640" y1="0" x2="640" y2="500" stroke="#c0bbb5" stroke-width="3"/>
+            <!-- sheen -->
             <rect x="0" y="0" width="800" height="500" fill="url(#sheen2)" opacity="0.2"/>
             <defs><linearGradient id="sheen2" x1="0%" y1="0%" x2="0%" y2="100%"><stop offset="0%" style="stop-color:#fff;stop-opacity:0.4"/><stop offset="100%" style="stop-color:#000;stop-opacity:0.05"/></linearGradient></defs>
             <text x="400" y="460" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="18" fill="rgba(100,100,100,0.4)" letter-spacing="4">REPLACE WITH YOUR AFTER PHOTO</text>
@@ -573,8 +580,10 @@
             <line x1="320" y1="0" x2="320" y2="500" stroke="#b8b3ae" stroke-width="3"/>
             <line x1="480" y1="0" x2="480" y2="500" stroke="#b8b3ae" stroke-width="3"/>
             <line x1="640" y1="0" x2="640" y2="500" stroke="#b8b3ae" stroke-width="3"/>
+            <!-- chipped corner on tile -->
             <polygon points="318,122 330,115 338,125 332,138 320,140 313,132" fill="#a09890" opacity="0.9"/>
             <polygon points="322,124 330,118 336,126 331,136 321,137 317,130" fill="#7a7068" opacity="0.95"/>
+            <!-- crack lines -->
             <line x1="320" y1="125" x2="345" y2="145" stroke="#888" stroke-width="1.5" opacity="0.7"/>
             <line x1="320" y1="125" x2="300" y2="140" stroke="#888" stroke-width="1" opacity="0.5"/>
             <text x="400" y="460" text-anchor="middle" font-family="'Bebas Neue', sans-serif" font-size="18" fill="rgba(100,100,100,0.4)" letter-spacing="4">REPLACE WITH YOUR BEFORE PHOTO</text>
@@ -603,6 +612,7 @@
               </linearGradient>
             </defs>
             <rect width="800" height="500" fill="url(#marble3a)"/>
+            <!-- marble veining after - clean -->
             <path d="M50 80 Q200 120 350 90 Q500 60 650 100 Q720 115 800 95" stroke="#c8c0b8" stroke-width="2" fill="none" opacity="0.6"/>
             <path d="M0 200 Q100 180 250 210 Q400 240 550 205 Q680 180 800 220" stroke="#c0b8b0" stroke-width="1.5" fill="none" opacity="0.5"/>
             <path d="M100 350 Q280 330 420 360 Q560 385 700 350 Q760 338 800 355" stroke="#c8c0b8" stroke-width="1" fill="none" opacity="0.4"/>
@@ -618,8 +628,10 @@
             <path d="M50 80 Q200 120 350 90 Q500 60 650 100 Q720 115 800 95" stroke="#b8b0a8" stroke-width="2" fill="none" opacity="0.6"/>
             <path d="M0 200 Q100 180 250 210 Q400 240 550 205 Q680 180 800 220" stroke="#b0a8a0" stroke-width="1.5" fill="none" opacity="0.5"/>
             <path d="M400 0 Q420 100 410 250 Q400 380 415 500" stroke="#c0b8b0" stroke-width="1.5" fill="none" opacity="0.35"/>
+            <!-- chip damage on marble -->
             <polygon points="390,235 410,220 432,228 428,255 408,265 388,255" fill="#9a9088" opacity="0.9"/>
             <polygon points="395,238 412,225 428,232 425,252 407,261 392,252" fill="#6a6058" opacity="0.95"/>
+            <!-- radiating cracks -->
             <line x1="432" y1="228" x2="460" y2="215" stroke="#888" stroke-width="1.5" opacity="0.6"/>
             <line x1="428" y1="255" x2="450" y2="270" stroke="#888" stroke-width="1" opacity="0.5"/>
             <line x1="390" y1="235" x2="365" y2="225" stroke="#888" stroke-width="1" opacity="0.45"/>
@@ -851,7 +863,7 @@
         </div>
         <div class="gallery-overlay">
           <div class="gallery-overlay-title">Travertine Floor</div>
-          <div class="gallery-overlay-sub">Chip &amp; crack — Kalamunda</div>
+          <div class="gallery-overlay-sub">Chip & crack — Kalamunda</div>
         </div>
       </div>
     </div>
@@ -1365,5 +1377,3 @@ function toggleTheme(){
   if(icon)icon.textContent=isLight?'☀️':'🌙';
 }
 </script>
-</body>
-</html>
