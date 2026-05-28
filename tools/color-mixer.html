@@ -108,6 +108,25 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .vol-input:focus{outline:none;border-color:var(--neon)}
 .vol-unit{font-size:13px;color:var(--muted);font-weight:500}
 
+/* My Shelf */
+.shelf-only-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 12px;background:rgba(var(--neon-rgb),.04);border:1px solid var(--border);border-radius:8px;transition:border-color .15s;user-select:none}
+.shelf-only-toggle:hover{border-color:rgba(var(--neon-rgb),.3)}
+.shelf-only-toggle input{width:14px;height:14px;accent-color:var(--neon);cursor:pointer;flex-shrink:0}
+.shelf-only-label{font-size:12px;font-weight:600;color:var(--text);flex:1}
+.shelf-count-badge{font-size:10px;color:var(--muted);background:var(--mid);border:1px solid var(--border);border-radius:980px;padding:2px 8px;white-space:nowrap}
+.shelf-items{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-top:8px}
+.shelf-empty-hint{font-size:11px;color:var(--muted);text-align:center;padding:10px 0}
+.shelf-item{display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--mid);border:1px solid var(--border);border-radius:7px}
+.shelf-item-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.shelf-item-info{flex:1;min-width:0}
+.shelf-item-name{font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shelf-item-meta{font-size:10px;color:var(--muted)}
+.shelf-item-remove{background:none;border:none;color:var(--muted);cursor:pointer;padding:0 2px;font-size:14px;line-height:1;transition:color .15s;flex-shrink:0}
+.shelf-item-remove:hover{color:#e83a2e}
+.shelf-btn{background:none;border:none;cursor:pointer;color:rgba(var(--text-rgb),.25);font-size:17px;padding:2px 4px;line-height:1;transition:color .15s;flex-shrink:0}
+.shelf-btn:hover{color:var(--neon)}
+.shelf-btn.on-shelf{color:var(--neon)}
+
 .btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .btn-primary:active{transform:scale(.98)}
@@ -316,6 +335,16 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
         <span class="vol-unit">ml total</span>
       </div>
       <p style="font-size:11px;color:var(--muted);margin-top:8px">Volume breakdown shown per paint in ml and drops (1 drop = 0.05 ml)</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">5. <span>My Shelf</span></div>
+      <label class="shelf-only-toggle" id="shelfOnlyToggle">
+        <input type="checkbox" id="shelfOnlyCheck" onchange="setShelfOnly(this.checked)">
+        <span class="shelf-only-label">Mix from shelf only</span>
+        <span class="shelf-count-badge" id="shelfCountBadge">0 paints</span>
+      </label>
+      <div id="shelfItems"><div class="shelf-empty-hint">&#9734; any paint from results to add it to your shelf</div></div>
     </div>
 
     <button class="btn-primary" id="findBtn" onclick="runSearch()">&#128269; Find Best Match</button>
@@ -836,6 +865,8 @@ const CAT_LABELS = {opaque:'Opaque',transparent:'Transparent',standard:'Standard
 let currentRGB = [232,58,46];
 let activeBrands = new Set(['createx-wicked']);
 let activeCats = new Set(['opaque','transparent','standard','metallic','pearl','fluorescent','detail']);
+let shelfSet = new Set(JSON.parse(localStorage.getItem('pcr-shelf') || '[]'));
+let shelfOnly = localStorage.getItem('pcr-shelf-only') === 'true';
 
 // ─── INIT UI ──────────────────────────────────────────────────────────────────
 function initUI() {
@@ -879,6 +910,10 @@ function initUI() {
 
   // Sync color picker init
   syncRGBfromArray(currentRGB);
+
+  // Shelf init
+  document.getElementById('shelfOnlyCheck').checked = shelfOnly;
+  renderShelfList();
 }
 
 function selectAllBrands() {
@@ -888,6 +923,49 @@ function selectAllBrands() {
 function selectNoBrands() {
   activeBrands = new Set();
   document.querySelectorAll('#brandGrid input[type=checkbox]').forEach(c => c.checked = false);
+}
+
+// ─── SHELF ────────────────────────────────────────────────────────────────────
+function saveShelf() {
+  localStorage.setItem('pcr-shelf', JSON.stringify([...shelfSet]));
+}
+function setShelfOnly(on) {
+  shelfOnly = on;
+  localStorage.setItem('pcr-shelf-only', on);
+}
+function toggleShelf(code) {
+  if(shelfSet.has(code)) shelfSet.delete(code); else shelfSet.add(code);
+  saveShelf();
+  document.querySelectorAll(`.shelf-btn[data-code="${code}"]`).forEach(btn => {
+    const on = shelfSet.has(code);
+    btn.classList.toggle('on-shelf', on);
+    btn.textContent = on ? '★' : '☆';
+    btn.title = on ? 'Remove from shelf' : 'Add to shelf';
+  });
+  renderShelfList();
+}
+function renderShelfList() {
+  const badge = document.getElementById('shelfCountBadge');
+  const container = document.getElementById('shelfItems');
+  if(!badge || !container) return;
+  badge.textContent = shelfSet.size + (shelfSet.size === 1 ? ' paint' : ' paints');
+  if(shelfSet.size === 0) {
+    container.innerHTML = '<div class="shelf-empty-hint">✴ any paint from results to add it to your shelf</div>';
+    return;
+  }
+  const items = [...shelfSet].map(code => {
+    const p = PAINTS.find(x => x.code === code);
+    if(!p) return '';
+    return `<div class="shelf-item">
+      <div class="shelf-item-dot" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
+      <div class="shelf-item-info">
+        <div class="shelf-item-name">${p.name} <span style="font-family:'Inter',monospace;font-weight:400">${p.code}</span></div>
+        <div class="shelf-item-meta">${BRAND_NAMES[p.brand]}</div>
+      </div>
+      <button class="shelf-item-remove" onclick="toggleShelf('${p.code}')" title="Remove">✕</button>
+    </div>`;
+  }).join('');
+  container.innerHTML = `<div class="shelf-items">${items}</div>`;
 }
 
 // ─── COLOR SYNC ───────────────────────────────────────────────────────────────
@@ -1036,6 +1114,7 @@ function deLabel(dE){if(dE<=1)return'Imperceptible';if(dE<=2)return'Very close';
 
 // ─── SEARCH ───────────────────────────────────────────────────────────────────
 function getAvailablePaints() {
+  if(shelfOnly) return PAINTS.filter(p => shelfSet.has(p.code));
   return PAINTS.filter(p => activeBrands.has(p.brand) && activeCats.has(p.category));
 }
 
@@ -1134,6 +1213,7 @@ function renderCard(result, cardNum, title, totalVol) {
   let paintsHTML = '';
   paints.forEach((p,i) => {
     const pct = Math.round(ratios[i]/totalRatio*100);
+    const onShelf = shelfSet.has(p.code);
     paintsHTML += `
       <div class="paint-row">
         <div class="paint-swatch-sm" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
@@ -1146,6 +1226,7 @@ function renderCard(result, cardNum, title, totalVol) {
           <div class="paint-ratio-big">${ratios[i]}pt</div>
           <div class="paint-ratio-pct">${pct}%</div>
         </div>
+        <button class="shelf-btn${onShelf?' on-shelf':''}" data-code="${p.code}" onclick="toggleShelf('${p.code}')" title="${onShelf?'Remove from shelf':'Add to my shelf'}">${onShelf?'★':'☆'}</button>
       </div>`;
   });
 
