@@ -242,49 +242,52 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
     <div class="panel">
       <div class="panel-title">1. <span>Target Colour</span></div>
 
-      <!-- Photo sampler -->
-      <button class="photo-toggle" id="photoToggle" onclick="togglePhotoPanel()">
-        <span>&#128247;</span> Sample from Photo <span class="photo-toggle-arrow">&#9660;</span>
-      </button>
-      <div class="photo-section" id="photoSection">
-        <div class="photo-upload-zone" id="photoUploadZone">
-          <div class="photo-upload-icon">&#128247;</div>
-          <div class="photo-upload-text">Click or drag a photo here</div>
-          <div class="photo-upload-hint">JPG &middot; PNG &middot; WEBP &mdash; then click any pixel to sample its colour</div>
-          <input type="file" id="photoFileInput" accept="image/*">
-        </div>
-        <div class="photo-canvas-wrap" id="photoCanvasWrap">
-          <canvas id="photoCanvas"></canvas>
-          <div class="photo-ring" id="photoRing"></div>
-        </div>
-        <div class="photo-hint" id="photoHint">Click anywhere on the photo to sample that colour</div>
+      <!-- Photo sampler — primary -->
+      <div class="photo-upload-zone" id="photoUploadZone">
+        <div class="photo-upload-icon">&#128247;</div>
+        <div class="photo-upload-text">Click or drag a photo here</div>
+        <div class="photo-upload-hint">JPG &middot; PNG &middot; WEBP &mdash; then click any pixel to sample its colour</div>
+        <input type="file" id="photoFileInput" accept="image/*">
       </div>
+      <div class="photo-canvas-wrap" id="photoCanvasWrap">
+        <canvas id="photoCanvas"></canvas>
+        <div class="photo-ring" id="photoRing"></div>
+      </div>
+      <div class="photo-hint" id="photoHint">Click anywhere on the photo to sample that colour</div>
 
-      <div class="color-preview-row">
+      <!-- Sampled / current colour display -->
+      <div class="color-preview-row" style="margin-top:14px">
         <div class="color-swatch-large" id="swatchLarge" style="background:#e83a2e">
           <input type="color" id="colorPicker" value="#e83a2e">
         </div>
         <div class="color-hex-display">
           <div class="color-hex-val" id="hexDisplay">#E83A2E</div>
-          <div class="color-hex-lbl">Target Hex</div>
+          <div class="color-hex-lbl">Target Hex &mdash; click swatch to change</div>
         </div>
       </div>
-      <div class="hex-input-row">
-        <label>HEX</label>
-        <input type="text" class="hex-input" id="hexInput" value="#e83a2e" maxlength="7" spellcheck="false">
-      </div>
-      <div class="rgb-sliders">
-        <div class="ctrl-group" style="margin-bottom:8px">
-          <div class="ctrl-label">R <span class="ctrl-value" id="rVal">232</span></div>
-          <input type="range" class="ctrl-slider" id="rSlider" min="0" max="255" value="232" style="--thumb-color:#ff5555">
+
+      <!-- Manual hex/sliders — collapsible -->
+      <button class="photo-toggle" id="manualToggle" onclick="toggleManualPanel()">
+        &#9998; Enter hex or adjust sliders <span class="photo-toggle-arrow">&#9660;</span>
+      </button>
+      <div class="photo-section" id="manualSection">
+        <div class="hex-input-row" style="margin-bottom:12px">
+          <label>HEX</label>
+          <input type="text" class="hex-input" id="hexInput" value="#e83a2e" maxlength="7" spellcheck="false">
         </div>
-        <div class="ctrl-group" style="margin-bottom:8px">
-          <div class="ctrl-label">G <span class="ctrl-value" id="gVal">58</span></div>
-          <input type="range" class="ctrl-slider" id="gSlider" min="0" max="255" value="58">
-        </div>
-        <div class="ctrl-group" style="margin-bottom:0">
-          <div class="ctrl-label">B <span class="ctrl-value" id="bVal">46</span></div>
-          <input type="range" class="ctrl-slider" id="bSlider" min="0" max="255" value="46">
+        <div class="rgb-sliders">
+          <div class="ctrl-group" style="margin-bottom:8px">
+            <div class="ctrl-label">R <span class="ctrl-value" id="rVal">232</span></div>
+            <input type="range" class="ctrl-slider" id="rSlider" min="0" max="255" value="232">
+          </div>
+          <div class="ctrl-group" style="margin-bottom:8px">
+            <div class="ctrl-label">G <span class="ctrl-value" id="gVal">58</span></div>
+            <input type="range" class="ctrl-slider" id="gSlider" min="0" max="255" value="58">
+          </div>
+          <div class="ctrl-group" style="margin-bottom:8px">
+            <div class="ctrl-label">B <span class="ctrl-value" id="bVal">46</span></div>
+            <input type="range" class="ctrl-slider" id="bSlider" min="0" max="255" value="46">
+          </div>
         </div>
       </div>
     </div>
@@ -326,7 +329,7 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
       <div class="how-to-title">How it works</div>
       <div class="how-step">
         <div class="how-num">01</div>
-        <div class="how-text"><h4>Pick a target colour</h4><p>Use the colour picker, RGB sliders or type a hex code directly.</p></div>
+        <div class="how-text"><h4>Sample your surface colour</h4><p>Upload a photo of the surface and click any pixel, or enter a hex code / adjust the sliders manually.</p></div>
       </div>
       <div class="how-step">
         <div class="how-num">02</div>
@@ -927,9 +930,9 @@ document.addEventListener('DOMContentLoaded', function(){
 });
 
 // ─── PHOTO SAMPLER ────────────────────────────────────────────────────────────
-function togglePhotoPanel(){
-  const btn = document.getElementById('photoToggle');
-  const sec = document.getElementById('photoSection');
+function toggleManualPanel(){
+  const btn = document.getElementById('manualToggle');
+  const sec = document.getElementById('manualSection');
   btn.classList.toggle('open');
   sec.classList.toggle('open');
 }
