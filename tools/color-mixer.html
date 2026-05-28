@@ -127,6 +127,29 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .shelf-btn:hover{color:var(--neon)}
 .shelf-btn.on-shelf{color:var(--neon)}
 
+/* Calibration */
+.cal-mode-row{display:flex;gap:4px;margin:10px 0 8px}
+.cal-mode-btn{flex:1;padding:6px 4px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-mode-btn:hover:not(.active){border-color:rgba(var(--text-rgb),.3);color:rgba(var(--text-rgb),.7)}
+.cal-mode-btn.active{border-color:var(--neon);color:var(--neon);background:rgba(var(--neon-rgb),.08)}
+.cal-info{font-size:11px;color:var(--muted);text-align:center;padding:6px 0 4px}
+.cal-status-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(var(--neon-rgb),.05);border:1px solid rgba(var(--neon-rgb),.2);border-radius:8px;margin-top:4px}
+.cal-status-dot{width:18px;height:18px;border-radius:4px;border:1px solid rgba(var(--text-rgb),.2);flex-shrink:0}
+.cal-status-text{font-size:11px;color:var(--text);flex:1}
+.cal-clear-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.5px;padding:4px 9px;border-radius:5px;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-clear-btn:hover{border-color:rgba(220,50,50,.5);color:#e04040}
+.cal-steps{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.cal-step-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--mid);border:1px solid var(--border);border-radius:7px;transition:border-color .15s,background .15s}
+.cal-step-row.done{border-color:rgba(var(--neon-rgb),.3);background:rgba(var(--neon-rgb),.04)}
+.cal-step-row.active-step{border-color:rgba(var(--neon-rgb),.5);background:rgba(var(--neon-rgb),.07)}
+.cal-step-num{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--neon);min-width:14px;line-height:1}
+.cal-step-row span{font-size:11px;color:var(--muted);flex:1}
+.cal-step-row.done span,.cal-step-row.active-step span{color:var(--text)}
+.cal-step-swatch{width:18px;height:18px;border-radius:4px;border:1px solid rgba(var(--text-rgb),.2);flex-shrink:0}
+.cal-3pt-actions{display:flex;gap:6px;margin-top:4px}
+.cal-card-btn{flex:1;padding:7px 10px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:8px;border:1px solid rgba(var(--neon-rgb),.3);background:rgba(var(--neon-rgb),.06);color:var(--neon);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-card-btn:hover{background:rgba(var(--neon-rgb),.13)}
+
 .btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .btn-primary:active{transform:scale(.98)}
@@ -276,6 +299,48 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
         <div class="photo-ring" id="photoRing"></div>
       </div>
       <div class="photo-hint" id="photoHint">Click anywhere on the photo to sample that colour</div>
+
+      <!-- Calibration (shown when photo loaded) -->
+      <div id="calUI" style="display:none">
+        <div class="cal-mode-row">
+          <button class="cal-mode-btn active" data-mode="none" onclick="setCalMode('none')">None</button>
+          <button class="cal-mode-btn" data-mode="wb" onclick="setCalMode('wb')">White balance</button>
+          <button class="cal-mode-btn" data-mode="3pt" onclick="setCalMode('3pt')">3-point</button>
+        </div>
+        <!-- White balance UI -->
+        <div id="calWbUI" style="display:none">
+          <div class="cal-info">Click any white or neutral area in the photo</div>
+          <div id="calWbStatus" class="cal-status-row" style="display:none">
+            <div class="cal-status-dot" id="calWbDot"></div>
+            <span class="cal-status-text">White point set &mdash; now sample your colour</span>
+            <button class="cal-clear-btn" onclick="clearCalibration()">&#10005; Reset</button>
+          </div>
+        </div>
+        <!-- 3-point UI -->
+        <div id="cal3ptUI" style="display:none">
+          <div class="cal-steps">
+            <div class="cal-step-row active-step" id="calStepRow0">
+              <div class="cal-step-num">1</div>
+              <span>Click the BLACK patch</span>
+              <div class="cal-step-swatch" id="calSwatch0" style="display:none"></div>
+            </div>
+            <div class="cal-step-row" id="calStepRow1">
+              <div class="cal-step-num">2</div>
+              <span>Click the MID GREY patch</span>
+              <div class="cal-step-swatch" id="calSwatch1" style="display:none"></div>
+            </div>
+            <div class="cal-step-row" id="calStepRow2">
+              <div class="cal-step-num">3</div>
+              <span>Click the WHITE patch</span>
+              <div class="cal-step-swatch" id="calSwatch2" style="display:none"></div>
+            </div>
+          </div>
+          <div class="cal-3pt-actions">
+            <button class="cal-clear-btn" onclick="clearCalibration()">&#10005; Reset</button>
+            <button class="cal-card-btn" onclick="downloadCalCard()">&#11015; Download card</button>
+          </div>
+        </div>
+      </div>
 
       <!-- Sampled / current colour display -->
       <div class="color-preview-row" style="margin-top:14px">
@@ -867,6 +932,10 @@ let activeBrands = new Set(['createx-wicked']);
 let activeCats = new Set(['opaque','transparent','standard','metallic','pearl','fluorescent','detail']);
 let shelfSet = new Set(JSON.parse(localStorage.getItem('pcr-shelf') || '[]'));
 let shelfOnly = localStorage.getItem('pcr-shelf-only') === 'true';
+let calMode = 'none'; // 'none' | 'wb' | '3pt'
+let calWB = null;     // [r,g,b] white point
+let cal3pt = { black: null, grey: null, white: null };
+let cal3ptStep = 0;   // 0-2 = capturing; 3 = done
 
 // ─── INIT UI ──────────────────────────────────────────────────────────────────
 function initUI() {
@@ -968,6 +1037,118 @@ function renderShelfList() {
   container.innerHTML = `<div class="shelf-items">${items}</div>`;
 }
 
+// ─── CALIBRATION ─────────────────────────────────────────────────────────────
+function setCalMode(mode) {
+  calMode = mode;
+  clearCalibration();
+  document.querySelectorAll('.cal-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('calWbUI').style.display = mode === 'wb' ? '' : 'none';
+  document.getElementById('cal3ptUI').style.display = mode === '3pt' ? '' : 'none';
+  const hints = { none: 'Click anywhere on the photo to sample that colour', wb: 'First click a white or neutral area to set white balance', '3pt': 'Click the BLACK patch on your calibration card' };
+  document.getElementById('photoHint').textContent = hints[mode];
+}
+function clearCalibration() {
+  calWB = null;
+  cal3pt = { black: null, grey: null, white: null };
+  cal3ptStep = 0;
+  document.getElementById('calWbStatus').style.display = 'none';
+  const rows = ['calStepRow0','calStepRow1','calStepRow2'];
+  const swatches = ['calSwatch0','calSwatch1','calSwatch2'];
+  rows.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('done','active-step');
+    if(i === 0) el.classList.add('active-step');
+    document.getElementById(swatches[i]).style.display = 'none';
+  });
+}
+function applyCalibration(rgb) {
+  if(calMode === 'wb' && calWB) {
+    return rgb.map((v, i) => Math.min(255, Math.round(v * 255 / Math.max(1, calWB[i]))));
+  }
+  if(calMode === '3pt' && cal3pt.black && cal3pt.grey && cal3pt.white) {
+    return rgb.map((v, i) => {
+      const b = cal3pt.black[i], g = cal3pt.grey[i], w = cal3pt.white[i];
+      let out;
+      if(v <= b) out = 0;
+      else if(g > b && v <= g) out = (v - b) / (g - b) * 128;
+      else if(w > g && v <= w) out = 128 + (v - g) / (w - g) * 127;
+      else out = 255;
+      return Math.round(Math.min(255, Math.max(0, out)));
+    });
+  }
+  return rgb;
+}
+function captureCalPoint(rgb) {
+  if(calMode === 'wb') {
+    calWB = rgb;
+    const dot = document.getElementById('calWbDot');
+    dot.style.background = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+    document.getElementById('calWbStatus').style.display = '';
+    document.getElementById('photoHint').textContent = 'White balance set — now click your target colour';
+    return true; // consumed, don't sample
+  }
+  if(calMode === '3pt' && cal3ptStep < 3) {
+    const keys = ['black','grey','white'];
+    const hints = ['Click the MID GREY patch on your calibration card', 'Click the WHITE patch on your calibration card', 'Calibration complete — click your target colour'];
+    cal3pt[keys[cal3ptStep]] = rgb;
+    const swatch = document.getElementById('calSwatch' + cal3ptStep);
+    swatch.style.background = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+    swatch.style.display = '';
+    document.getElementById('calStepRow' + cal3ptStep).classList.remove('active-step');
+    document.getElementById('calStepRow' + cal3ptStep).classList.add('done');
+    cal3ptStep++;
+    document.getElementById('photoHint').textContent = hints[cal3ptStep - 1];
+    if(cal3ptStep < 3) {
+      document.getElementById('calStepRow' + cal3ptStep).classList.add('active-step');
+    }
+    return true; // calibration point captured, don't sample as colour
+  }
+  return false;
+}
+function downloadCalCard() {
+  const W = 560, H = 210;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#f5f5f5';
+  ctx.fillRect(0, 0, W, H);
+  // Border
+  ctx.strokeStyle = '#bbb'; ctx.lineWidth = 1;
+  ctx.strokeRect(0.5, 0.5, W-1, H-1);
+  // Title
+  ctx.fillStyle = '#222'; ctx.font = 'bold 13px sans-serif';
+  ctx.fillText('Perth Chip Repairs — Colour Calibration Card', 12, 20);
+  ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
+  ctx.fillText('Print at 100% (no scaling). Include in photo alongside the surface. Use "3-point calibration" in the colour mixer.', 12, 35);
+  const patches = [
+    { label: 'BLACK', sub:'Step 1', col:'#000000', txt:'#888888' },
+    { label: 'DARK GREY', sub:'', col:'#404040', txt:'#aaaaaa' },
+    { label: 'MID GREY', sub:'Step 2', col:'#808080', txt:'#ffffff' },
+    { label: 'LIGHT GREY', sub:'', col:'#c0c0c0', txt:'#555555' },
+    { label: 'WHITE', sub:'Step 3', col:'#ffffff', txt:'#666666' },
+  ];
+  const pW = 93, pH = 140, y0 = 46, gap = 7, x0 = 12;
+  patches.forEach((p, i) => {
+    const x = x0 + i * (pW + gap);
+    ctx.fillStyle = p.col;
+    ctx.fillRect(x, y0, pW, pH);
+    ctx.strokeStyle = '#bbb'; ctx.lineWidth = 0.5;
+    ctx.strokeRect(x + 0.5, y0 + 0.5, pW - 1, pH - 1);
+    ctx.fillStyle = p.txt;
+    ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(p.label, x + pW/2, y0 + pH - 22);
+    ctx.font = '9px sans-serif';
+    ctx.fillText(p.sub, x + pW/2, y0 + pH - 10);
+  });
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#888'; ctx.font = '9px sans-serif';
+  ctx.fillText('perthchiprepairs.com.au', 12, H - 8);
+  const link = document.createElement('a');
+  link.href = c.toDataURL('image/png');
+  link.download = 'pcr-calibration-card.png';
+  link.click();
+}
+
 // ─── COLOR SYNC ───────────────────────────────────────────────────────────────
 function rgbToHex(r,g,b){return'#'+[r,g,b].map(v=>v.toString(16).padStart(2,'0')).join('');}
 function hexToRgb(h){h=h.replace('#','');if(h.length===3)h=h.split('').map(c=>c+c).join('');const n=parseInt(h,16);return[(n>>16)&255,(n>>8)&255,n&255];}
@@ -1050,6 +1231,8 @@ function initPhotoSampler(){
         zone.style.display = 'none';
         wrap.style.display = 'block';
         hint.style.display = 'block';
+        document.getElementById('calUI').style.display = '';
+        clearCalibration();
       };
       img.src = e.target.result;
     };
@@ -1076,8 +1259,11 @@ function initPhotoSampler(){
     const x = Math.round((e.clientX - rect.left) * scaleX);
     const y = Math.round((e.clientY - rect.top) * scaleY);
     const px = canvas.getContext('2d').getImageData(x, y, 1, 1).data;
-    syncRGBfromArray([px[0], px[1], px[2]]);
-    // Flash the ring gold
+    const raw = [px[0], px[1], px[2]];
+    const consumed = captureCalPoint(raw);
+    if(!consumed) {
+      syncRGBfromArray(applyCalibration(raw));
+    }
     ring.style.borderColor = 'var(--neon)';
     setTimeout(() => { ring.style.borderColor = `rgb(${255-px[0]},${255-px[1]},${255-px[2]})`; }, 300);
   });
