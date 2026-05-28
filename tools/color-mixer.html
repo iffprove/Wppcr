@@ -108,6 +108,48 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
 .vol-input:focus{outline:none;border-color:var(--neon)}
 .vol-unit{font-size:13px;color:var(--muted);font-weight:500}
 
+/* My Shelf */
+.shelf-only-toggle{display:flex;align-items:center;gap:8px;cursor:pointer;padding:9px 12px;background:rgba(var(--neon-rgb),.04);border:1px solid var(--border);border-radius:8px;transition:border-color .15s;user-select:none}
+.shelf-only-toggle:hover{border-color:rgba(var(--neon-rgb),.3)}
+.shelf-only-toggle input{width:14px;height:14px;accent-color:var(--neon);cursor:pointer;flex-shrink:0}
+.shelf-only-label{font-size:12px;font-weight:600;color:var(--text);flex:1}
+.shelf-count-badge{font-size:10px;color:var(--muted);background:var(--mid);border:1px solid var(--border);border-radius:980px;padding:2px 8px;white-space:nowrap}
+.shelf-items{display:flex;flex-direction:column;gap:4px;max-height:200px;overflow-y:auto;margin-top:8px}
+.shelf-empty-hint{font-size:11px;color:var(--muted);text-align:center;padding:10px 0}
+.shelf-item{display:flex;align-items:center;gap:8px;padding:5px 8px;background:var(--mid);border:1px solid var(--border);border-radius:7px}
+.shelf-item-dot{width:10px;height:10px;border-radius:3px;flex-shrink:0}
+.shelf-item-info{flex:1;min-width:0}
+.shelf-item-name{font-size:11px;font-weight:600;color:var(--text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.shelf-item-meta{font-size:10px;color:var(--muted)}
+.shelf-item-remove{background:none;border:none;color:var(--muted);cursor:pointer;padding:0 2px;font-size:14px;line-height:1;transition:color .15s;flex-shrink:0}
+.shelf-item-remove:hover{color:#e83a2e}
+.shelf-btn{background:none;border:none;cursor:pointer;color:rgba(var(--text-rgb),.25);font-size:17px;padding:2px 4px;line-height:1;transition:color .15s;flex-shrink:0}
+.shelf-btn:hover{color:var(--neon)}
+.shelf-btn.on-shelf{color:var(--neon)}
+
+/* Calibration */
+.cal-mode-row{display:flex;gap:4px;margin:10px 0 8px}
+.cal-mode-btn{flex:1;padding:6px 4px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:6px;border:1px solid var(--border);background:transparent;color:var(--muted);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-mode-btn:hover:not(.active){border-color:rgba(var(--text-rgb),.3);color:rgba(var(--text-rgb),.7)}
+.cal-mode-btn.active{border-color:var(--neon);color:var(--neon);background:rgba(var(--neon-rgb),.08)}
+.cal-info{font-size:11px;color:var(--muted);text-align:center;padding:6px 0 4px}
+.cal-status-row{display:flex;align-items:center;gap:8px;padding:7px 10px;background:rgba(var(--neon-rgb),.05);border:1px solid rgba(var(--neon-rgb),.2);border-radius:8px;margin-top:4px}
+.cal-status-dot{width:18px;height:18px;border-radius:4px;border:1px solid rgba(var(--text-rgb),.2);flex-shrink:0}
+.cal-status-text{font-size:11px;color:var(--text);flex:1}
+.cal-clear-btn{background:none;border:1px solid var(--border);color:var(--muted);font-size:10px;font-weight:700;letter-spacing:.5px;padding:4px 9px;border-radius:5px;cursor:pointer;white-space:nowrap;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-clear-btn:hover{border-color:rgba(220,50,50,.5);color:#e04040}
+.cal-steps{display:flex;flex-direction:column;gap:4px;margin-bottom:8px}
+.cal-step-row{display:flex;align-items:center;gap:8px;padding:6px 10px;background:var(--mid);border:1px solid var(--border);border-radius:7px;transition:border-color .15s,background .15s}
+.cal-step-row.done{border-color:rgba(var(--neon-rgb),.3);background:rgba(var(--neon-rgb),.04)}
+.cal-step-row.active-step{border-color:rgba(var(--neon-rgb),.5);background:rgba(var(--neon-rgb),.07)}
+.cal-step-num{font-family:'Bebas Neue',sans-serif;font-size:17px;color:var(--neon);min-width:14px;line-height:1}
+.cal-step-row span{font-size:11px;color:var(--muted);flex:1}
+.cal-step-row.done span,.cal-step-row.active-step span{color:var(--text)}
+.cal-step-swatch{width:18px;height:18px;border-radius:4px;border:1px solid rgba(var(--text-rgb),.2);flex-shrink:0}
+.cal-3pt-actions{display:flex;gap:6px;margin-top:4px}
+.cal-card-btn{flex:1;padding:7px 10px;font-size:10px;font-weight:700;letter-spacing:.8px;text-transform:uppercase;border-radius:8px;border:1px solid rgba(var(--neon-rgb),.3);background:rgba(var(--neon-rgb),.06);color:var(--neon);cursor:pointer;transition:all .15s;font-family:'Inter',sans-serif}
+.cal-card-btn:hover{background:rgba(var(--neon-rgb),.13)}
+
 .btn-primary{display:block;width:100%;background:var(--neon);color:var(--dark);padding:14px 24px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;transition:opacity .2s,transform .15s;font-family:'Inter',sans-serif;text-align:center;text-decoration:none}
 .btn-primary:hover{opacity:.9;transform:translateY(-1px)}
 .btn-primary:active{transform:scale(.98)}
@@ -214,6 +256,9 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
   .tool-footer{padding:24px}
 }
 </style>
+<script>/* spectral.js v3.0.0 — MIT © 2025 Ronald van Wijnen — inlined to avoid CDN dependency */
+!function(t,e){"object"==typeof exports&&"undefined"!=typeof module?e(exports):"function"==typeof define&&define.amd?define(["exports"],e):e((t=t||self).spectral={})}(this,(function(t){class e{constructor(...t){1===t.length&&("string"==typeof t[0]&&(this.sRGB=G(t[0]).slice(0,3),this.lRGB=l(this.sRGB),this.R=R(this.lRGB),this.XYZ=g(this.R)),Array.isArray(t[0])&&(38===t[0].length?(this.R=t[0],this.XYZ=g(this.R),this.lRGB=u(this.XYZ),this.sRGB=o(this.lRGB)):(this.sRGB=t[0],this.lRGB=l(this.sRGB),this.R=R(this.lRGB),this.XYZ=g(this.R))))}get OKLab(){return this._OKLab??=c(this.XYZ)}get OKLCh(){return this._OKLCh??=M(this.OKLab)}get KS(){return this._KS??=this.R.map((t=>i(t)))}get luminance(){return this._luminance??=Math.max(Number.EPSILON,this.XYZ[1])}get tintingStrength(){return this._tintingStrength??=1}set tintingStrength(t){this._tintingStrength=t}inGamut=({epsilon:t=0}={})=>r(this.lRGB,t);toGamut=({method:t="map"}={})=>{switch(t.toLowerCase()){case"clip":return new e(this.sRGB.map((t=>B.clamp(t,0,255))));case"map":return a(this);default:throw new TypeError(`Unknown method: '${t}'`)}};toString=({format:t="hex",method:e="map"}={})=>{let r;if(this.inGamut())r=this.sRGB;else switch(e.toLowerCase()){case"clip":r=this.sRGB.map((t=>B.clamp(t,0,255)));break;case"map":r=a(this).sRGB;break;default:throw new TypeError(`Unknown method: '${e}'`)}switch(t.toLowerCase()){case"hex":return`#${r.map((t=>t.toString(16).padStart(2,"0"))).join("").toUpperCase()}`;case"rgb":return`rgb(${r.join(", ")})`;default:throw new TypeError(`Unknown format: '${t}'`)}}}const r=(t,{epsilon:e=0}={})=>t.every((t=>t>=-e&&t<=1+e)),n=(t,e)=>{let[r,n,a]=t,[i,s,h]=e;return((r-i)**2+(n-s)**2+(a-h)**2)**.5},a=(t,{jnd:a=.03,e:i=1e-4}={})=>{let s=t.OKLCh[0];if(s>=1)return new e([255,255,255]);if(s<=0)return new e([0,0,0]);if(r(t.lRGB))return t;let h=t.OKLCh[2],l=0,c=t.OKLCh[1],M=!0,g=t.lRGB,R=m(g.map((t=>B.clamp(t)))),G=n(R,m(g));if(G<a)return new e(o(u(p(R))));for(;c-l>i;){const t=(l+c)/2;let e=f([s,t,h]),o=p(e);if(g=u(o),M&&r(g))l=t;else if(R=m(g.map((t=>B.clamp(t)))),G=n(R,e),G<a){if(a-G<i)break;M=!1,l=t}else c=t}return new e(o(u(p(R))))},i=t=>(1-t)**2/(2*t),s=t=>1+t-(t**2+2*t)**.5,h=(...t)=>{let r=new Array(38);for(let e=0;e<38;e++){let n=0,a=0;for(let[r,i]of t){let t=i**2*r.tintingStrength**2*r.luminance;a+=t,n+=r.KS[e]*t}r[e]=s(n/a)}return new e(r)},l=t=>t.map((t=>(t=>t>.04045?((t+.055)/1.055)**2.4:t/12.92)(t/255))),o=t=>t.map((t=>Math.round(255*(t=>t>.0031308?1.055*t**(1/2.4)-.055:12.92*t)(t)))),u=t=>B.mulMatVec(w.XYZ_RGB,t),m=t=>c((t=>B.mulMatVec(w.RGB_XYZ,t))(t)),c=t=>{let e=B.mulMatVec(w.XYZ_LMS,t).map((t=>Math.cbrt(t)));return B.mulMatVec(w.LMS_LAB,e)},p=t=>{let e=B.mulMatVec(w.LAB_LMS,t).map((t=>t**3));return B.mulMatVec(w.LMS_XYZ,e)},M=t=>{let[e,r,n]=t;const a=(r*r+n*n)**.5,i=180*Math.atan2(n,r)/Math.PI;return[e,a,i>=0?i:i+360]},f=t=>{let[e,r,n]=t;return[e,r*Math.cos(n*Math.PI/180),r*Math.sin(n*Math.PI/180)]},g=t=>B.mulMatVec(d.CMF,t),R=t=>{let e=Math.min(...t);t=[t[0]-e,t[1]-e,t[2]-e];let r=Math.min(t[1],t[2]),n=Math.min(t[0],t[2]),a=Math.min(t[0],t[1]),i=Math.max(0,Math.min(t[0]-t[2],t[0]-t[1])),s=Math.max(0,Math.min(t[1]-t[2],t[1]-t[0])),h=Math.max(0,Math.min(t[2]-t[1],t[2]-t[0]));const l=new Array(38);for(let t=0;t<38;t++)l[t]=Math.max(Number.EPSILON,e*L.W[t]+r*L.C[t]+n*L.M[t]+a*L.Y[t]+i*L.R[t]+s*L.G[t]+h*L.B[t]);return l},B={lerp:(t,e,r)=>t+(e-t)*r,clamp:(t,e=0,r=1)=>Math.min(Math.max(t,e),r),dot:(t,e)=>t.reduce(((t,r,n)=>t+r*e[n]),0),mulMatVec:(t,e)=>t.map((t=>B.dot(t,e)))},G=t=>"#"===t[0]?(t=4===t.length?t.replace(/./g,(t=>t+t)).slice(1):t.slice(1),[parseInt(t.substring(0,2),16),parseInt(t.substring(2,4),16),parseInt(t.substring(4,6),16),8===t.length?parseInt(t.substring(6,8),16)/255:1]):t.startsWith("rgb")?t.slice(t.indexOf("(")+1,-1).split(",").map(((t,e)=>e<3&&t.includes("%")?Math.round(2.55*parseFloat(t)):parseFloat(t))):NaN,L=Object.freeze({W:[1.00116072718764,1.00116065159728,1.00116031922747,1.00115867270789,1.00115259844552,1.00113252528998,1.00108500663327,1.00099687889453,1.00086525152274,1.0006962900094,1.00050496114888,1.00030808187992,1.00011966602013,.999952765968407,.999821836899297,.999738609557593,.999709551639612,.999731930210627,.999799436346195,.999900330316671,1.00002040652611,1.00014478793658,1.00025997903412,1.00035579697089,1.00042753780269,1.00047623344888,1.00050720967508,1.00052519156373,1.00053509606896,1.00054022097482,1.00054272816784,1.00054389569087,1.00054448212151,1.00054476959992,1.00054489887762,1.00054496254689,1.00054498927058,1.000544996993],C:[.970585001322962,.970592498143425,.970625348729891,.970786806119017,.971368673228248,.973163230621252,.976740223158765,.981587605491377,.986280265652949,.989949147689134,.99249270153842,.994145680405256,.995183975033212,.995756750110818,.99591281828671,.995606157834528,.994597600961854,.99221571549237,.986236452783249,.967943337264541,.891285004244943,.536202477862053,.154108119001878,.0574575093228929,.0315349873107007,.0222633920086335,.0182022841492439,.016299055973264,.0153656239334613,.0149111568733976,.0146954339898235,.0145964146717719,.0145470156699655,.0145228771899495,.0145120341118965,.0145066940939832,.0145044507314479,.0145038009464639],M:[.990673557319988,.990671524961979,.990662582353421,.990618107644795,.99045148087871,.989871081400204,.98828660875964,.984290692797504,.973934905625306,.941817838460145,.817390326195156,.432472805065729,.13845397825887,.0537347216940033,.0292174996673231,.021313651750859,.0201349530181136,.0241323096280662,.0372236145223627,.0760506552706601,.205375471942399,.541268903460439,.815841685086486,.912817704123976,.946339830166962,.959927696331991,.966260595230312,.969325970058424,.970854536721399,.971605066528128,.971962769757392,.972127272274509,.972209417745812,.972249577678424,.972267621998742,.97227650946215,.972280243306874,.97228132482656],Y:[.0210523371789306,.0210564627517414,.0210746178695038,.0211649058448753,.0215027957272504,.0226738799041561,.0258235649693629,.0334879385639851,.0519069663740307,.100749014833473,.239129899706847,.534804312272748,.79780757864303,.911449894067384,.953797963004507,.971241615465429,.979303123807588,.983380119507575,.985461246567755,.986435046976605,.986738250670141,.986617882445032,.986277776758643,.985860592444056,.98547492767621,.985176934765558,.984971574014181,.984846303415712,.984775351811199,.984738066625265,.984719648311765,.984711023391939,.984706683300676,.984704554393091,.98470359630937,.984703124077552,.98470292561509,.984702868122795],R:[.0315605737777207,.0315520718330149,.0315148215513658,.0313318044982702,.0306729857725527,.0286480476989607,.0246450407045709,.0192960753663651,.0142066612220556,.0102942608878609,.0076191460521811,.005898041083542,.0048233247781713,.0042298748350633,.0040599171299341,.0043533695594676,.0053434425970201,.0076917201010463,.0135969795736536,.0316975442661115,.107861196355249,.463812603168704,.847055405272011,.943185409393918,.968862150696558,.978030667473603,.982043643854306,.983923623718707,.984845484154382,.985294275814596,.985507295219825,.985605071539837,.985653849933578,.985677685033883,.985688391806122,.985693664690031,.985695879848205,.985696521463762],G:[.0095560747554212,.0095581580120851,.0095673245444588,.0096129126297349,.0097837090401843,.010378622705871,.0120026452378567,.0160977721473922,.026706190223168,.0595555440185881,.186039826532826,.570579820116159,.861467768400292,.945879089767658,.970465486474305,.97841363028445,.979589031411224,.975533536908632,.962288755397813,.92312157451312,.793434018943111,.459270135902429,.185574103666303,.0881774959955372,.05436302287667,.0406288447060719,.034221520431697,.0311185790956966,.0295708898336134,.0288108739348928,.0284486271324597,.0282820301724731,.0281988376490237,.0281581655342037,.0281398910216386,.0281308901665811,.0281271086805816,.0281260133612096],B:[.979404752502014,.97940070684313,.979382903470261,.979294364945594,.97896301460857,.977814466694043,.974724321133836,.967198482343973,.949079657530575,.900850128940977,.76315044546224,.465922171649319,.201263280451005,.0877524413419623,.0457176793291679,.0284706050521843,.020527176756985,.0165302792310211,.0145135107212858,.0136003508637687,.0133604258769571,.013548894314568,.0139594356366992,.014443425575357,.0148854440621406,.0152254296999746,.0154592848180209,.0156018026485961,.0156824871281936,.0157248764360615,.0157458108784121,.0157556123350225,.0157605443964911,.0157629637515278,.0157640525629106,.015764589232951,.0157648147772649,.0157648801149616]}),d=Object.freeze({CMF:[[646919989576e-16,.0002194098998132,.0011205743509343,.0037666134117111,.011880553603799,.0232864424191771,.0345594181969747,.0372237901162006,.0324183761091486,.021233205609381,.0104909907685421,.0032958375797931,.0005070351633801,.0009486742057141,.0062737180998318,.0168646241897775,.028689649025981,.0426748124691731,.0562547481311377,.0694703972677158,.0830531516998291,.0861260963002257,.0904661376847769,.0850038650591277,.0709066691074488,.0506288916373645,.035473961885264,.0214682102597065,.0125164567619117,.0068045816390165,.0034645657946526,.0014976097506959,.000769700480928,.0004073680581315,.0001690104031614,952245150365e-16,490309872958e-16,199961492222e-16],[1844289444e-15,62053235865e-16,310096046799e-16,.0001047483849269,.0003536405299538,.0009514714056444,.0022822631748318,.004207329043473,.0066887983719014,.0098883960193565,.0152494514496311,.0214183109449723,.0334229301575068,.0513100134918512,.070402083939949,.0878387072603517,.0942490536184085,.0979566702718931,.0941521856862608,.0867810237486753,.0788565338632013,.0635267026203555,.05374141675682,.042646064357412,.0316173492792708,.020885205921391,.0138601101360152,.0081026402038399,.004630102258803,.0024913800051319,.0012593033677378,.000541646522168,.0002779528920067,.0001471080673854,610327472927e-16,343873229523e-16,177059860053e-16,7220974913e-15],[.000305017147638,.0010368066663574,.0053131363323992,.0179543925899536,.0570775815345485,.113651618936287,.17335872618355,.196206575558657,.186082370706296,.139950475383207,.0891745294268649,.0478962113517075,.0281456253957952,.0161376622950514,.0077591019215214,.0042961483736618,.0020055092122156,.0008614711098802,.0003690387177652,.0001914287288574,.0001495555858975,923109285104e-16,681349182337e-16,288263655696e-16,157671820553e-16,39406041027e-16,1584012587e-15,0,0,0,0,0,0,0,0,0,0,0]]}),w=Object.freeze({RGB_XYZ:[[.41239079926595934,.357584339383878,.1804807884018343],[.21263900587151027,.715168678767756,.07219231536073371],[.01933081871559182,.11919477979462598,.9505321522496607]],XYZ_RGB:[[3.2409699419045226,-1.537383177570094,-.4986107602930034],[-.9692436362808796,1.8759675015077202,.04155505740717559],[.05563007969699366,-.20397695888897652,1.0569715142428786]],XYZ_LMS:[[.819022437996703,.3619062600528904,-.1288737815209879],[.0329836539323885,.9292868615863434,.0361446663506424],[.0481771893596242,.2642395317527308,.6335478284694309]],LMS_XYZ:[[1.2268798758459243,-.5578149944602171,.2813910456659647],[-.0405757452148008,1.112286803280317,-.0717110580655164],[-.0763729366746601,-.4214933324022432,1.5869240198367816]],LMS_LAB:[[.210454268309314,.7936177747023054,-.0040720430116193],[1.9779985324311684,-2.42859224204858,.450593709617411],[.0259040424655478,.7827717124575296,-.8086757549230774]],LAB_LMS:[[1,.3963377773761749,.2158037573099136],[1,-.1055613458156586,-.0638541728258133],[1,-.0894841775298119,-1.2914855480194092]]});t.Color=e,t.mix=h,t.palette=(t,e,r)=>{let n=new Array(r);for(let a=0;a<r;a++)n[a]=h([t,r-1-a],[e,a]);return n},t.gradient=(t,...e)=>{let r=null,n=null;for(const[a,i]of e)i<=t&&(!r||i>r[1])&&(r=[a,i]),i>=t&&(!n||i<n[1])&&(n=[a,i]);if(!r)return n[0];if(!n)return r[0];if(r[1]===n[1])return r[0];const a=(t-r[1])/(n[1]-r[1]);return h([r[0],1-a],[n[0],a])}}));
+</script>
 </head>
 <body>
 
@@ -254,6 +299,48 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
         <div class="photo-ring" id="photoRing"></div>
       </div>
       <div class="photo-hint" id="photoHint">Click anywhere on the photo to sample that colour</div>
+
+      <!-- Calibration (shown when photo loaded) -->
+      <div id="calUI" style="display:none">
+        <div class="cal-mode-row">
+          <button class="cal-mode-btn active" data-mode="none" onclick="setCalMode('none')">None</button>
+          <button class="cal-mode-btn" data-mode="wb" onclick="setCalMode('wb')">White balance</button>
+          <button class="cal-mode-btn" data-mode="3pt" onclick="setCalMode('3pt')">3-point</button>
+        </div>
+        <!-- White balance UI -->
+        <div id="calWbUI" style="display:none">
+          <div class="cal-info">Click any white or neutral area in the photo</div>
+          <div id="calWbStatus" class="cal-status-row" style="display:none">
+            <div class="cal-status-dot" id="calWbDot"></div>
+            <span class="cal-status-text">White point set &mdash; now sample your colour</span>
+            <button class="cal-clear-btn" onclick="clearCalibration()">&#10005; Reset</button>
+          </div>
+        </div>
+        <!-- 3-point UI -->
+        <div id="cal3ptUI" style="display:none">
+          <div class="cal-steps">
+            <div class="cal-step-row active-step" id="calStepRow0">
+              <div class="cal-step-num">1</div>
+              <span>Click the BLACK patch</span>
+              <div class="cal-step-swatch" id="calSwatch0" style="display:none"></div>
+            </div>
+            <div class="cal-step-row" id="calStepRow1">
+              <div class="cal-step-num">2</div>
+              <span>Click the MID GREY patch</span>
+              <div class="cal-step-swatch" id="calSwatch1" style="display:none"></div>
+            </div>
+            <div class="cal-step-row" id="calStepRow2">
+              <div class="cal-step-num">3</div>
+              <span>Click the WHITE patch</span>
+              <div class="cal-step-swatch" id="calSwatch2" style="display:none"></div>
+            </div>
+          </div>
+          <div class="cal-3pt-actions">
+            <button class="cal-clear-btn" onclick="clearCalibration()">&#10005; Reset</button>
+            <button class="cal-card-btn" onclick="downloadCalCard()">&#11015; Download card</button>
+          </div>
+        </div>
+      </div>
 
       <!-- Sampled / current colour display -->
       <div class="color-preview-row" style="margin-top:14px">
@@ -313,6 +400,16 @@ body{background:var(--dark);color:var(--text);font-family:'Inter',sans-serif;ove
         <span class="vol-unit">ml total</span>
       </div>
       <p style="font-size:11px;color:var(--muted);margin-top:8px">Volume breakdown shown per paint in ml and drops (1 drop = 0.05 ml)</p>
+    </div>
+
+    <div class="panel">
+      <div class="panel-title">5. <span>My Shelf</span></div>
+      <label class="shelf-only-toggle" id="shelfOnlyToggle">
+        <input type="checkbox" id="shelfOnlyCheck" onchange="setShelfOnly(this.checked)">
+        <span class="shelf-only-label">Mix from shelf only</span>
+        <span class="shelf-count-badge" id="shelfCountBadge">0 paints</span>
+      </label>
+      <div id="shelfItems"><div class="shelf-empty-hint">&#9734; any paint from results to add it to your shelf</div></div>
     </div>
 
     <button class="btn-primary" id="findBtn" onclick="runSearch()">&#128269; Find Best Match</button>
@@ -833,6 +930,12 @@ const CAT_LABELS = {opaque:'Opaque',transparent:'Transparent',standard:'Standard
 let currentRGB = [232,58,46];
 let activeBrands = new Set(['createx-wicked']);
 let activeCats = new Set(['opaque','transparent','standard','metallic','pearl','fluorescent','detail']);
+let shelfSet = new Set(JSON.parse(localStorage.getItem('pcr-shelf') || '[]'));
+let shelfOnly = localStorage.getItem('pcr-shelf-only') === 'true';
+let calMode = 'none'; // 'none' | 'wb' | '3pt'
+let calWB = null;     // [r,g,b] white point
+let cal3pt = { black: null, grey: null, white: null };
+let cal3ptStep = 0;   // 0-2 = capturing; 3 = done
 
 // ─── INIT UI ──────────────────────────────────────────────────────────────────
 function initUI() {
@@ -876,6 +979,10 @@ function initUI() {
 
   // Sync color picker init
   syncRGBfromArray(currentRGB);
+
+  // Shelf init
+  document.getElementById('shelfOnlyCheck').checked = shelfOnly;
+  renderShelfList();
 }
 
 function selectAllBrands() {
@@ -885,6 +992,161 @@ function selectAllBrands() {
 function selectNoBrands() {
   activeBrands = new Set();
   document.querySelectorAll('#brandGrid input[type=checkbox]').forEach(c => c.checked = false);
+}
+
+// ─── SHELF ────────────────────────────────────────────────────────────────────
+function saveShelf() {
+  localStorage.setItem('pcr-shelf', JSON.stringify([...shelfSet]));
+}
+function setShelfOnly(on) {
+  shelfOnly = on;
+  localStorage.setItem('pcr-shelf-only', on);
+}
+function toggleShelf(code) {
+  if(shelfSet.has(code)) shelfSet.delete(code); else shelfSet.add(code);
+  saveShelf();
+  document.querySelectorAll(`.shelf-btn[data-code="${code}"]`).forEach(btn => {
+    const on = shelfSet.has(code);
+    btn.classList.toggle('on-shelf', on);
+    btn.textContent = on ? '★' : '☆';
+    btn.title = on ? 'Remove from shelf' : 'Add to shelf';
+  });
+  renderShelfList();
+}
+function renderShelfList() {
+  const badge = document.getElementById('shelfCountBadge');
+  const container = document.getElementById('shelfItems');
+  if(!badge || !container) return;
+  badge.textContent = shelfSet.size + (shelfSet.size === 1 ? ' paint' : ' paints');
+  if(shelfSet.size === 0) {
+    container.innerHTML = '<div class="shelf-empty-hint">✴ any paint from results to add it to your shelf</div>';
+    return;
+  }
+  const items = [...shelfSet].map(code => {
+    const p = PAINTS.find(x => x.code === code);
+    if(!p) return '';
+    return `<div class="shelf-item">
+      <div class="shelf-item-dot" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
+      <div class="shelf-item-info">
+        <div class="shelf-item-name">${p.name} <span style="font-family:'Inter',monospace;font-weight:400">${p.code}</span></div>
+        <div class="shelf-item-meta">${BRAND_NAMES[p.brand]}</div>
+      </div>
+      <button class="shelf-item-remove" onclick="toggleShelf('${p.code}')" title="Remove">✕</button>
+    </div>`;
+  }).join('');
+  container.innerHTML = `<div class="shelf-items">${items}</div>`;
+}
+
+// ─── CALIBRATION ─────────────────────────────────────────────────────────────
+function setCalMode(mode) {
+  calMode = mode;
+  clearCalibration();
+  document.querySelectorAll('.cal-mode-btn').forEach(b => b.classList.toggle('active', b.dataset.mode === mode));
+  document.getElementById('calWbUI').style.display = mode === 'wb' ? '' : 'none';
+  document.getElementById('cal3ptUI').style.display = mode === '3pt' ? '' : 'none';
+  const hints = { none: 'Click anywhere on the photo to sample that colour', wb: 'First click a white or neutral area to set white balance', '3pt': 'Click the BLACK patch on your calibration card' };
+  document.getElementById('photoHint').textContent = hints[mode];
+}
+function clearCalibration() {
+  calWB = null;
+  cal3pt = { black: null, grey: null, white: null };
+  cal3ptStep = 0;
+  document.getElementById('calWbStatus').style.display = 'none';
+  const rows = ['calStepRow0','calStepRow1','calStepRow2'];
+  const swatches = ['calSwatch0','calSwatch1','calSwatch2'];
+  rows.forEach((id, i) => {
+    const el = document.getElementById(id);
+    el.classList.remove('done','active-step');
+    if(i === 0) el.classList.add('active-step');
+    document.getElementById(swatches[i]).style.display = 'none';
+  });
+}
+function applyCalibration(rgb) {
+  if(calMode === 'wb' && calWB) {
+    return rgb.map((v, i) => Math.min(255, Math.round(v * 255 / Math.max(1, calWB[i]))));
+  }
+  if(calMode === '3pt' && cal3pt.black && cal3pt.grey && cal3pt.white) {
+    return rgb.map((v, i) => {
+      const b = cal3pt.black[i], g = cal3pt.grey[i], w = cal3pt.white[i];
+      let out;
+      if(v <= b) out = 0;
+      else if(g > b && v <= g) out = (v - b) / (g - b) * 128;
+      else if(w > g && v <= w) out = 128 + (v - g) / (w - g) * 127;
+      else out = 255;
+      return Math.round(Math.min(255, Math.max(0, out)));
+    });
+  }
+  return rgb;
+}
+function captureCalPoint(rgb) {
+  if(calMode === 'wb') {
+    calWB = rgb;
+    const dot = document.getElementById('calWbDot');
+    dot.style.background = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+    document.getElementById('calWbStatus').style.display = '';
+    document.getElementById('photoHint').textContent = 'White balance set — now click your target colour';
+    return true; // consumed, don't sample
+  }
+  if(calMode === '3pt' && cal3ptStep < 3) {
+    const keys = ['black','grey','white'];
+    const hints = ['Click the MID GREY patch on your calibration card', 'Click the WHITE patch on your calibration card', 'Calibration complete — click your target colour'];
+    cal3pt[keys[cal3ptStep]] = rgb;
+    const swatch = document.getElementById('calSwatch' + cal3ptStep);
+    swatch.style.background = `rgb(${rgb[0]},${rgb[1]},${rgb[2]})`;
+    swatch.style.display = '';
+    document.getElementById('calStepRow' + cal3ptStep).classList.remove('active-step');
+    document.getElementById('calStepRow' + cal3ptStep).classList.add('done');
+    cal3ptStep++;
+    document.getElementById('photoHint').textContent = hints[cal3ptStep - 1];
+    if(cal3ptStep < 3) {
+      document.getElementById('calStepRow' + cal3ptStep).classList.add('active-step');
+    }
+    return true; // calibration point captured, don't sample as colour
+  }
+  return false;
+}
+function downloadCalCard() {
+  const W = 560, H = 210;
+  const c = document.createElement('canvas');
+  c.width = W; c.height = H;
+  const ctx = c.getContext('2d');
+  ctx.fillStyle = '#f5f5f5';
+  ctx.fillRect(0, 0, W, H);
+  // Border
+  ctx.strokeStyle = '#bbb'; ctx.lineWidth = 1;
+  ctx.strokeRect(0.5, 0.5, W-1, H-1);
+  // Title
+  ctx.fillStyle = '#222'; ctx.font = 'bold 13px sans-serif';
+  ctx.fillText('Perth Chip Repairs — Colour Calibration Card', 12, 20);
+  ctx.fillStyle = '#666'; ctx.font = '10px sans-serif';
+  ctx.fillText('Print at 100% (no scaling). Include in photo alongside the surface. Use "3-point calibration" in the colour mixer.', 12, 35);
+  const patches = [
+    { label: 'BLACK', sub:'Step 1', col:'#000000', txt:'#888888' },
+    { label: 'DARK GREY', sub:'', col:'#404040', txt:'#aaaaaa' },
+    { label: 'MID GREY', sub:'Step 2', col:'#808080', txt:'#ffffff' },
+    { label: 'LIGHT GREY', sub:'', col:'#c0c0c0', txt:'#555555' },
+    { label: 'WHITE', sub:'Step 3', col:'#ffffff', txt:'#666666' },
+  ];
+  const pW = 93, pH = 140, y0 = 46, gap = 7, x0 = 12;
+  patches.forEach((p, i) => {
+    const x = x0 + i * (pW + gap);
+    ctx.fillStyle = p.col;
+    ctx.fillRect(x, y0, pW, pH);
+    ctx.strokeStyle = '#bbb'; ctx.lineWidth = 0.5;
+    ctx.strokeRect(x + 0.5, y0 + 0.5, pW - 1, pH - 1);
+    ctx.fillStyle = p.txt;
+    ctx.font = 'bold 10px sans-serif'; ctx.textAlign = 'center';
+    ctx.fillText(p.label, x + pW/2, y0 + pH - 22);
+    ctx.font = '9px sans-serif';
+    ctx.fillText(p.sub, x + pW/2, y0 + pH - 10);
+  });
+  ctx.textAlign = 'left';
+  ctx.fillStyle = '#888'; ctx.font = '9px sans-serif';
+  ctx.fillText('perthchiprepairs.com.au', 12, H - 8);
+  const link = document.createElement('a');
+  link.href = c.toDataURL('image/png');
+  link.download = 'pcr-calibration-card.png';
+  link.click();
 }
 
 // ─── COLOR SYNC ───────────────────────────────────────────────────────────────
@@ -969,6 +1231,8 @@ function initPhotoSampler(){
         zone.style.display = 'none';
         wrap.style.display = 'block';
         hint.style.display = 'block';
+        document.getElementById('calUI').style.display = '';
+        clearCalibration();
       };
       img.src = e.target.result;
     };
@@ -995,8 +1259,11 @@ function initPhotoSampler(){
     const x = Math.round((e.clientX - rect.left) * scaleX);
     const y = Math.round((e.clientY - rect.top) * scaleY);
     const px = canvas.getContext('2d').getImageData(x, y, 1, 1).data;
-    syncRGBfromArray([px[0], px[1], px[2]]);
-    // Flash the ring gold
+    const raw = [px[0], px[1], px[2]];
+    const consumed = captureCalPoint(raw);
+    if(!consumed) {
+      syncRGBfromArray(applyCalibration(raw));
+    }
     ring.style.borderColor = 'var(--neon)';
     setTimeout(() => { ring.style.borderColor = `rgb(${255-px[0]},${255-px[1]},${255-px[2]})`; }, 300);
   });
@@ -1014,43 +1281,17 @@ function rgbToLab(r,g,b){
   return[(116*f(y))-16,500*(f(x)-f(y)),200*(f(y)-f(z))];
 }
 function deltaE(lab1,lab2){const d0=lab1[0]-lab2[0],d1=lab1[1]-lab2[1],d2=lab1[2]-lab2[2];return Math.sqrt(d0*d0+d1*d1+d2*d2);}
-function mixCMY(paints,ratios){
-  const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
-  let absR=0,absG=0,absB=0,tw=0;
-  for(let i=0;i<paints.length;i++){
-    const lr=srgbToLinear(paints[i].rgb[0]),lg=srgbToLinear(paints[i].rgb[1]),lb=srgbToLinear(paints[i].rgb[2]);
-    const ratio=ratios[i]/total;
-    const power=ratio*paints[i].tintingStrength*(0.3+paints[i].opacity*0.7);
-    absR+=(1-lr)*power;absG+=(1-lg)*power;absB+=(1-lb)*power;tw+=power;
-  }
-  if(!tw)return[128,128,128];
-  return[linearToSrgb(1-absR/tw),linearToSrgb(1-absG/tw),linearToSrgb(1-absB/tw)];
-}
-function mixLAB(paints,ratios){
-  const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
-  const labs=paints.map(p=>rgbToLab(p.rgb[0],p.rgb[1],p.rgb[2]));
-  let L=0,a=0,b=0,lw=0,cw=0;
-  for(let i=0;i<paints.length;i++){
-    const ratio=ratios[i]/total,op=paints[i].opacity,ts=paints[i].tintingStrength;
-    const w1=ratio*ts*(0.2+op*0.8);L+=labs[i][0]*w1;lw+=w1;
-    const boost=1+(1-labs[i][0]/100)*0.5;
-    const w2=ratio*ts*boost*(0.4+op*0.6);a+=labs[i][1]*w2;b+=labs[i][2]*w2;cw+=w2;
-  }
-  if(lw>0){L/=lw;}if(cw>0){a/=cw;b/=cw;}
-  let y=(L+16)/116,x=a/500+y,z=y-b/200;
-  const finv=t=>{const t3=t*t*t;return t3>0.008856?t3:(t-16/116)/7.787;};
-  x=finv(x)*0.95047;y=finv(y)*1.00000;z=finv(z)*1.08883;
-  let rr=x*3.2404542+y*-1.5371385+z*-0.4985314;
-  let gg=x*-0.9692660+y*1.8760108+z*0.0415560;
-  let bb=x*0.0556434+y*-0.2040259+z*1.0572252;
-  return[linearToSrgb(rr),linearToSrgb(gg),linearToSrgb(bb)];
-}
 function mixPaints(paints,ratios){
   const total=ratios.reduce((s,r)=>s+r,0);if(!total)return[128,128,128];
-  let avgOp=0;
-  for(let i=0;i<paints.length;i++)avgOp+=paints[i].opacity*(ratios[i]/total);
-  const cmy=mixCMY(paints,ratios),lab=mixLAB(paints,ratios);
-  return[Math.round(cmy[0]*avgOp+lab[0]*(1-avgOp)),Math.round(cmy[1]*avgOp+lab[1]*(1-avgOp)),Math.round(cmy[2]*avgOp+lab[2]*(1-avgOp))];
+  if(paints.length===1)return[...paints[0].rgb];
+  const args=paints.map((p,i)=>{
+    const c=new spectral.Color(p.rgb);
+    c.tintingStrength=p.tintingStrength||1;
+    return[c,ratios[i]/total];
+  });
+  const mixed=spectral.mix(...args);
+  const out=mixed.inGamut()?mixed:mixed.toGamut({method:'clip'});
+  return out.sRGB.map(x=>Math.round(x));
 }
 function gcd2(a,b){a=Math.abs(a);b=Math.abs(b);while(b){[a,b]=[b,a%b];}return a||1;}
 function gcd3(a,b,c){return gcd2(gcd2(a,b),c);}
@@ -1059,6 +1300,7 @@ function deLabel(dE){if(dE<=1)return'Imperceptible';if(dE<=2)return'Very close';
 
 // ─── SEARCH ───────────────────────────────────────────────────────────────────
 function getAvailablePaints() {
+  if(shelfOnly) return PAINTS.filter(p => shelfSet.has(p.code));
   return PAINTS.filter(p => activeBrands.has(p.brand) && activeCats.has(p.category));
 }
 
@@ -1157,6 +1399,7 @@ function renderCard(result, cardNum, title, totalVol) {
   let paintsHTML = '';
   paints.forEach((p,i) => {
     const pct = Math.round(ratios[i]/totalRatio*100);
+    const onShelf = shelfSet.has(p.code);
     paintsHTML += `
       <div class="paint-row">
         <div class="paint-swatch-sm" style="background:rgb(${p.rgb[0]},${p.rgb[1]},${p.rgb[2]})"></div>
@@ -1169,6 +1412,7 @@ function renderCard(result, cardNum, title, totalVol) {
           <div class="paint-ratio-big">${ratios[i]}pt</div>
           <div class="paint-ratio-pct">${pct}%</div>
         </div>
+        <button class="shelf-btn${onShelf?' on-shelf':''}" data-code="${p.code}" onclick="toggleShelf('${p.code}')" title="${onShelf?'Remove from shelf':'Add to my shelf'}">${onShelf?'★':'☆'}</button>
       </div>`;
   });
 
