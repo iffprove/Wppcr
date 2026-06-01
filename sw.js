@@ -1,4 +1,4 @@
-const CACHE = 'pcr-v1';
+const CACHE = 'pcr-__BUILDTIME__';
 const PRECACHE = [
   './',
   './index.html',
