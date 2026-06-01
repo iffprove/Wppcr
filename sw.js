@@ -1,4 +1,4 @@
-const CACHE = 'pcr-__BUILDTIME__';
+const CACHE = 'pcr-1780310635';
 const PRECACHE = [
   './',
   './index.html',
