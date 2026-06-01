@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#e8c84a">
+<link rel="apple-touch-icon" href="../images/icon-192.png">
 <title>Colour Mixer | Perth Chip Repairs Tools</title>
 <meta name="description" content="Professional airbrush paint colour mixer — find the best single, 2-paint or 3-paint blend from 400+ paints across 9 brands to match any target colour.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1596,6 +1599,7 @@ function runSearch() {
 </div>
 <script>
 (function(){
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('/Wppcr/sw.js', {scope:'/Wppcr/'}).catch(function(){});
   if(window.matchMedia('(display-mode:standalone)').matches||navigator.standalone)return;
   if(localStorage.getItem('pcr-a2hs'))return;
   var ua=navigator.userAgent;

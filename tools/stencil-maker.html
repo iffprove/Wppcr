@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link rel="manifest" href="../manifest.json">
+<meta name="theme-color" content="#e8c84a">
+<link rel="apple-touch-icon" href="../images/icon-192.png">
 <title>Stencil Maker | Perth Chip Repairs Tools</title>
 <meta name="description" content="Free online stencil maker — upload an image, adjust threshold and contrast, download as PNG or SVG for precision chip repair pattern work.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -559,6 +562,7 @@ function toggleTheme(){
 </div>
 <script>
 (function(){
+  if('serviceWorker' in navigator) navigator.serviceWorker.register('/Wppcr/sw.js', {scope:'/Wppcr/'}).catch(function(){});
   if(window.matchMedia('(display-mode:standalone)').matches||navigator.standalone)return;
   if(localStorage.getItem('pcr-a2hs'))return;
   var ua=navigator.userAgent;
