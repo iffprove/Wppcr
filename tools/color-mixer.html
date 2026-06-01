@@ -1559,5 +1559,84 @@ function runSearch() {
   }, 20);
 }
 </script>
+<style>
+.a2hs-wrap{position:fixed;inset:0;z-index:9998;display:none;pointer-events:none}
+.a2hs-wrap.visible{pointer-events:all}
+.a2hs-overlay{position:absolute;inset:0;background:rgba(0,0,0,.55);opacity:0;transition:opacity .3s}
+.a2hs-wrap.visible .a2hs-overlay{opacity:1}
+.a2hs-sheet{position:absolute;bottom:0;left:0;right:0;background:var(--card);border-radius:22px 22px 0 0;border-top:1px solid var(--border);padding:0 20px 36px;transform:translateY(100%);transition:transform .38s cubic-bezier(.32,.72,0,1);max-width:480px;margin:0 auto}
+.a2hs-wrap.visible .a2hs-sheet{transform:translateY(0)}
+.a2hs-handle{width:38px;height:4px;background:var(--border);border-radius:2px;margin:14px auto 22px}
+.a2hs-head{display:flex;align-items:center;gap:14px;margin-bottom:18px}
+.a2hs-logo{width:52px;height:52px;border-radius:14px;background:var(--neon);display:flex;align-items:center;justify-content:center;font-family:'Bebas Neue','Inter',sans-serif;font-size:17px;font-weight:700;color:#0d0d0b;letter-spacing:1px;flex-shrink:0}
+.a2hs-head-text strong{display:block;font-size:16px;font-weight:700;color:var(--text);margin-bottom:2px}
+.a2hs-head-text span{font-size:11px;color:var(--muted)}
+.a2hs-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
+.a2hs-step{display:flex;align-items:flex-start;gap:12px;font-size:13px;color:var(--text);line-height:1.5}
+.a2hs-step-num{width:22px;height:22px;min-width:22px;border-radius:50%;background:var(--neon);color:#0d0d0b;font-weight:700;font-size:11px;display:flex;align-items:center;justify-content:center;margin-top:1px}
+.a2hs-install-btn{display:block;width:100%;background:var(--neon);color:#0d0d0b;padding:14px;font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;border:none;cursor:pointer;border-radius:980px;font-family:'Inter',sans-serif;margin-bottom:10px;transition:opacity .15s}
+.a2hs-install-btn:hover{opacity:.88}
+.a2hs-dismiss-btn{display:block;width:100%;background:transparent;color:var(--muted);padding:10px;font-size:12px;font-weight:500;border:none;cursor:pointer;font-family:'Inter',sans-serif}
+</style>
+<div class="a2hs-wrap" id="a2hsWrap">
+  <div class="a2hs-overlay" id="a2hsOverlay"></div>
+  <div class="a2hs-sheet">
+    <div class="a2hs-handle"></div>
+    <div class="a2hs-head">
+      <div class="a2hs-logo">PCR</div>
+      <div class="a2hs-head-text">
+        <strong>Add to Home Screen</strong>
+        <span>Perth Chip Repairs &mdash; free tools</span>
+      </div>
+    </div>
+    <div class="a2hs-steps" id="a2hsSteps"></div>
+    <button class="a2hs-install-btn" id="a2hsInstallBtn">Add to Home Screen</button>
+    <button class="a2hs-dismiss-btn" id="a2hsDismissBtn">Maybe later</button>
+  </div>
+</div>
+<script>
+(function(){
+  if(window.matchMedia('(display-mode:standalone)').matches||navigator.standalone)return;
+  if(localStorage.getItem('pcr-a2hs'))return;
+  var ua=navigator.userAgent;
+  var isIOS=/iPhone|iPad|iPod/i.test(ua);
+  var isAndroid=/Android/i.test(ua);
+  if(!isIOS&&!isAndroid)return;
+  var deferredPrompt=null;
+  window.addEventListener('beforeinstallprompt',function(e){e.preventDefault();deferredPrompt=e;});
+  setTimeout(show,3000);
+  function show(){
+    var steps=document.getElementById('a2hsSteps');
+    var btn=document.getElementById('a2hsInstallBtn');
+    if(isIOS){
+      steps.innerHTML='<div class="a2hs-step"><div class="a2hs-step-num">1</div><span>Tap the <strong>Share</strong> button &#11014; at the bottom of Safari</span></div>'
+        +'<div class="a2hs-step"><div class="a2hs-step-num">2</div><span>Scroll down and tap <strong>"Add to Home Screen"</strong></span></div>'
+        +'<div class="a2hs-step"><div class="a2hs-step-num">3</div><span>Tap <strong>Add</strong> &mdash; done!</span></div>';
+      btn.textContent='Got it';
+      btn.addEventListener('click',dismiss);
+    } else if(deferredPrompt){
+      steps.innerHTML='<div class="a2hs-step"><div class="a2hs-step-num">1</div><span>Tap <strong>Add to Home Screen</strong> below to install this tool</span></div>'
+        +'<div class="a2hs-step"><div class="a2hs-step-num">2</div><span>Opens instantly from your home screen</span></div>';
+      btn.addEventListener('click',function(){deferredPrompt.prompt();deferredPrompt.userChoice.then(function(){deferredPrompt=null;dismiss();});});
+    } else {
+      steps.innerHTML='<div class="a2hs-step"><div class="a2hs-step-num">1</div><span>Tap the <strong>&#8942; menu</strong> in your browser</span></div>'
+        +'<div class="a2hs-step"><div class="a2hs-step-num">2</div><span>Tap <strong>"Add to Home Screen"</strong></span></div>';
+      btn.textContent='Got it';
+      btn.addEventListener('click',dismiss);
+    }
+    var wrap=document.getElementById('a2hsWrap');
+    wrap.style.display='';
+    requestAnimationFrame(function(){requestAnimationFrame(function(){wrap.classList.add('visible');});});
+  }
+  document.getElementById('a2hsDismissBtn').addEventListener('click',dismiss);
+  document.getElementById('a2hsOverlay').addEventListener('click',dismiss);
+  function dismiss(){
+    var wrap=document.getElementById('a2hsWrap');
+    wrap.classList.remove('visible');
+    setTimeout(function(){wrap.style.display='none';},380);
+    localStorage.setItem('pcr-a2hs','1');
+  }
+})();
+</script>
 </body>
 </html>
