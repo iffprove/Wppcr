@@ -1064,7 +1064,7 @@
     btn.parentElement.remove();
   }
   const ENDPOINT='https://cnlfcdighqairsocbceg.supabase.co/functions/v1/web-lead-intake';
-  const TURNSTILE_SITE_KEY='0x4AAAAAADo_Xr6r9z0nZ2WB';
+  const TURNSTILE_SITE_KEY='0x4AAAAAADo_XvJjRPMePLCZociDHQyB89U';
 
   let turnstileWidgetId=null;
   let turnstileToken=null;
@@ -1124,11 +1124,13 @@
       }else{
         submitBtn.textContent='Something went wrong — try again';
         submitBtn.disabled=false;
+        turnstileToken=null;
         if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
       }
     }catch{
       submitBtn.textContent='Something went wrong — try again';
       submitBtn.disabled=false;
+      turnstileToken=null;
       if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
     }
   }
