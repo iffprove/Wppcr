@@ -167,7 +167,7 @@
   .section-label{font-size:11px;letter-spacing:4px;text-transform:uppercase;color:var(--neon);margin-bottom:16px}
   .section-title{font-family:'Bebas Neue',sans-serif;font-size:clamp(52px,7vw,100px);line-height:1;letter-spacing:-1px}
 
-  .services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;background:transparent;margin-top:64px;}
+  .services-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;background:transparent;margin-top:64px;}
   .service-card{background:var(--card);padding:44px 36px;transition:background .3s,transform .2s,box-shadow .2s;position:relative;overflow:hidden;cursor:default;border-radius:18px;border:1px solid var(--border);box-shadow:0 2px 20px rgba(0,0,0,0.3)}
   .service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform .4s}
   .service-card:hover{background:var(--card-hover);transform:translateY(-3px);box-shadow:0 8px 40px rgba(0,0,0,0.5)}
@@ -356,7 +356,6 @@
     <li><a href="#gallery">Gallery</a></li>
     <li><a href="#faq">FAQ</a></li>
     <li><a href="#reviews">Reviews</a></li>
-    <li><a href="#tools">Free Tools</a></li>
     <li><a href="#contact">Contact</a></li>
   </ul>
   <button class="theme-toggle" id="themeToggle" aria-label="Toggle theme" onclick="toggleTheme()"><span id="themeIcon">☀️</span></button>
@@ -376,7 +375,6 @@
       <li><a href="#faq" onclick="closeMenu()">FAQ</a></li>
       <li><a href="#coverage" onclick="closeMenu()">Coverage</a></li>
       <li><a href="#reviews" onclick="closeMenu()">Reviews</a></li>
-      <li><a href="#tools" onclick="closeMenu()">Free Tools</a></li>
       <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
     </ul>
     <a href="tel:+61400000000" class="mobile-cta">Call Now</a>
@@ -392,7 +390,7 @@
   <div class="hero-sub">
     <div>
       <p class="hero-desc">Chips, cracks and scratches in your benchtop, tiles or stone surfaces &mdash; restored to invisible. Professional mobile repair service across all of Perth, at a fraction of replacement cost.</p>
-      <p class="hero-meta">Stone &middot; Tile &middot; Porcelain &middot; Marble &middot; Granite &middot; Engineered Stone &middot; <span>Perth Wide</span></p>
+      <p class="hero-meta">Stone &middot; Tile &middot; Laminate &middot; Marble &middot; Granite &middot; Engineered Stone &middot; <span>Perth Wide</span></p>
     </div>
     <div class="hero-actions">
       <a href="#contact" class="btn-primary">Get a Free Quote</a>
@@ -408,7 +406,7 @@
     <span>Stone Restoration</span><span style="margin-right:60px">&#10022;</span>
     <span>Marble Repair</span><span style="margin-right:60px">&#10022;</span>
     <span>Granite Chip Repair</span><span style="margin-right:60px">&#10022;</span>
-    <span>Porcelain Repair</span><span style="margin-right:60px">&#10022;</span>
+    <span>Laminate Chip Repair</span><span style="margin-right:60px">&#10022;</span>
     <span>Mobile Service Perth Wide</span><span style="margin-right:60px">&#10022;</span>
     <span>Save Thousands vs Replacement</span><span style="margin-right:60px">&#10022;</span>
     <span>Benchtop Chip Repair</span><span style="margin-right:60px">&#10022;</span>
@@ -416,7 +414,7 @@
     <span>Stone Restoration</span><span style="margin-right:60px">&#10022;</span>
     <span>Marble Repair</span><span style="margin-right:60px">&#10022;</span>
     <span>Granite Chip Repair</span><span style="margin-right:60px">&#10022;</span>
-    <span>Porcelain Repair</span><span style="margin-right:60px">&#10022;</span>
+    <span>Laminate Chip Repair</span><span style="margin-right:60px">&#10022;</span>
     <span>Mobile Service Perth Wide</span><span style="margin-right:60px">&#10022;</span>
     <span>Save Thousands vs Replacement</span><span style="margin-right:60px">&#10022;</span>
   </div>
@@ -451,27 +449,11 @@
       </div>
     </div>
     <div class="service-card">
-      <div class="service-icon">🚿</div>
-      <div class="service-name">Bathroom Surface Repair</div>
-      <p class="service-desc">Chips and cracks in bathroom vanities, shower recesses, bath surrounds and floor tiles. We match grout colour, surface texture and sheen for a flawless invisible repair.</p>
+      <div class="service-icon">🪵</div>
+      <div class="service-name">Laminate Chip &amp; Burn Repair</div>
+      <p class="service-desc">Chips, burns, scratches and edge damage on laminate benchtops and surfaces. We colour-match and fill seamlessly — no need to replace an entire benchtop panel.</p>
       <div class="service-tag">
-        <span class="tag">Vanity</span><span class="tag">Shower</span><span class="tag">Bath Surround</span><span class="tag">Grout</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🏺</div>
-      <div class="service-name">Porcelain &amp; Ceramic</div>
-      <p class="service-desc">Porcelain and ceramic surfaces are among the toughest to repair &mdash; we have specialist techniques and colour-matching for even the most complex surface finishes and patterns.</p>
-      <div class="service-tag">
-        <span class="tag">Porcelain</span><span class="tag">Ceramic</span><span class="tag">Glaze Repair</span>
-      </div>
-    </div>
-    <div class="service-card">
-      <div class="service-icon">🌿</div>
-      <div class="service-name">Outdoor &amp; Alfresco</div>
-      <p class="service-desc">Driveways, pool surrounds, outdoor pavers and alfresco tiles &mdash; chipped or cracked from weather, foot traffic or dropped objects. We restore outdoor surfaces back to like-new condition.</p>
-      <div class="service-tag">
-        <span class="tag">Pavers</span><span class="tag">Pool Surrounds</span><span class="tag">Alfresco</span>
+        <span class="tag">Laminate</span><span class="tag">Chip Repair</span><span class="tag">Burn Marks</span><span class="tag">Edge Damage</span>
       </div>
     </div>
   </div>
@@ -1055,68 +1037,6 @@
   }
 </script>
 
-<!-- ══ FREE TOOLS ══ -->
-<section class="tools-section" id="tools">
-  <p class="section-label reveal">For The Trade</p>
-  <h2 class="section-title reveal">Free<br>Tools</h2>
-  <p class="tools-intro reveal">Professional tools to help with colour matching and stencil creation for chip and crack repairs. No sign-in required &mdash; everything runs in your browser.</p>
-  <div class="tools-grid reveal">
-
-    <a href="tools/stencil-maker.html" class="tool-card">
-      <div class="tool-card-top">
-        <div class="tool-icon">&#9999;&#65039;</div>
-        <span class="tool-badge-new">Free</span>
-      </div>
-      <div class="tool-name">Stencil Maker</div>
-      <p class="tool-desc">Upload any image and convert it to a precision black-and-white stencil. Adjust threshold and contrast, then download as PNG or SVG for printing or laser cutting.</p>
-      <div class="tool-tags">
-        <span class="tool-tag">Image Upload</span>
-        <span class="tool-tag">Threshold Control</span>
-        <span class="tool-tag">PNG &amp; SVG Export</span>
-      </div>
-      <span class="tool-cta">Open Stencil Maker &#8594;</span>
-    </a>
-
-    <a href="tools/color-mixer.html" class="tool-card">
-      <div class="tool-card-top">
-        <div class="tool-icon">&#127912;</div>
-        <span class="tool-badge-new">Free</span>
-      </div>
-      <div class="tool-name">Colour Mixer</div>
-      <p class="tool-desc">Match any surface colour to professional Createx Wicked airbrush paint formulas. 103 paints, CIE LAB colour science, ΔE accuracy scores, and ml / drop measurements.</p>
-      <div class="tool-tags">
-        <span class="tool-tag">103 Paints</span>
-        <span class="tool-tag">ΔE Colour Matching</span>
-        <span class="tool-tag">2-Paint Blends</span>
-      </div>
-      <span class="tool-cta">Open Colour Mixer &#8594;</span>
-    </a>
-
-  </div>
-</section>
-
-<style>
-  .tools-section{padding:120px 48px;background:var(--mid)}
-  .tools-intro{font-size:15px;line-height:1.7;color:rgba(var(--text-rgb),.5);max-width:520px;margin-top:16px;margin-bottom:64px}
-  .tools-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px}
-  .tool-card{background:var(--card);border:1px solid var(--border);border-radius:24px;padding:44px 40px;text-decoration:none;color:var(--text);display:flex;flex-direction:column;gap:0;transition:border-color .3s,transform .2s,background .3s,box-shadow .2s;position:relative;overflow:hidden}
-  .tool-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--neon);transform:scaleX(0);transform-origin:left;transition:transform .4s}
-  .tool-card:hover{border-color:rgba(var(--neon-rgb),.4);transform:translateY(-4px);background:var(--card-hover);box-shadow:0 12px 48px rgba(0,0,0,.5)}
-  .tool-card:hover::before{transform:scaleX(1)}
-  .tool-card-top{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:24px}
-  .tool-icon{font-size:40px;line-height:1}
-  .tool-badge-new{font-size:9px;font-weight:700;letter-spacing:2px;text-transform:uppercase;background:rgba(var(--neon-rgb),.15);border:1px solid rgba(var(--neon-rgb),.3);color:var(--neon);padding:4px 12px;border-radius:980px;flex-shrink:0}
-  .tool-name{font-family:'Bebas Neue',sans-serif;font-size:40px;letter-spacing:1px;line-height:1;margin-bottom:14px}
-  .tool-desc{font-size:14px;line-height:1.75;color:rgba(var(--text-rgb),.5);margin-bottom:24px;flex:1}
-  .tool-tags{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:28px}
-  .tool-tag{font-size:10px;letter-spacing:1.5px;text-transform:uppercase;border:1px solid var(--border);padding:4px 10px;color:var(--muted);border-radius:4px}
-  .tool-cta{font-size:12px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:var(--neon);margin-top:auto}
-  @media(max-width:900px){
-    .tools-section{padding:80px 24px}
-    .tools-grid{grid-template-columns:1fr}
-  }
-</style>
-
 <section class="cta-section" id="contact">
   <h2 class="cta-title">Get a Free<br>Quote Today</h2>
   <p class="cta-desc">Fill in your details and upload a photo of the damage. We&rsquo;ll get a quote back to you fast &mdash; no call-out fee, no obligation.</p>
@@ -1149,8 +1069,7 @@
           <option>Wall Tiles / Splashback</option>
           <option>Marble Surface</option>
           <option>Granite Surface</option>
-          <option>Porcelain / Ceramic</option>
-          <option>Outdoor / Alfresco Tiles</option>
+          <option>Laminate Benchtop</option>
           <option>Pool Surround</option>
           <option>Other</option>
         </select>
@@ -1283,9 +1202,7 @@
       <li><a href="#">Benchtop Chip Repair</a></li>
       <li><a href="#">Tile Repair</a></li>
       <li><a href="#">Stone Restoration</a></li>
-      <li><a href="#">Bathroom Surfaces</a></li>
-      <li><a href="#">Outdoor &amp; Alfresco</a></li>
-      <li><a href="#">Porcelain &amp; Ceramic</a></li>
+      <li><a href="#">Laminate Repair</a></li>
     </ul></div>
     <div class="footer-col"><h5>Company</h5><ul>
       <li><a href="#">About</a></li>
