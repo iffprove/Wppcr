@@ -1039,6 +1039,7 @@
   const drop=document.getElementById('fileDrop');
   const fileInput=document.getElementById('photo');
   const preview=document.getElementById('filePreview');
+  // Store {name, type, blob} — read into memory immediately so iOS File refs can't go stale
   let selectedFiles=[];
   drop.addEventListener('dragover',e=>{e.preventDefault();drop.classList.add('dragover')});
   drop.addEventListener('dragleave',()=>drop.classList.remove('dragover'));
@@ -1047,16 +1048,20 @@
   function handleFiles(files){
     Array.from(files).forEach(file=>{
       if(file.type && !file.type.startsWith('image/'))return;
-      selectedFiles.push(file);
+      const name=file.name;
+      const type=file.type||'image/jpeg';
       const reader=new FileReader();
       reader.onload=e=>{
+        const blob=new Blob([e.target.result],{type});
+        selectedFiles.push({name,type,blob});
         const item=document.createElement('div');
         item.className='file-preview-item';
-        item.dataset.name=file.name;
-        item.innerHTML=`<img src="${e.target.result}" alt="preview"><button type="button" onclick="removeFile(this,'${file.name.replace(/'/g,"\'")}')">&#10005;</button>`;
+        item.dataset.name=name;
+        const previewUrl=URL.createObjectURL(blob);
+        item.innerHTML=`<img src="${previewUrl}" alt="preview"><button type="button" onclick="removeFile(this,'${name.replace(/'/g,"\'")}')">&#10005;</button>`;
         preview.appendChild(item);
       };
-      reader.readAsDataURL(file);
+      reader.readAsArrayBuffer(file);
     });
   }
   function removeFile(btn,name){
@@ -1113,7 +1118,7 @@
     const fd=new FormData(form);
     if(token) fd.set('cf-turnstile-response', token);
     fd.delete('photo');
-    selectedFiles.forEach(f=>fd.append('photo',f));
+    selectedFiles.forEach(f=>fd.append('photo',f.blob,f.name));
     try{
       const res=await fetch(ENDPOINT,{method:'POST',body:fd});
       const data=await res.json();
