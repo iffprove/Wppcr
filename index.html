@@ -1093,7 +1093,9 @@
   const successMsg=document.getElementById('formSuccess');
   const submitBtn=document.getElementById('submitBtn');
 
-  form.addEventListener('submit',e=>{
+  // Use click on the button, not form submit — autofill can trigger submit without user intent
+  form.addEventListener('submit',e=>e.preventDefault());
+  submitBtn.addEventListener('click',e=>{
     e.preventDefault();
     submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
