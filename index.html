@@ -1066,16 +1066,13 @@
   const ENDPOINT='https://cnlfcdighqairsocbceg.supabase.co/functions/v1/web-lead-intake';
   const TURNSTILE_SITE_KEY='0x4AAAAAADo_Xr6r9z0nZ2WB';
 
-  let turnstileWidgetId=null;
+  let turnstileToken=null;
   function onTurnstileLoad(){
-    turnstileWidgetId=turnstile.render('#turnstile-container',{
+    turnstile.render('#turnstile-container',{
       sitekey:TURNSTILE_SITE_KEY,
-      size:'invisible',
-      callback:function(token){submitWithToken(token);},
-      'error-callback':function(){
-        submitBtn.textContent='Verification failed — try again';
-        submitBtn.disabled=false;
-      }
+      callback:function(token){turnstileToken=token;},
+      'expired-callback':function(){turnstileToken=null;},
+      'error-callback':function(){turnstileToken=null;},
     });
   }
 
@@ -1087,12 +1084,7 @@
     e.preventDefault();
     submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
-    if(window.turnstile && turnstileWidgetId!==null){
-      turnstile.execute(turnstileWidgetId);
-    } else {
-      // Turnstile didn't load (e.g. blocked by ad blocker) — submit without token
-      submitWithToken('');
-    }
+    submitWithToken(turnstileToken||'');
   });
 
   async function submitWithToken(token){
@@ -1110,12 +1102,14 @@
       }else{
         submitBtn.textContent='Something went wrong — try again';
         submitBtn.disabled=false;
-        if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
+        turnstileToken=null;
+        if(window.turnstile) turnstile.reset();
       }
     }catch{
       submitBtn.textContent='Something went wrong — try again';
       submitBtn.disabled=false;
-      if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
+      turnstileToken=null;
+      if(window.turnstile) turnstile.reset();
     }
   }
 </script>
