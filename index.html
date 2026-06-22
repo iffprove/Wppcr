@@ -1067,13 +1067,24 @@
   const TURNSTILE_SITE_KEY='0x4AAAAAADo_Xr6r9z0nZ2WB';
 
   let turnstileWidgetId=null;
+  let turnstileToken=null;
+  let formPendingSubmit=false;
+
   function onTurnstileLoad(){
     turnstileWidgetId=turnstile.render('#turnstile-container',{
       sitekey:TURNSTILE_SITE_KEY,
-      callback:function(token){submitWithToken(token);},
+      callback:function(token){
+        turnstileToken=token;
+        if(formPendingSubmit){ formPendingSubmit=false; submitWithToken(token); }
+      },
+      'expired-callback':function(){ turnstileToken=null; },
       'error-callback':function(){
-        submitBtn.textContent='Something went wrong — try again';
-        submitBtn.disabled=false;
+        turnstileToken=null;
+        if(formPendingSubmit){
+          formPendingSubmit=false;
+          submitBtn.textContent='Something went wrong — try again';
+          submitBtn.disabled=false;
+        }
       },
     });
   }
@@ -1086,7 +1097,10 @@
     e.preventDefault();
     submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
-    if(window.turnstile && turnstileWidgetId!==null){
+    if(turnstileToken){
+      submitWithToken(turnstileToken);
+    } else if(window.turnstile && turnstileWidgetId!==null){
+      formPendingSubmit=true;
       turnstile.execute(turnstileWidgetId);
     } else {
       submitWithToken('');
