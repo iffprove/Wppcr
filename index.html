@@ -342,6 +342,7 @@
 .theme-toggle{background:none;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:border-color .2s,background .2s;flex-shrink:0;padding:0}
 .theme-toggle:hover{border-color:var(--neon);background:rgba(var(--neon-rgb),.08)}
 </style>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </head>
 <body>
 
@@ -985,6 +986,7 @@
       <!-- honeypot: hidden from humans, bots fill this -->
       <input type="text" name="website" id="hp_website" style="display:none" tabindex="-1" autocomplete="off">
     </div>
+    <div class="cf-turnstile" data-sitekey="0x4AAAAAADo_Xr6r9z0nZ2WB" style="margin-bottom:16px"></div>
     <div class="form-submit">
       <button type="submit" class="submit-btn" id="submitBtn">Send My Quote Request &#8594;</button>
       <p class="form-note">We typically respond within a few hours during business hours.</p>
@@ -1061,40 +1063,25 @@
     selectedFiles=selectedFiles.filter(f=>f.name!==name);
     btn.parentElement.remove();
   }
-  const SUPA_URL='https://cnlfcdighqairsocbceg.supabase.co';
-  const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNubGZjZGlnaHFhaXJzb2NiY2VnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDA5MzUsImV4cCI6MjA5NzI3NjkzNX0.u7GvaVOPPWASB2W4JMEqqPs5pgj_BqG4hLuuTmCIPKs';
-  const PCR_ORG='3f87eef6-cd4f-46db-97e3-f19f8614d1bd';
+  const ENDPOINT='https://cnlfcdighqairsocbceg.supabase.co/functions/v1/web-lead-intake';
 
   const form=document.getElementById('quoteForm');
   const successMsg=document.getElementById('formSuccess');
   const submitBtn=document.getElementById('submitBtn');
   form.addEventListener('submit',async e=>{
     e.preventDefault();
-    submitBtn.textContent='Sending...';
+    submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
     const fd=new FormData(form);
+    // Attach first selected file if any (FormData from form won't include drag-dropped files)
+    if(selectedFiles.length>0) fd.append('photo', selectedFiles[0]);
     try{
-      const res=await fetch(`${SUPA_URL}/rest/v1/rpc/submit_web_lead`,{
-        method:'POST',
-        headers:{
-          'Content-Type':'application/json',
-          'apikey':SUPA_KEY,
-          'Authorization':`Bearer ${SUPA_KEY}`
-        },
-        body:JSON.stringify({
-          p_org:PCR_ORG,
-          p_name:fd.get('name')||'',
-          p_phone:fd.get('phone')||'',
-          p_email:fd.get('email')||'',
-          p_suburb:fd.get('suburb')||'',
-          p_surface:fd.get('surface')||'',
-          p_description:fd.get('message')||'',
-          p_hp:fd.get('website')||''
-        })
-      });
-      if(res.ok){
+      const res=await fetch(ENDPOINT,{method:'POST',body:fd});
+      const data=await res.json();
+      if(data.ok){
         form.querySelector('.form-grid').style.display='none';
         form.querySelector('.form-submit').style.display='none';
+        form.querySelector('.cf-turnstile').style.display='none';
         successMsg.classList.add('show');
       }else{
         submitBtn.textContent='Something went wrong — try again';
@@ -1104,6 +1091,7 @@
       submitBtn.textContent='Something went wrong — try again';
       submitBtn.disabled=false;
     }
+    if(window.turnstile) window.turnstile.reset();
   });
 </script>
 
