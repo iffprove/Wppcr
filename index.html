@@ -1112,7 +1112,8 @@
   async function submitWithToken(token){
     const fd=new FormData(form);
     if(token) fd.set('cf-turnstile-response', token);
-    if(selectedFiles.length>0) fd.set('photo', selectedFiles[0]);
+    fd.delete('photo');
+    selectedFiles.forEach(f=>fd.append('photo',f));
     try{
       const res=await fetch(ENDPOINT,{method:'POST',body:fd});
       const data=await res.json();
