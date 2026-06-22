@@ -934,7 +934,7 @@
   <h2 class="cta-title">Get a Free<br>Quote Today</h2>
   <p class="cta-desc">Fill in your details and upload a photo of the damage. We&rsquo;ll get a quote back to you fast &mdash; no call-out fee, no obligation.</p>
 
-  <form action="https://formspree.io/f/YOUR_FORM_ID" method="POST" enctype="multipart/form-data" id="quoteForm">
+  <form id="quoteForm">
     <div class="form-grid">
       <div class="form-group">
         <label for="name">Your Name</label>
@@ -981,6 +981,9 @@
         </div>
         <div class="file-preview" id="filePreview"></div>
       </div>
+    </div>
+      <!-- honeypot: hidden from humans, bots fill this -->
+      <input type="text" name="website" id="hp_website" style="display:none" tabindex="-1" autocomplete="off">
     </div>
     <div class="form-submit">
       <button type="submit" class="submit-btn" id="submitBtn">Send My Quote Request &#8594;</button>
@@ -1058,6 +1061,10 @@
     selectedFiles=selectedFiles.filter(f=>f.name!==name);
     btn.parentElement.remove();
   }
+  const SUPA_URL='https://cnlfcdighqairsocbceg.supabase.co';
+  const SUPA_KEY='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImNubGZjZGlnaHFhaXJzb2NiY2VnIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODE3MDA5MzUsImV4cCI6MjA5NzI3NjkzNX0.u7GvaVOPPWASB2W4JMEqqPs5pgj_BqG4hLuuTmCIPKs';
+  const PCR_ORG='3f87eef6-cd4f-46db-97e3-f19f8614d1bd';
+
   const form=document.getElementById('quoteForm');
   const successMsg=document.getElementById('formSuccess');
   const submitBtn=document.getElementById('submitBtn');
@@ -1065,10 +1072,26 @@
     e.preventDefault();
     submitBtn.textContent='Sending...';
     submitBtn.disabled=true;
-    const data=new FormData(form);
-    selectedFiles.forEach(f=>data.append('photo',f));
+    const fd=new FormData(form);
     try{
-      const res=await fetch(form.action,{method:'POST',body:data,headers:{'Accept':'application/json'}});
+      const res=await fetch(`${SUPA_URL}/rest/v1/rpc/submit_web_lead`,{
+        method:'POST',
+        headers:{
+          'Content-Type':'application/json',
+          'apikey':SUPA_KEY,
+          'Authorization':`Bearer ${SUPA_KEY}`
+        },
+        body:JSON.stringify({
+          p_org:PCR_ORG,
+          p_name:fd.get('name')||'',
+          p_phone:fd.get('phone')||'',
+          p_email:fd.get('email')||'',
+          p_suburb:fd.get('suburb')||'',
+          p_surface:fd.get('surface')||'',
+          p_description:fd.get('message')||'',
+          p_hp:fd.get('website')||''
+        })
+      });
       if(res.ok){
         form.querySelector('.form-grid').style.display='none';
         form.querySelector('.form-submit').style.display='none';
