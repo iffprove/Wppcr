@@ -342,7 +342,7 @@
 .theme-toggle{background:none;border:1px solid var(--border);color:var(--text);width:34px;height:34px;border-radius:50%;cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:15px;transition:border-color .2s,background .2s;flex-shrink:0;padding:0}
 .theme-toggle:hover{border-color:var(--neon);background:rgba(var(--neon-rgb),.08)}
 </style>
-<script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
+<script src="https://challenges.cloudflare.com/turnstile/v0/api.js?onload=onTurnstileLoad" async defer></script>
 </head>
 <body>
 
@@ -986,7 +986,7 @@
       <!-- honeypot: hidden from humans, bots fill this -->
       <input type="text" name="website" id="hp_website" style="display:none" tabindex="-1" autocomplete="off">
     </div>
-    <div class="cf-turnstile" data-sitekey="0x4AAAAAADo_Xr6r9z0nZ2WB" style="margin-bottom:16px;position:relative;z-index:10;overflow:visible"></div>
+    <div id="turnstile-container" style="margin-bottom:16px"></div>
     <div class="form-submit">
       <button type="submit" class="submit-btn" id="submitBtn">Send My Quote Request &#8594;</button>
       <p class="form-note">We typically respond within a few hours during business hours.</p>
@@ -1064,35 +1064,60 @@
     btn.parentElement.remove();
   }
   const ENDPOINT='https://cnlfcdighqairsocbceg.supabase.co/functions/v1/web-lead-intake';
+  const TURNSTILE_SITE_KEY='0x4AAAAAADo_Xr6r9z0nZ2WB';
+
+  let turnstileWidgetId=null;
+  function onTurnstileLoad(){
+    turnstileWidgetId=turnstile.render('#turnstile-container',{
+      sitekey:TURNSTILE_SITE_KEY,
+      size:'invisible',
+      callback:function(token){submitWithToken(token);},
+      'error-callback':function(){
+        submitBtn.textContent='Verification failed — try again';
+        submitBtn.disabled=false;
+      }
+    });
+  }
 
   const form=document.getElementById('quoteForm');
   const successMsg=document.getElementById('formSuccess');
   const submitBtn=document.getElementById('submitBtn');
-  form.addEventListener('submit',async e=>{
+
+  form.addEventListener('submit',e=>{
     e.preventDefault();
     submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
+    if(window.turnstile && turnstileWidgetId!==null){
+      turnstile.execute(turnstileWidgetId);
+    } else {
+      // Turnstile didn't load (e.g. blocked by ad blocker) — submit without token
+      submitWithToken('');
+    }
+  });
+
+  async function submitWithToken(token){
     const fd=new FormData(form);
-    // Attach first selected file if any (FormData from form won't include drag-dropped files)
-    if(selectedFiles.length>0) fd.append('photo', selectedFiles[0]);
+    if(token) fd.set('cf-turnstile-response', token);
+    if(selectedFiles.length>0) fd.set('photo', selectedFiles[0]);
     try{
       const res=await fetch(ENDPOINT,{method:'POST',body:fd});
       const data=await res.json();
       if(data.ok){
         form.querySelector('.form-grid').style.display='none';
         form.querySelector('.form-submit').style.display='none';
-        form.querySelector('.cf-turnstile').style.display='none';
+        document.getElementById('turnstile-container').style.display='none';
         successMsg.classList.add('show');
       }else{
         submitBtn.textContent='Something went wrong — try again';
         submitBtn.disabled=false;
+        if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
       }
     }catch{
       submitBtn.textContent='Something went wrong — try again';
       submitBtn.disabled=false;
+      if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
     }
-    if(window.turnstile) window.turnstile.reset();
-  });
+  }
 </script>
 
 <footer>
