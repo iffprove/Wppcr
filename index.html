@@ -1046,7 +1046,7 @@
   fileInput.addEventListener('change',()=>handleFiles(fileInput.files));
   function handleFiles(files){
     Array.from(files).forEach(file=>{
-      if(!file.type.startsWith('image/'))return;
+      if(file.type && !file.type.startsWith('image/'))return;
       selectedFiles.push(file);
       const reader=new FileReader();
       reader.onload=e=>{
