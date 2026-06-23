@@ -1089,11 +1089,12 @@
         if(formPendingSubmit){ formPendingSubmit=false; submitWithToken(token); }
       },
       'expired-callback':function(){ turnstileToken=null; },
-      'error-callback':function(){
+      'error-callback':function(code){
+        console.error('Turnstile error:',code);
         turnstileToken=null;
         if(formPendingSubmit){
           formPendingSubmit=false;
-          submitBtn.textContent='Something went wrong — try again';
+          submitBtn.textContent='Verification error ('+code+') — please refresh and try again';
           submitBtn.disabled=false;
         }
       },
@@ -1135,13 +1136,17 @@
         document.getElementById('turnstile-container').style.display='none';
         successMsg.classList.add('show');
       }else{
-        submitBtn.textContent='Something went wrong — try again';
+        const msg=data.error==='verification_failed'
+          ?'Verification failed — please refresh the page and try again'
+          :'Something went wrong — please try again';
+        submitBtn.textContent=msg;
         submitBtn.disabled=false;
         turnstileToken=null;
         if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
       }
-    }catch{
-      submitBtn.textContent='Something went wrong — try again';
+    }catch(err){
+      console.error('Form submit error:',err);
+      submitBtn.textContent='Something went wrong — please try again';
       submitBtn.disabled=false;
       turnstileToken=null;
       if(window.turnstile && turnstileWidgetId!==null) turnstile.reset(turnstileWidgetId);
