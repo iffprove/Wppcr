@@ -494,10 +494,10 @@
       <div class="ba-label-top">Porcelain Tile &mdash; Edge Chip Repair</div>
       <div class="ba-slider" id="slider2">
         <div class="ba-after">
-          <img src="images/after-1.jpg" alt="After: repaired porcelain tile edge" style="width:100%;height:100%;object-fit:cover;object-position:left center;display:block">
+          <img src="images/after-1.jpg" alt="After: repaired porcelain tile edge" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
         </div>
         <div class="ba-before">
-          <img src="images/before-1.jpg" alt="Before: chipped porcelain tile edge" style="width:100%;height:100%;object-fit:cover;object-position:left center;display:block">
+          <img src="images/before-1.jpg" alt="Before: chipped porcelain tile edge" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
         </div>
         <div class="ba-handle" id="handle2">
           <div class="ba-handle-line"></div>
@@ -514,12 +514,52 @@
       <div class="ba-label-top">Travertine Floor Tile &mdash; Surface Chip Repair</div>
       <div class="ba-slider" id="slider3">
         <div class="ba-after">
-          <img src="images/after-3.jpg" alt="After: repaired travertine floor tile" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
+          <img src="images/after-3.jpg" alt="After: repaired travertine floor tile" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
         </div>
         <div class="ba-before">
-          <img src="images/before-3.jpg" alt="Before: chipped travertine floor tile" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block">
+          <img src="images/before-3.jpg" alt="Before: chipped travertine floor tile" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
         </div>
         <div class="ba-handle" id="handle3">
+          <div class="ba-handle-line"></div>
+          <div class="ba-handle-btn"><span>&#8592;</span><span>&#8594;</span></div>
+          <div class="ba-handle-line"></div>
+        </div>
+        <div class="ba-tag ba-tag-before">Before</div>
+        <div class="ba-tag ba-tag-after">After</div>
+      </div>
+    </div>
+
+    <!-- SLIDER 5 -->
+    <div class="ba-card">
+      <div class="ba-label-top">Porcelain Tile &mdash; Edge Chip Repair</div>
+      <div class="ba-slider" id="slider5">
+        <div class="ba-after">
+          <img src="images/after-5.png" alt="After: repaired porcelain tile edge chip" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
+        </div>
+        <div class="ba-before">
+          <img src="images/before-5.png" alt="Before: chipped porcelain tile edge" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
+        </div>
+        <div class="ba-handle" id="handle5">
+          <div class="ba-handle-line"></div>
+          <div class="ba-handle-btn"><span>&#8592;</span><span>&#8594;</span></div>
+          <div class="ba-handle-line"></div>
+        </div>
+        <div class="ba-tag ba-tag-before">Before</div>
+        <div class="ba-tag ba-tag-after">After</div>
+      </div>
+    </div>
+
+    <!-- SLIDER 4 -->
+    <div class="ba-card">
+      <div class="ba-label-top">Engineered Stone Benchtop &mdash; Edge Chip Repair</div>
+      <div class="ba-slider" id="slider4">
+        <div class="ba-after">
+          <img src="images/after-4.png" alt="After: repaired engineered stone benchtop edge" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
+        </div>
+        <div class="ba-before">
+          <img src="images/before-4.png" alt="Before: chipped engineered stone benchtop edge" style="width:100%;height:100%;object-fit:cover;object-position:center center;display:block">
+        </div>
+        <div class="ba-handle" id="handle4">
           <div class="ba-handle-line"></div>
           <div class="ba-handle-btn"><span>&#8592;</span><span>&#8594;</span></div>
           <div class="ba-handle-line"></div>
@@ -536,7 +576,7 @@
 <style>
   .ba-section{padding:120px 48px;background:var(--mid)}
   .ba-intro{font-size:15px;line-height:1.7;color:rgba(var(--text-rgb),.5);max-width:580px;margin-top:16px}
-  .ba-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;margin-top:64px}
+  .ba-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:24px;margin-top:64px}
   .ba-card{display:flex;flex-direction:column;gap:0;border-radius:18px;overflow:hidden;border:1px solid var(--border);box-shadow:0 4px 24px rgba(0,0,0,0.3)}
   .ba-label-top{font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--neon);font-weight:600;padding:16px 20px 12px;background:var(--card)}
   .ba-slider{position:relative;width:100%;aspect-ratio:16/10;overflow:hidden;cursor:col-resize;user-select:none;background:var(--card)}
@@ -583,6 +623,8 @@
   initSlider('slider1', 'handle1');
   initSlider('slider2', 'handle2');
   initSlider('slider3', 'handle3');
+  initSlider('slider4', 'handle4');
+  initSlider('slider5', 'handle5');
 </script>
 
 <div class="stats-section">
@@ -680,73 +722,41 @@
     </div>
     <div class="gallery-grid reveal">
       <div class="gallery-item gallery-item--large">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">🪨</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
+        <img src="images/after-4.png" alt="Repaired engineered stone benchtop edge">
         <div class="gallery-overlay">
           <div class="gallery-overlay-title">Engineered Stone Benchtop</div>
           <div class="gallery-overlay-sub">Chip repair — Subiaco</div>
         </div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">🔲</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
+        <img src="images/after-5.png" alt="Repaired porcelain tile edge" style="object-position:center center">
         <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Porcelain Floor Tile</div>
-          <div class="gallery-overlay-sub">Crack repair — Joondalup</div>
+          <div class="gallery-overlay-title">Porcelain Tile</div>
+          <div class="gallery-overlay-sub">Edge chip repair — Joondalup</div>
         </div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">✨</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
+        <img src="images/after-2.jpg" alt="Repaired marble kitchen benchtop corner">
         <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Marble Bathroom Vanity</div>
+          <div class="gallery-overlay-title">Marble Kitchen Benchtop</div>
           <div class="gallery-overlay-sub">Chip repair — Cottesloe</div>
         </div>
       </div>
       <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">🚿</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
+        <img src="images/after-1.jpg" alt="Repaired porcelain tile edge">
         <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Shower Recess Tile</div>
-          <div class="gallery-overlay-sub">Corner chip — Morley</div>
-        </div>
-      </div>
-      <div class="gallery-item">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">🌿</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
-        <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Granite Pool Surround</div>
-          <div class="gallery-overlay-sub">Crack repair — Rockingham</div>
+          <div class="gallery-overlay-title">Porcelain Floor Tile</div>
+          <div class="gallery-overlay-sub">Edge chip repair — Morley</div>
         </div>
       </div>
       <div class="gallery-item gallery-item--large">
-        <div class="gallery-placeholder">
-          <div class="gallery-ph-icon">🏺</div>
-          <div class="gallery-ph-text">Add your photo here</div>
-          <div class="gallery-ph-hint">Replace src with your image path</div>
-        </div>
+        <img src="images/after-3.jpg" alt="Repaired travertine floor tile" style="object-position:center center">
         <div class="gallery-overlay">
-          <div class="gallery-overlay-title">Travertine Floor</div>
-          <div class="gallery-overlay-sub">Chip & crack — Kalamunda</div>
+          <div class="gallery-overlay-title">Travertine Floor Tile</div>
+          <div class="gallery-overlay-sub">Chip repair — Kalamunda</div>
         </div>
       </div>
     </div>
-    <p class="gallery-note reveal">&#128247; Replace placeholders with your real job photos — even 6 photos will dramatically increase enquiries.</p>
   </div>
 </section>
 
@@ -938,23 +948,27 @@
   <form id="quoteForm">
     <div class="form-grid">
       <div class="form-group">
-        <label for="name">Your Name</label>
+        <label for="name">Your Name <span class="req">*</span></label>
         <input type="text" id="name" name="name" placeholder="Jane Smith" required>
+        <div class="field-error" id="err-name"></div>
       </div>
       <div class="form-group">
         <label for="phone">Phone Number</label>
-        <input type="tel" id="phone" name="phone" placeholder="0400 000 000" required>
+        <input type="tel" id="phone" name="phone" placeholder="0400 000 000">
+        <div class="field-error" id="err-phone"></div>
       </div>
       <div class="form-group">
-        <label for="email">Email Address</label>
+        <label for="email">Email Address <span class="req">*</span></label>
         <input type="email" id="email" name="email" placeholder="jane@email.com" required>
+        <div class="field-error" id="err-email"></div>
       </div>
       <div class="form-group">
-        <label for="suburb">Your Suburb</label>
+        <label for="suburb">Your Suburb <span class="req">*</span></label>
         <input type="text" id="suburb" name="suburb" placeholder="e.g. Subiaco" required>
+        <div class="field-error" id="err-suburb"></div>
       </div>
       <div class="form-group form-full">
-        <label for="surface">What surface needs repairing?</label>
+        <label for="surface">What surface needs repairing? <span class="req">*</span></label>
         <select id="surface" name="surface" required>
           <option value="" disabled selected>Select a surface type...</option>
           <option>Kitchen Benchtop</option>
@@ -967,6 +981,7 @@
           <option>Pool Surround</option>
           <option>Other</option>
         </select>
+        <div class="field-error"></div>
       </div>
       <div class="form-group form-full">
         <label for="message">Describe the damage</label>
@@ -1005,6 +1020,9 @@
   .form-full{grid-column:1/-1}
   .form-group{display:flex;flex-direction:column;gap:8px}
   .form-group label{font-size:11px;font-weight:700;letter-spacing:2px;text-transform:uppercase;color:rgba(var(--dark-rgb),.7)}
+  .req{color:#e05252;margin-left:2px}
+  .field-error{font-size:11px;color:#e05252;min-height:16px;letter-spacing:.5px}
+  .form-group input.invalid,.form-group select.invalid{border-color:#e05252}
   .label-hint{font-size:10px;font-weight:400;letter-spacing:1px;color:rgba(var(--dark-rgb),.45);text-transform:none}
   .form-group input,.form-group select,.form-group textarea{background:rgba(var(--dark-rgb),.1);border:1.5px solid rgba(var(--dark-rgb),.15);color:var(--dark);padding:14px 16px;font-size:14px;font-family:'Inter',sans-serif;outline:none;transition:border-color .2s,box-shadow .2s;width:100%;border-radius:10px;-webkit-appearance:none;appearance:none}
   .form-group input::placeholder,.form-group textarea::placeholder{color:rgba(var(--dark-rgb),.35)}
@@ -1105,10 +1123,103 @@
   const successMsg=document.getElementById('formSuccess');
   const submitBtn=document.getElementById('submitBtn');
 
+  function validateForm(){
+    let ok=true;
+    const fields=[
+      {id:'name',   err:'err-name',   msg:'Please enter your name'},
+      {id:'email',  err:'err-email',  msg:'Please enter a valid email address'},
+      {id:'suburb', err:'err-suburb', msg:'Please enter your suburb'},
+    ];
+    fields.forEach(f=>{
+      const el=document.getElementById(f.id);
+      const errEl=document.getElementById(f.err);
+      el.classList.remove('invalid');
+      errEl.textContent='';
+      if(!el.value.trim()){
+        errEl.textContent=f.msg;
+        el.classList.add('invalid');
+        ok=false;
+      } else if(f.id==='email' && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())){
+        errEl.textContent='Please enter a valid email address';
+        el.classList.add('invalid');
+        ok=false;
+      }
+    });
+    const phoneEl=document.getElementById('phone');
+    const phoneErr=document.getElementById('err-phone');
+    phoneEl.classList.remove('invalid');
+    phoneErr.textContent='';
+    if(phoneEl.value.trim()){
+      const digits=phoneEl.value.replace(/[\s\-()+]/g,'');
+      if(!/^\d{8,15}$/.test(digits)){
+        phoneErr.textContent='Please enter a valid phone number';
+        phoneEl.classList.add('invalid');
+        ok=false;
+      }
+    }
+    const surfaceEl=document.getElementById('surface');
+    const surfaceErr=surfaceEl.closest('.form-group').querySelector('.field-error');
+    surfaceEl.classList.remove('invalid');
+    if(surfaceErr) surfaceErr.textContent='';
+    if(!surfaceEl.value){
+      if(surfaceErr) surfaceErr.textContent='Please select a surface type';
+      surfaceEl.classList.add('invalid');
+      ok=false;
+    }
+    return ok;
+  }
+
+  function validateField(id){
+    const el=document.getElementById(id);
+    if(!el) return;
+    const errEl=document.getElementById('err-'+id) || el.closest('.form-group').querySelector('.field-error');
+    if(!errEl) return;
+    el.classList.remove('invalid');
+    errEl.textContent='';
+    if(id==='phone'){
+      if(el.value.trim()){
+        const digits=el.value.replace(/[\s\-()+]/g,'');
+        if(!/^\d{8,15}$/.test(digits)){
+          errEl.textContent='Please enter a valid phone number';
+          el.classList.add('invalid');
+        }
+      }
+    } else if(id==='email'){
+      if(!el.value.trim()){
+        errEl.textContent='Please enter a valid email address';
+        el.classList.add('invalid');
+      } else if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim())){
+        errEl.textContent='Please enter a valid email address';
+        el.classList.add('invalid');
+      }
+    } else if(id==='surface'){
+      if(!el.value){
+        errEl.textContent='Please select a surface type';
+        el.classList.add('invalid');
+      }
+    } else {
+      if(!el.value.trim()){
+        const labels={name:'Please enter your name',suburb:'Please enter your suburb'};
+        errEl.textContent=labels[id]||'This field is required';
+        el.classList.add('invalid');
+      }
+    }
+  }
+
+  ['name','email','phone','suburb','surface'].forEach(id=>{
+    const el=document.getElementById(id);
+    if(!el) return;
+    el.addEventListener('blur',()=>validateField(id));
+    el.addEventListener('input',()=>{
+      if(el.classList.contains('invalid')) validateField(id);
+    });
+  });
+
   // Use click on the button, not form submit — autofill can trigger submit without user intent
   form.addEventListener('submit',e=>e.preventDefault());
   submitBtn.addEventListener('click',e=>{
     e.preventDefault();
+    if(!validateForm()) return;
     submitBtn.textContent='Sending…';
     submitBtn.disabled=true;
     if(turnstileToken){
@@ -1120,6 +1231,195 @@
       submitWithToken('');
     }
   });
+
+  function triggerRepairEffect(anchor){
+    const cvs=document.createElement('canvas');
+    cvs.style.cssText='position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:9999';
+    document.body.appendChild(cvs);
+    const dpr=devicePixelRatio||1;
+    const W=innerWidth,H=innerHeight;
+    cvs.width=W*dpr;cvs.height=H*dpr;
+    const ctx=cvs.getContext('2d');
+    ctx.scale(dpr,dpr);
+    const br=anchor.getBoundingClientRect();
+    const ox=br.left+br.width/2,oy=br.top+br.height/2;
+
+    // Timing (ms)
+    const TC=700,TH=870,TS=1750,TR=2750,TF=3350;
+
+    const clamp=(v,lo,hi)=>Math.max(lo,Math.min(hi,v));
+    const easeOut=t=>1-(1-t)**2;
+
+    // ── Cracks ──
+    const cracks=[];
+    const addCrack=(x,y,a,len,dep)=>{
+      const pts=[[x,y]];
+      let cx=x,cy=y;
+      const n=4+~~(Math.random()*5);
+      for(let i=0;i<n;i++){
+        a+=(Math.random()-.5)*.65;
+        cx+=Math.cos(a)*len/n;cy+=Math.sin(a)*len/n;
+        pts.push([cx,cy]);
+        if(dep>0&&Math.random()<.55)
+          addCrack(cx,cy,a+(Math.random()>.5?1:-1)*(.5+Math.random()*.65),len*.52,dep-1);
+      }
+      cracks.push({pts,d:Math.random()*.35});
+    };
+    for(let i=0;i<9;i++){
+      const a=i/9*Math.PI*2+(Math.random()-.5)*.4;
+      addCrack(ox,oy,a,(.55+Math.random()*.6)*Math.max(W,H),2);
+    }
+
+    // ── Shards ──
+    const shards=[];
+    for(let i=0;i<22;i++){
+      const sx=Math.random()*W,sy=Math.random()*H;
+      const n=4+~~(Math.random()*4);
+      const pts=Array.from({length:n},(_,j)=>{
+        const a=j/n*Math.PI*2+(Math.random()-.5)*.7;
+        const r=(55+Math.random()*145)*(0.45+Math.random()*0.8);
+        return[Math.cos(a)*r,Math.sin(a)*r];
+      });
+      const dx=sx-ox,dy=sy-oy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+      const spd=3+Math.random()*8;
+      shards.push({
+        x:sx,y:sy,pts,
+        vx:dx/dist*spd*.5+(Math.random()-.5)*5,
+        vy:dy/dist*spd*.25-2-Math.random()*5,
+        ay:.25,rot:0,rv:(Math.random()-.5)*.09,
+        d:Math.random()*.4,
+        c:`hsl(40,${~~(Math.random()*8+3)}%,${~~(Math.random()*10+6)}%)`
+      });
+    }
+
+    // ── Chips ──
+    const chipCols=['#b8b0a0','#8c8478','#ccc4b4','#d8cfc0','#a09080','#706860','#e8c84a','#c8a830','#e0d8c8'];
+    const chips=Array.from({length:95},()=>{
+      const sx=ox+(Math.random()-.5)*W*.9,sy=oy+(Math.random()-.5)*H*.9;
+      const dx=sx-ox,dy=sy-oy,dist=Math.sqrt(dx*dx+dy*dy)||1;
+      const spd=2+Math.random()*9;
+      const shape=Array.from({length:6},(_,j)=>{
+        const a=j/6*Math.PI*2;
+        return[Math.cos(a)*(.5+Math.random()*.6),Math.sin(a)*(.5+Math.random()*.6)];
+      });
+      return{
+        x:sx,y:sy,
+        vx:dx/dist*spd*.3+(Math.random()-.5)*5,
+        vy:-2-Math.random()*6,ay:.2,
+        rot:Math.random()*Math.PI*2,rv:(Math.random()-.5)*.3,
+        sz:3+Math.random()*9,
+        c:chipCols[~~(Math.random()*chipCols.length)],
+        d:Math.random()*.45,shape
+      };
+    });
+
+    const t0=performance.now();
+    let last=t0;
+
+    (function animate(now){
+      const e=now-t0;
+      const dt=Math.min((now-last)/16.67,3);last=now;
+      ctx.clearRect(0,0,W,H);
+
+      // Dark overlay
+      const oa=e<TR?.9:.9*clamp(1-(e-TR)/(TF-TR),0,1);
+      ctx.fillStyle=`rgba(13,13,11,${oa})`;
+      ctx.fillRect(0,0,W,H);
+
+      // ── Draw cracks ──
+      const ct=clamp(e/TC,0,1);
+      const ca=e<TR?1:clamp(1-(e-TR)/((TF-TR)*.7),0,1);
+      ctx.save();
+      ctx.shadowColor='rgba(255,255,255,.7)';ctx.shadowBlur=5;ctx.lineWidth=1.5;
+      cracks.forEach(({pts,d})=>{
+        const prog=clamp((ct-d)/(1-d),0,1);
+        if(!prog)return;
+        const show=prog*(pts.length-1);
+        ctx.beginPath();
+        ctx.strokeStyle=`rgba(240,237,232,${ca*.88})`;
+        ctx.moveTo(pts[0][0],pts[0][1]);
+        for(let i=1;i<pts.length;i++){
+          if(i<=Math.floor(show)){ctx.lineTo(pts[i][0],pts[i][1]);}
+          else if(i-1===Math.floor(show)){
+            const f=show%1;
+            ctx.lineTo(pts[i-1][0]+(pts[i][0]-pts[i-1][0])*f,pts[i-1][1]+(pts[i][1]-pts[i-1][1])*f);
+            break;
+          }
+        }
+        ctx.stroke();
+      });
+      ctx.restore();
+
+      // ── Shatter ──
+      if(e>=TH){
+        const st=clamp((e-TH)/(TS-TH),0,1);
+        // Large shards
+        shards.forEach(s=>{
+          const lt=clamp((st-s.d)/(1-s.d),0,1);
+          if(!lt)return;
+          s.x+=s.vx*dt;s.vx*=.996;s.vy+=s.ay*dt;s.y+=s.vy*dt;s.rot+=s.rv*dt;
+          const a=clamp(1-easeOut(lt),0,1);
+          if(!a)return;
+          ctx.save();
+          ctx.globalAlpha=a;
+          ctx.translate(s.x,s.y);ctx.rotate(s.rot);
+          ctx.fillStyle=s.c;
+          ctx.strokeStyle='rgba(220,215,205,.18)';ctx.lineWidth=.5;
+          ctx.beginPath();
+          s.pts.forEach(([x,y],j)=>j?ctx.lineTo(x,y):ctx.moveTo(x,y));
+          ctx.closePath();ctx.fill();ctx.stroke();
+          ctx.restore();
+        });
+        // Small chips
+        chips.forEach(c=>{
+          const lt=clamp((st-c.d)/(1-c.d),0,1);
+          if(!lt)return;
+          c.x+=c.vx*dt;c.vy+=c.ay*dt;c.y+=c.vy*dt;c.rot+=c.rv*dt;
+          const a=clamp(1-lt*1.1,0,1);
+          if(!a)return;
+          ctx.save();
+          ctx.globalAlpha=a;
+          ctx.translate(c.x,c.y);ctx.rotate(c.rot);
+          ctx.fillStyle=c.c;
+          ctx.beginPath();
+          c.shape.forEach(([x,y],j)=>j?ctx.lineTo(x*c.sz,y*c.sz):ctx.moveTo(x*c.sz,y*c.sz));
+          ctx.closePath();ctx.fill();
+          ctx.restore();
+        });
+      }
+
+      // ── Repair sweep ──
+      if(e>=TS){
+        const rt=clamp((e-TS)/(TR-TS),0,1);
+        const R=easeOut(rt)*Math.hypot(W,H);
+        const rw=160;
+        const g=ctx.createRadialGradient(ox,oy,Math.max(0,R-rw),ox,oy,R);
+        g.addColorStop(0,'rgba(232,200,74,0)');
+        g.addColorStop(.3,`rgba(232,200,74,${.6*(1-rt*.55)})`);
+        g.addColorStop(.65,`rgba(255,248,190,${.35*(1-rt*.4)})`);
+        g.addColorStop(1,'rgba(232,200,74,0)');
+        ctx.fillStyle=g;
+        ctx.beginPath();ctx.arc(ox,oy,R+2,0,Math.PI*2);ctx.fill();
+        // Cracks go gold then dissolve
+        const ga=clamp(.95-rt*1.35,0,1);
+        if(ga>0){
+          ctx.save();
+          ctx.shadowColor='#e8c84a';ctx.shadowBlur=14;ctx.lineWidth=2.5;
+          cracks.forEach(({pts})=>{
+            ctx.beginPath();
+            ctx.strokeStyle=`rgba(232,200,74,${ga})`;
+            ctx.moveTo(pts[0][0],pts[0][1]);
+            pts.slice(1).forEach(([x,y])=>ctx.lineTo(x,y));
+            ctx.stroke();
+          });
+          ctx.restore();
+        }
+      }
+
+      if(e<TF)requestAnimationFrame(animate);
+      else cvs.remove();
+    })(t0);
+  }
 
   async function submitWithToken(token){
     await Promise.all(pendingReads);
@@ -1135,6 +1435,7 @@
         form.querySelector('.form-submit').style.display='none';
         document.getElementById('turnstile-container').style.display='none';
         successMsg.classList.add('show');
+        triggerRepairEffect(successMsg);
       }else{
         const msg=data.error==='verification_failed'
           ?'Verification failed — please refresh the page and try again'
